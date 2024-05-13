@@ -11,12 +11,6 @@ public class ValidationHelpers {
         }
     }
 
-    public static void validateDecimalRange(double value, double min, double max, String message) {
-        if (value < min || value > max) {
-            throw new IllegalArgumentException(message);
-        }
-    }
-
     public static void validateArgumentsCount(List<String> list, int expectedNumberOfParameters) {
         if (list.size() < expectedNumberOfParameters) {
             throw new IllegalArgumentException(
@@ -26,6 +20,6 @@ public class ValidationHelpers {
     }
 
     public static void validateStringLength(String stringToValidate, int minLength, int maxLength, String errorMessage) {
-        validateIntRange(stringToValidate.length(),minLength,maxLength,errorMessage);
+        validateIntRange(stringToValidate.length(), minLength, maxLength, errorMessage);
     }
 }

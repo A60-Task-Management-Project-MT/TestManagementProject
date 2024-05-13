@@ -53,6 +53,11 @@ public class MemberImpl implements Member {
     }
 
     @Override
+    public void addHistory(ActivityHistory activity) {
+        histories.add(activity);
+    }
+
+    @Override
     public void removeComment(Comment commentToRemove, Task taskToRemoveComment) {
         taskToRemoveComment.removeComment(commentToRemove);
     }

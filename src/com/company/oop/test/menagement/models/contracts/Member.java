@@ -9,6 +9,7 @@ public interface Member extends Taskable, HistorySavable {
     void unassignTask(Task task);
 
     void addComment(Comment commentToAdd, Task taskToAddComment);
+    void addHistory(ActivityHistory activity);
 
     void removeComment(Comment commentToRemove, Task taskToRemoveComment);
 }
