@@ -2,7 +2,8 @@ package com.company.oop.test.menagement.models.contracts;
 
 import java.util.List;
 
-public interface Commentable {
+public interface HistorySavable {
 
-    List<Comment> getComments();
+    List<ActivityHistory> getHistory();
+
 }

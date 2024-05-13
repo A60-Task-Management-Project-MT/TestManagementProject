@@ -13,7 +13,7 @@ public enum PriorityType {
             case MEDIUM:
                 return "Medium";
             case LOW:
-                return "Lol";
+                return "Low";
             default:
                 return "Unknown";
         }

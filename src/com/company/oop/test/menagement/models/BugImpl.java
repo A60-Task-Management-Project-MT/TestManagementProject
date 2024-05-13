@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
-public class BugImpl extends TaskImpl {
+import com.company.oop.test.menagement.models.contracts.Bug;
 
+public class BugImpl extends TaskImpl implements Bug {
 }
