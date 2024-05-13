@@ -30,7 +30,7 @@ public class BugImpl extends TaskImpl implements Bug {
     public void revertStatus() {
         if (getStatus() != BugStatusType.ACTIVE) {
             BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() - 1];
-            createNewHistory(String.format("Feedback status changed from %s to %s", getStatus(), newStatus));
+            createNewHistory(String.format("Bug status changed from %s to %s", getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
             createNewHistory(String.format("Cant revert, already at %s", getStatus()));
@@ -41,7 +41,7 @@ public class BugImpl extends TaskImpl implements Bug {
     public void advanceStatus() {
         if (getStatus() != BugStatusType.DONE) {
             BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Feedback status changed from %s to %s", getStatus(), newStatus));
+            createNewHistory(String.format("Bug status changed from %s to %s", getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
             createNewHistory(String.format("Cant revert, already at %s", getStatus()));
