@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface Teams {
 
+    String getName();
+
     List<Member> getMembers();
 
     List<Board> getBoards();

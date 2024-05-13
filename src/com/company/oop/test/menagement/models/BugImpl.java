@@ -64,6 +64,11 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void addStep(String step) {
+        stepsToReproduce.add(step);
+    }
+
+    @Override
     public List<String> getStepsToReproduce() {
         return new ArrayList<>(stepsToReproduce);
     }

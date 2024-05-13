@@ -12,4 +12,6 @@ public interface Bug extends Task, Reproducible {
 
     BugStatusType getStatus();
 
+    void addStep(String step);
+
 }

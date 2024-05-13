@@ -12,10 +12,16 @@ import java.util.List;
 public abstract class TaskImpl implements Task {
     public static final int MIN_TITLE_SYMBOLS = 10;
     public static final int MAX_TITLE_SYMBOLS = 100;
-    public static final String TITLE_MIN_OR_MAX_LENGTH_ERROR = String.format("Title must be between %s and %s characters long!", MIN_TITLE_SYMBOLS, MAX_TITLE_SYMBOLS);
+    public static final String TITLE_MIN_OR_MAX_LENGTH_ERROR = String.format(
+            "Title must be between %s and %s characters long!",
+            MIN_TITLE_SYMBOLS,
+            MAX_TITLE_SYMBOLS);
     public static final int MIN_DESCRIPTION_SYMBOLS = 10;
     public static final int MAX_DESCRIPTION_SYMBOLS = 500;
-    public static final String DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR = String.format("Description must be between %s and %s characters long!", MIN_DESCRIPTION_SYMBOLS, MAX_DESCRIPTION_SYMBOLS);
+    public static final String DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR = String.format(
+            "Description must be between %s and %s characters long!",
+            MIN_DESCRIPTION_SYMBOLS,
+            MAX_DESCRIPTION_SYMBOLS);
 
     private int id;
     private String title;

@@ -5,8 +5,6 @@ public enum TaskType {
     STORY,
     FEEDBACK;
 
-
-
     @Override
     public String toString() {
         switch (this) {
