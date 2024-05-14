@@ -1,9 +1,7 @@
 package com.company.oop.test.menagement.core;
 
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
-import com.company.oop.test.menagement.models.BugImpl;
-import com.company.oop.test.menagement.models.FeedbackImpl;
-import com.company.oop.test.menagement.models.StoryImpl;
+import com.company.oop.test.menagement.models.*;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
@@ -73,12 +71,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Member createMember(String memberName) {
-        return null;
+        return new MemberImpl(memberName);
     }
 
     @Override
     public Board createBoard(String boardName) {
-        return null;
+        return new BoardImpl(boardName);
     }
 
     @Override
