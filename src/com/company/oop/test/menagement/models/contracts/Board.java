@@ -6,7 +6,5 @@ public interface Board extends Taskable, HistorySavable {
 
     void addTask(Task task);
 
-    void addHistory(ActivityHistory activity);
-
-
+    void createNewHistory(String activity);
 }

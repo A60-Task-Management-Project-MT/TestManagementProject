@@ -13,9 +13,7 @@ public interface Task extends Commentable, HistorySavable {
 
     void removeComment(Comment comment);
 
-    void revertStatus();
-
-    void advanceStatus();
+    void changeStatus();
 
     void displayFullHistory();
 }

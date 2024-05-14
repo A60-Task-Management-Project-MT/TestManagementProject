@@ -7,4 +7,6 @@ public interface Feedback extends Task {
     int getRating();
 
     FeedbackStatusType getStatus();
+
+    void changeRating(int newRating);
 }

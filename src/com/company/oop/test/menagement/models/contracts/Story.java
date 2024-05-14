@@ -12,4 +12,9 @@ public interface Story extends Task {
 
     StoryStatusType getStatus();
 
+    void changePriority(PriorityType newPriorityType);
+
+    void changeSize(StorySizeType newSizeType);
+
+    String getAssignee();
 }

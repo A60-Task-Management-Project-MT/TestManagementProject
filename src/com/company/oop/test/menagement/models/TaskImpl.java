@@ -5,11 +5,13 @@ import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public abstract class TaskImpl implements Task {
+
     public static final int MIN_TITLE_SYMBOLS = 10;
     public static final int MAX_TITLE_SYMBOLS = 100;
     public static final String TITLE_MIN_OR_MAX_LENGTH_ERROR = String.format(
@@ -25,6 +27,7 @@ public abstract class TaskImpl implements Task {
 
     private int id;
     private String title;
+    private LocalDate dueDate;
     private String description;
     private List<Comment> comments;
     private List<ActivityHistory> history;
@@ -37,16 +40,6 @@ public abstract class TaskImpl implements Task {
         this.history = new ArrayList<>();
 
         createNewHistory(String.format("Task with title %s was created!", title));
-    }
-
-    private void setTitle(String title) {
-        ValidationHelpers.validateStringLength(title, MIN_TITLE_SYMBOLS, MAX_TITLE_SYMBOLS, TITLE_MIN_OR_MAX_LENGTH_ERROR);
-        this.title = title;
-    }
-
-    private void setDescription(String description) {
-        ValidationHelpers.validateStringLength(description, MIN_DESCRIPTION_SYMBOLS, MAX_DESCRIPTION_SYMBOLS, DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR);
-        this.description = description;
     }
 
     @Override
@@ -78,9 +71,7 @@ public abstract class TaskImpl implements Task {
         createNewHistory(String.format("A comment was removed from task %s", title));
     }
 
-    public abstract void revertStatus();
-
-    public abstract void advanceStatus();
+    public abstract void changeStatus();
 
     @Override
     public List<Comment> getComments() {
@@ -99,7 +90,23 @@ public abstract class TaskImpl implements Task {
         }
     }
 
-    public void createNewHistory(String event) {
+    protected void createNewHistory(String event) {
         history.add(new ActivityHistoryImpl(event));
+    }
+
+    private void setTitle(String title) {
+        ValidationHelpers.validateStringLength(title,
+                MIN_TITLE_SYMBOLS,
+                MAX_TITLE_SYMBOLS,
+                TITLE_MIN_OR_MAX_LENGTH_ERROR);
+        this.title = title;
+    }
+
+    private void setDescription(String description) {
+        ValidationHelpers.validateStringLength(description,
+                MIN_DESCRIPTION_SYMBOLS,
+                MAX_DESCRIPTION_SYMBOLS,
+                DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR);
+        this.description = description;
     }
 }

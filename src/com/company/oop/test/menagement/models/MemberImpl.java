@@ -25,6 +25,8 @@ public class MemberImpl implements Member {
         setMemberName(memberName);
         this.tasks = new ArrayList<>();
         this.histories = new ArrayList<>();
+
+        createNewHistory(String.format("A new member with name %s was created!", memberName));
     }
 
     private void setMemberName(String memberName) {
@@ -40,26 +42,34 @@ public class MemberImpl implements Member {
     @Override
     public void assignTask(Task task) {
         tasks.add(task);
+
+        createNewHistory(String.format("A new %s task was assigned to member %s.", task, memberName));
     }
 
     @Override
     public void unassignTask(Task task) {
         tasks.remove(task);
+
+        createNewHistory(String.format("A new %s task was unassigned from member %s.", task, memberName));
     }
 
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
         taskToAddComment.addComment(commentToAdd);
-    }
 
-    @Override
-    public void addHistory(ActivityHistory activity) {
-        histories.add(activity);
+        createNewHistory(String.format("A new comment %s was add to task %s.", commentToAdd, taskToAddComment));
     }
 
     @Override
     public void removeComment(Comment commentToRemove, Task taskToRemoveComment) {
         taskToRemoveComment.removeComment(commentToRemove);
+
+        createNewHistory(String.format("A comment %s was removed from task %s.", commentToRemove, taskToRemoveComment));
+    }
+
+    @Override
+    public void createNewHistory(String activity) {
+        histories.add(new ActivityHistoryImpl(activity));
     }
 
     @Override

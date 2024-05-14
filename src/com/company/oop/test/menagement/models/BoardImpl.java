@@ -24,6 +24,8 @@ public class BoardImpl implements Board {
         setBoardName(boardName);
         tasks = new ArrayList<>();
         histories = new ArrayList<>();
+
+        createNewHistory(String.format("A new board with name %s was created!", boardName));
     }
 
     private void setBoardName(String boardName) {
@@ -42,11 +44,13 @@ public class BoardImpl implements Board {
     @Override
     public void addTask(Task task) {
         tasks.add(task);
+
+        createNewHistory(String.format("A new %s task was added to board %s.", task, boardName));
     }
 
     @Override
-    public void addHistory(ActivityHistory activity) {
-        histories.add(activity);
+    public void createNewHistory(String activity) {
+        histories.add(new ActivityHistoryImpl(activity));
     }
 
     @Override
