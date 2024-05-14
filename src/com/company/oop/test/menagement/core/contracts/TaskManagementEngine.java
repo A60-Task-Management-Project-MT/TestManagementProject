@@ -1,4 +1,6 @@
 package com.company.oop.test.menagement.core.contracts;
 
-public interface TestManagementEngine {
+public interface TaskManagementEngine {
+
+    void start();
 }
