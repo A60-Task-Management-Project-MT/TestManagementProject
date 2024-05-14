@@ -81,4 +81,24 @@ public class MemberImpl implements Member {
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
     }
+
+    @Override
+    public String printHistory() {
+        return null;
+    }
+
+    @Override
+    public String printTasks() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("~~~ %s TASKS ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
+        if (tasks.isEmpty()) {
+            builder.append(" ~~~ NO AVAILABLE TASKS ~~~").append(System.lineSeparator());
+        } else {
+            for (Task task : tasks) {
+                builder.append(task.viewInfo()).append(System.lineSeparator());
+            }
+            builder.append("~~~ TASKS ~~~").append(System.lineSeparator());
+        }
+        return builder.toString().trim();
+    }
 }

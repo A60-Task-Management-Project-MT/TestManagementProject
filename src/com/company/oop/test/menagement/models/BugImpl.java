@@ -29,6 +29,8 @@ public class BugImpl extends TaskImpl implements Bug {
         setSeverityType(severityType);
         this.statusType = BugStatusType.ACTIVE;
         setAssignee(assignee);
+
+        createNewHistory(String.format("New Bug was created: %s!", viewInfo()));
     }
 
     @Override
@@ -111,5 +113,11 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private void setSeverityType(BugSeverityType severityType) {
         this.severityType = severityType;
+    }
+
+    @Override
+    public String viewInfo() {
+        return String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s%n",
+                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus());
     }
 }

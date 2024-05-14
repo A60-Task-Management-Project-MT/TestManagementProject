@@ -27,7 +27,6 @@ public abstract class TaskImpl implements Task {
 
     private int id;
     private String title;
-    private LocalDate dueDate;
     private String description;
     private List<Comment> comments;
     private List<ActivityHistory> history;
@@ -38,8 +37,6 @@ public abstract class TaskImpl implements Task {
         setDescription(description);
         this.comments = new ArrayList<>();
         this.history = new ArrayList<>();
-
-        createNewHistory(String.format("Task with title %s was created!", title));
     }
 
     @Override

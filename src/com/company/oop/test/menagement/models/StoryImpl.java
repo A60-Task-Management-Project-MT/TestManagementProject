@@ -23,6 +23,8 @@ public class StoryImpl extends TaskImpl implements Story {
         setStorySizeType(storySizeType);
         this.statusType = StoryStatusType.NOT_DONE;
         setAssignee(assignee);
+
+        createNewHistory(String.format("New Story was created: %s!", viewInfo()));
     }
 
     @Override
@@ -74,6 +76,12 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override
     public String getAssignee() {
         return assignee;
+    }
+
+    @Override
+    public String viewInfo() {
+        return String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee: %s%n",
+                getTitle(),getDescription(),getPriority(),getSize(),getStatus(),getAssignee());
     }
 
     private void setStatusType(StoryStatusType statusType) {

@@ -1,6 +1,6 @@
 package com.company.oop.test.menagement.models.contracts;
 
-public interface Board extends Taskable, HistorySavable {
+public interface Board extends Taskable, HistorySavable ,Printable{
 
     String getBoardName();
 

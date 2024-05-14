@@ -62,4 +62,14 @@ public class BoardImpl implements Board {
     public List<Task> getTasks() {
         return tasks;
     }
+
+    @Override
+    public String printHistory() {
+        return null;
+    }
+
+    @Override
+    public String printTasks() {
+        return null;
+    }
 }

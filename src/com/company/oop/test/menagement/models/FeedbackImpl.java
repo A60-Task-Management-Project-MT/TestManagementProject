@@ -14,6 +14,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         super(id, title, description);
         setRating(rating);
         setStatusType(FeedbackStatusType.NEW);
+
+        createNewHistory(String.format("New Feedback was created: %s!", viewInfo()));
     }
 
     @Override
@@ -45,6 +47,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         setRating(newRating);
 
         createNewHistory(String.format("Feedback rating was changed from %d to %d", rating, newRating));
+    }
+    @Override
+    public String viewInfo() {
+        return String.format("Title: %s | Description: %s | Rating: %d | Status: %s%n",
+                getTitle(),getDescription(),getRating(),getStatus());
     }
 
     private void setStatusType(FeedbackStatusType statusType) {

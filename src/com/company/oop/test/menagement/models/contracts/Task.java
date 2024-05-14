@@ -16,4 +16,6 @@ public interface Task extends Commentable, HistorySavable {
     void changeStatus();
 
     void displayFullHistory();
+
+    String viewInfo();
 }
