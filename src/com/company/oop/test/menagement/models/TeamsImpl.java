@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
+import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.contracts.Teams;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
@@ -67,5 +68,35 @@ public class TeamsImpl implements Teams {
     @Override
     public void removeBoard(Board board) {
         boards.remove(board);
+    }
+
+    @Override
+    public String printMembers() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("~~~ MEMBERS ~~~").append(System.lineSeparator());
+        if (members.isEmpty()) {
+            builder.append(" ~~~ NO AVAILABLE MEMBERS ~~~").append(System.lineSeparator());
+        } else {
+            for (Member member : members) {
+                builder.append(member).append(System.lineSeparator());
+            }
+            builder.append("~~~ MEMBERS ~~~").append(System.lineSeparator());
+        }
+        return builder.toString().trim();
+    }
+
+    @Override
+    public String printBoards() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
+        if (boards.isEmpty()) {
+            builder.append(" ~~~ NO AVAILABLE BOARDS ~~~").append(System.lineSeparator());
+        } else {
+            for (Board board : boards) {
+                builder.append(board).append(System.lineSeparator());
+            }
+            builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
+        }
+        return builder.toString().trim();
     }
 }

@@ -26,6 +26,6 @@ public class ActivityHistoryImpl implements ActivityHistory {
 
     @Override
     public String viewInfo() {
-       return String.format("[%s] %s", timestamp.format(formatter), description);
+       return String.format("[%s] Description: %s", timestamp.format(formatter), description);
     }
 }

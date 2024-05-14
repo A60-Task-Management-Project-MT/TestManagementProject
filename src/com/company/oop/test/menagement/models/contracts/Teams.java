@@ -17,4 +17,6 @@ public interface Teams {
     void addBoard(Board board);
 
     void removeBoard(Board board);
+    String printMembers();
+    String printBoards();
 }
