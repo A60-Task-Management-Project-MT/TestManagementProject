@@ -21,7 +21,7 @@ public class MemberImpl implements Member {
     private List<Task> tasks;
     private List<ActivityHistory> histories;
 
-    public MemberImpl(String memberName, List<Task> tasks) {
+    public MemberImpl(String memberName) {
         setMemberName(memberName);
         this.tasks = new ArrayList<>();
         this.histories = new ArrayList<>();
