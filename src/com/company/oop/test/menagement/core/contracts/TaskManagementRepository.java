@@ -3,7 +3,9 @@ package com.company.oop.test.menagement.core.contracts;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
+import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
 import java.util.List;
 
@@ -16,9 +18,9 @@ public interface TaskManagementRepository {
 
     List<Board> getBoards();
 
-    Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee);
+    Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, BugStatusType statusType, String assignee);
 
-    Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, String assignee);
+    Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, StoryStatusType statusType, String assignee);
 
     Feedback createFeedback(String title, String description, int rating);
 

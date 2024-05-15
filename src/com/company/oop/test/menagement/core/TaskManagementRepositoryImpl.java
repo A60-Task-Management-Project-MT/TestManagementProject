@@ -6,7 +6,9 @@ import com.company.oop.test.menagement.models.*;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
+import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +47,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee) {
+    public Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, BugStatusType statusType, String assignee) {
         Bug bug = new BugImpl(++nextId, title, description, priorityType, severityType, assignee);
         tasks.add(bug);
         return bug;
     }
 
     @Override
-    public Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, String assignee) {
+    public Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, StoryStatusType statusType, String assignee) {
         Story story = new StoryImpl(++nextId, title, description, priorityType, storySizeType, assignee);
         tasks.add(story);
         return story;
