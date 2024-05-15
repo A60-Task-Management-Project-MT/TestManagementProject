@@ -1,10 +1,11 @@
 package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Feedback;
+import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.feedback_enums.FeedbackStatusType;
-
-import java.time.LocalDate;
+import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
@@ -31,6 +32,21 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
+    public void changePriority(PriorityType newPriorityType) {
+        throw new IllegalArgumentException("Feedback does not have priority type!");
+    }
+
+    @Override
+    public void changeSeverity(BugSeverityType newSeverityType) {
+        throw new IllegalArgumentException("Feedback does not have severity type!");
+    }
+
+    @Override
+    public void changeSize(StorySizeType newSizeType) {
+        throw new IllegalArgumentException("Feedback does not have size type!");
+    }
+
+    @Override
     public int getRating() {
         return rating;
     }
@@ -49,6 +65,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
         createNewHistory(String.format("Feedback rating was changed from %d to %d", rating, newRating));
     }
+
     @Override
     public String viewInfo() {
         return String.format("Title: %s | Description: %s | Rating: %d | Status: %s%n",

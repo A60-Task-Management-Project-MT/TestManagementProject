@@ -14,9 +14,5 @@ public interface Bug extends Task, Reproducible {
 
     void addStep(String step);
 
-    void changePriority(PriorityType newPriorityType);
-
-    void changeSeverity(BugSeverityType newSeverityType);
-
     String getAssignee();
 }

@@ -5,8 +5,8 @@ import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
+import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +89,16 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void changeRating(int newRating) {
+        throw new IllegalArgumentException("Bug does not have rating!");
+    }
+
+    @Override
+    public void changeSize(StorySizeType newSizeType) {
+        throw new IllegalArgumentException("Bug does not have size type!");
+    }
+
+    @Override
     public String getAssignee() {
         return assignee;
     }
@@ -96,6 +106,12 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override
     public List<String> getStepsToReproduce() {
         return new ArrayList<>(stepsToReproduce);
+    }
+
+    @Override
+    public String viewInfo() {
+        return String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s%n",
+                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus());
     }
 
     private void setStatusType(BugStatusType statusType) {
@@ -115,11 +131,5 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private void setSeverityType(BugSeverityType severityType) {
         this.severityType = severityType;
-    }
-
-    @Override
-    public String viewInfo() {
-        return String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s%n",
-                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus());
     }
 }

@@ -3,6 +3,7 @@ package com.company.oop.test.menagement.models;
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
@@ -62,6 +63,16 @@ public class StoryImpl extends TaskImpl implements Story {
         setPriorityType(newPriorityType);
 
         createNewHistory(String.format("Story priority was changed from %s to %s!", priorityType, newPriorityType));
+    }
+
+    @Override
+    public void changeSeverity(BugSeverityType newSeverityType) {
+        throw new IllegalArgumentException("Story does not have severity type!");
+    }
+
+    @Override
+    public void changeRating(int newRating) {
+        throw new IllegalArgumentException("Story does not have rating!");
     }
 
     @Override
