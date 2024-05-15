@@ -16,9 +16,9 @@ import java.util.List;
 
 public class CreateNewBugToBoardCommand implements Command {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 8;
     private static final String INVALID_ID_ERROR = "Invalid ID. Needs to be number!";
-    private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s added to board %s!";
+    private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %s added to board %s!";
 
 
     private final TaskManagementRepository taskManagementRepository;
@@ -46,7 +46,7 @@ public class CreateNewBugToBoardCommand implements Command {
 
         board.addTask(task);
 
-        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, task, board);
+        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, taskType, task.getId(), boardName);
     }
 
     private Task createTask(TaskType taskType, String title, String description, PriorityType priorityType,
