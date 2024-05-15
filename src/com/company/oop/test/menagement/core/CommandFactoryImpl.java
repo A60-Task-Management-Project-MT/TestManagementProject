@@ -11,6 +11,9 @@ import com.company.oop.test.menagement.commands.changestory.ChangeStorySizeComma
 import com.company.oop.test.menagement.commands.changestory.ChangeStoryStatusCommand;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.commands.CreateNewPersonCommand;
+import com.company.oop.test.menagement.commands.creation.CreateNewBugToBoardCommand;
+import com.company.oop.test.menagement.commands.creation.CreateNewFeedbackToBoardCommand;
+import com.company.oop.test.menagement.commands.creation.CreateNewStoryToBoardCommand;
 import com.company.oop.test.menagement.commands.enums.CommandType;
 import com.company.oop.test.menagement.core.contracts.CommandFactory;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
@@ -34,9 +37,15 @@ public class CommandFactoryImpl implements CommandFactory {
             case CREATE_PERSON -> {
                 return new CreateNewPersonCommand(taskManagementRepository);
             }
-//            case CREATE_TASK -> {
-//                return new CreateNewTaskCommand(taskManagementRepository);
-//            }
+            case CREATE_BUG -> {
+                return new CreateNewBugToBoardCommand(taskManagementRepository);
+            }
+            case CREATE_STORY -> {
+                return new CreateNewStoryToBoardCommand(taskManagementRepository);
+            }
+            case CREATE_FEEDBACK -> {
+                return new CreateNewFeedbackToBoardCommand(taskManagementRepository);
+            }
             case CREATE_TEAM -> {
                 return new CreateNewTeamCommand(taskManagementRepository);
             }

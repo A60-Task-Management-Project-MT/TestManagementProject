@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Task;
@@ -49,7 +50,7 @@ public class BoardImpl implements Board {
             tasks.add(task);
             createNewHistory(String.format("A new %s task was added to board %s.", task, boardName));
         } else {
-            throw new IllegalArgumentException(String.format("Task already added to board %s!", getBoardName()));
+            throw new DuplicateEntityException(String.format("Task already added to board %s!", getBoardName()));
         }
     }
 
