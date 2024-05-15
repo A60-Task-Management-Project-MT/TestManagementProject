@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 
@@ -23,7 +24,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     public BugImpl(int id, String title, String description, PriorityType priorityType,
                    BugSeverityType severityType, String assignee) {
-        super(id, title, description);
+        super(id, title, description, TaskType.BUG);
         this.stepsToReproduce = new ArrayList<>();
         setPriorityType(priorityType);
         setSeverityType(severityType);

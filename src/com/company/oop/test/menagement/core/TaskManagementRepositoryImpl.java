@@ -1,6 +1,7 @@
 package com.company.oop.test.menagement.core;
 
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.*;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
@@ -97,32 +98,46 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return task;
             }
         }
-        throw new IllegalArgumentException(String.format("No record with id %d", id));
+        throw new IllegalArgumentException(String.format("No task find with id %d", id));
     }
 
     @Override
     public boolean teamExist(String teamName) {
-        return false;
+        boolean exist = false;
+
+        for (Teams team : teams) {
+            if (team.getName().equalsIgnoreCase(teamName)) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
     }
 
     @Override
     public boolean boardExist(String boardName) {
-        return false;
+        boolean exist = false;
+
+        for (Board board : boards) {
+            if (board.getBoardName().equalsIgnoreCase(boardName)) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
     }
 
     @Override
     public boolean memberExist(String memberName) {
-        return false;
-    }
+        boolean exist = false;
 
-    @Override
-    public void addBoardToTeam(Board board) {
-
-    }
-
-    @Override
-    public void addMemberToTeam(Member member) {
-
+        for (Member member : members) {
+            if (member.getMemberName().equalsIgnoreCase(memberName)) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
     }
 
     @Override
@@ -132,7 +147,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return team;
             }
         }
-        throw new IllegalArgumentException(String.format(TEAM_EXIST_ERROR, teamName));
+        throw new ElementNotFoundException(String.format(TEAM_EXIST_ERROR, teamName));
     }
 
     @Override
@@ -142,11 +157,16 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return member;
             }
         }
-        throw new IllegalArgumentException(String.format("Member %s already exist!", memberName));
+        throw new ElementNotFoundException(String.format("Member %s does not exist!", memberName));
     }
 
     @Override
     public Board findBoardByBoardName(String boardName) {
-        return null;
+        for (Board board : boards) {
+            if (board.getBoardName().equalsIgnoreCase(boardName)) {
+                return board;
+            }
+        }
+        throw new ElementNotFoundException(String.format("Board %s does not exist!", boardName));
     }
 }

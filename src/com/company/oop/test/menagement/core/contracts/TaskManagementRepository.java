@@ -38,10 +38,6 @@ public interface TaskManagementRepository {
 
     boolean memberExist(String memberName);
 
-    void addBoardToTeam(Board board);
-
-    void addMemberToTeam(Member member);
-
     Teams findTeamByTeamName(String teamName);
 
     Member findMemberByMemberName(String memberName);

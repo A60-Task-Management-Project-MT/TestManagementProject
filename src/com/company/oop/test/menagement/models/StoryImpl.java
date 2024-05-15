@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
@@ -18,7 +19,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     public StoryImpl(int id, String title, String description, PriorityType priorityType,
                      StorySizeType storySizeType, String assignee) {
-        super(id, title, description);
+        super(id, title, description, TaskType.STORY);
         setPriorityType(priorityType);
         setStorySizeType(storySizeType);
         this.statusType = StoryStatusType.NOT_DONE;

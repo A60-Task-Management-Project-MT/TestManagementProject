@@ -1,6 +1,8 @@
 package com.company.oop.test.menagement.models.contracts;
 
 
+import com.company.oop.test.menagement.models.enums.TaskType;
+
 public interface Task extends Commentable, HistorySavable {
 
     int getId();
@@ -8,6 +10,8 @@ public interface Task extends Commentable, HistorySavable {
     String getTitle();
 
     String getDescription();
+
+    TaskType getTaskType();
 
     void addComment(Comment comment);
 

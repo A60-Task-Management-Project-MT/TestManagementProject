@@ -3,6 +3,7 @@ package com.company.oop.test.menagement.models;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Task;
+import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -30,13 +31,15 @@ public abstract class TaskImpl implements Task {
     private String description;
     private List<Comment> comments;
     private List<ActivityHistory> history;
+    private TaskType taskType;
 
-    public TaskImpl(int id, String title, String description) {
+    public TaskImpl(int id, String title, String description, TaskType taskType) {
         this.id = id;
         setTitle(title);
         setDescription(description);
         this.comments = new ArrayList<>();
         this.history = new ArrayList<>();
+        this.taskType = taskType;
     }
 
     @Override
@@ -85,6 +88,11 @@ public abstract class TaskImpl implements Task {
         for (ActivityHistory activity : history) {
             System.out.println(activity.viewInfo());
         }
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     @Override
