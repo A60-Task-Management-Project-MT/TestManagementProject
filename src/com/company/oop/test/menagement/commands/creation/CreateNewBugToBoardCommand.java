@@ -40,14 +40,14 @@ public class CreateNewBugToBoardCommand implements Command {
         List<String> steps = Arrays.asList(parameters.get(7).split("; "));
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
-        Task task = createTask(taskType, title, description, priorityType, severityType, assignee, steps);
+        Task task = createBug(taskType, title, description, priorityType, severityType, assignee, steps);
 
         board.addTask(task);
 
         return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, taskType, task.getId(), boardName);
     }
 
-    private Task createTask(TaskType taskType, String title, String description, PriorityType priorityType,
+    private Task createBug(TaskType taskType, String title, String description, PriorityType priorityType,
                             BugSeverityType severityType, String assignee, List<String> steps) {
         return taskManagementRepository.createBug(title, description, priorityType, severityType, assignee, steps);
     }
