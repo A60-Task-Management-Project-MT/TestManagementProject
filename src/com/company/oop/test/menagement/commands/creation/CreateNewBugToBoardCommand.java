@@ -3,6 +3,8 @@ package com.company.oop.test.menagement.commands.creation;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.models.BoardImpl;
+import com.company.oop.test.menagement.models.BugImpl;
+import com.company.oop.test.menagement.models.StoryImpl;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.enums.PriorityType;
@@ -17,7 +19,7 @@ import java.util.List;
 public class CreateNewBugToBoardCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 8;
-    private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %s added to board %s!";
+    private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %d added to board %s!";
 
     private final TaskManagementRepository taskManagementRepository;
 
