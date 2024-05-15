@@ -30,24 +30,23 @@ public class CreateNewBugToBoardCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        TaskType taskType = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
-        String title = parameters.get(1);
-        String description = parameters.get(2);
-        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(3), PriorityType.class);
-        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(4), BugSeverityType.class);
-        String assignee = parameters.get(5);
-        String boardName = parameters.get(6);
-        List<String> steps = Arrays.asList(parameters.get(7).split("; "));
+        String title = parameters.get(0);
+        String description = parameters.get(1);
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
+        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(3), BugSeverityType.class);
+        String assignee = parameters.get(4);
+        String boardName = parameters.get(5);
+        List<String> steps = Arrays.asList(parameters.get(6).split("; "));
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
-        Task task = createBug(taskType, title, description, priorityType, severityType, assignee, steps);
+        Task task = createBug(title, description, priorityType, severityType, assignee, steps);
 
         board.addTask(task);
 
-        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, taskType, task.getId(), boardName);
+        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, task.getTaskType(), task.getId(), boardName);
     }
 
-    private Task createBug(TaskType taskType, String title, String description, PriorityType priorityType,
+    private Task createBug(String title, String description, PriorityType priorityType,
                             BugSeverityType severityType, String assignee, List<String> steps) {
         return taskManagementRepository.createBug(title, description, priorityType, severityType, assignee, steps);
     }

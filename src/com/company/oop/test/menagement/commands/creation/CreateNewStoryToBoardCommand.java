@@ -26,22 +26,21 @@ public class CreateNewStoryToBoardCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        TaskType taskType = ParsingHelpers.tryParseEnum(parameters.get(0),TaskType.class);
-        String title = parameters.get(1);
-        String description = parameters.get(2);
-        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(3), PriorityType.class);
-        StorySizeType storySizeType = ParsingHelpers.tryParseEnum(parameters.get(4), StorySizeType.class);
-        String assignee = parameters.get(5);
-        String boardName = parameters.get(6);
+        String title = parameters.get(0);
+        String description = parameters.get(1);
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
+        StorySizeType storySizeType = ParsingHelpers.tryParseEnum(parameters.get(3), StorySizeType.class);
+        String assignee = parameters.get(4);
+        String boardName = parameters.get(5);
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
-        Task task = createStory(taskType, title, description, priorityType, storySizeType, assignee);
+        Task task = createStory(title, description, priorityType, storySizeType, assignee);
 
         board.addTask(task);
 
-        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, taskType, task.getId(), boardName);
+        return String.format(TASK_SUCCESSFULLY_ADDED_TO_BOARD, task.getTaskType(), task.getId(), boardName);
     }
-    private Task createStory(TaskType taskType, String title, String description, PriorityType priorityType,
+    private Task createStory(String title, String description, PriorityType priorityType,
                              StorySizeType storySizeType, String assignee) {
         return taskManagementRepository.createStory(title,description,priorityType,storySizeType,assignee);
     }
