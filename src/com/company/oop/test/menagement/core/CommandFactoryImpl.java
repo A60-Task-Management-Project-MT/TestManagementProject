@@ -10,6 +10,7 @@ import com.company.oop.test.menagement.commands.changestory.ChangeStoryPriorityC
 import com.company.oop.test.menagement.commands.changestory.ChangeStorySizeCommand;
 import com.company.oop.test.menagement.commands.changestory.ChangeStoryStatusCommand;
 import com.company.oop.test.menagement.commands.contracts.Command;
+import com.company.oop.test.menagement.commands.CreateNewPersonCommand;
 import com.company.oop.test.menagement.commands.enums.CommandType;
 import com.company.oop.test.menagement.core.contracts.CommandFactory;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
