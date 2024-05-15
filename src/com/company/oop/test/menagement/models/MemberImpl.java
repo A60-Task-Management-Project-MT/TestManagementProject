@@ -8,6 +8,7 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MemberImpl implements Member {
     public static final int NAME_MIN_LENGTH = 5;
@@ -110,5 +111,19 @@ public class MemberImpl implements Member {
             builder.append("~~~ TASKS ~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemberImpl member = (MemberImpl) o;
+        return Objects.equals(memberName, member.memberName) && Objects.equals(tasks, member.tasks)
+                && Objects.equals(histories, member.histories);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberName, tasks, histories);
     }
 }

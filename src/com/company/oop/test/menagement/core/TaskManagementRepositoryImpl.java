@@ -66,7 +66,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Teams createTeam(String name) {
-        return null;
+        return new TeamsImpl(name);
     }
 
     @Override
@@ -81,12 +81,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Comment createComment(String author, String content) {
-        return null;
+        return new CommentImpl(content, author);
     }
 
     @Override
     public Task findTaskById(int id) {
-        return null;
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        throw new IllegalArgumentException(String.format("No record with id %d", id));
     }
 
     @Override

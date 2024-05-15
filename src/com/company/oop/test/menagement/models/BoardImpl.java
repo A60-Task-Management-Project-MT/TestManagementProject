@@ -7,6 +7,7 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BoardImpl implements Board {
     public static final int BOARD_NAME_MIN_LENGTH = 5;
@@ -71,5 +72,19 @@ public class BoardImpl implements Board {
     @Override
     public String printTasks() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BoardImpl board = (BoardImpl) o;
+        return Objects.equals(boardName, board.boardName) &&
+                Objects.equals(tasks, board.tasks) && Objects.equals(histories, board.histories);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(boardName, tasks, histories);
     }
 }

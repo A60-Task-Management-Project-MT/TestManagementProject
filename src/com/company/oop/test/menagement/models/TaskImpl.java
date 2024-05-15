@@ -7,6 +7,7 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public abstract class TaskImpl implements Task {
@@ -84,6 +85,20 @@ public abstract class TaskImpl implements Task {
         for (ActivityHistory activity : history) {
             System.out.println(activity.viewInfo());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskImpl task = (TaskImpl) o;
+        return id == task.id && Objects.equals(title, task.title) && Objects.equals(description,
+                task.description) && Objects.equals(comments, task.comments) && Objects.equals(history, task.history);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, comments, history);
     }
 
     protected void createNewHistory(String event) {

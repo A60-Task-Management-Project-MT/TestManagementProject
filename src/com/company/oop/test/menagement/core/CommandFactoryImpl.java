@@ -33,9 +33,9 @@ public class CommandFactoryImpl implements CommandFactory {
             case CREATE_PERSON -> {
                 return new CreateNewPersonCommand(taskManagementRepository);
             }
-            case CREATE_TASK -> {
-                return new CreateNewTaskCommand(taskManagementRepository);
-            }
+//            case CREATE_TASK -> {
+//                return new CreateNewTaskCommand(taskManagementRepository);
+//            }
             case CREATE_TEAM -> {
                 return new CreateNewTeamCommand(taskManagementRepository);
             }

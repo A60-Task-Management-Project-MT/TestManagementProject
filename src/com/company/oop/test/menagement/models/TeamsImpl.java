@@ -8,6 +8,7 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TeamsImpl implements Teams {
     public static final int NAME_MIN_LENGTH = 5;
@@ -98,5 +99,19 @@ public class TeamsImpl implements Teams {
             builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TeamsImpl teams = (TeamsImpl) o;
+        return Objects.equals(name, teams.name) && Objects.equals(members, teams.members)
+                && Objects.equals(boards, teams.boards);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, members, boards);
     }
 }
