@@ -18,9 +18,9 @@ public interface TaskManagementRepository {
 
     List<Board> getBoards();
 
-    Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, BugStatusType statusType, String assignee);
+    Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee, List<String> steps);
 
-    Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, StoryStatusType statusType, String assignee);
+    Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, String assignee);
 
     Feedback createFeedback(String title, String description, int rating);
 
