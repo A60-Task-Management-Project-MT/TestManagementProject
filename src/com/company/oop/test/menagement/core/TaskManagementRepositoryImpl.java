@@ -66,17 +66,23 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Teams createTeam(String name) {
-        return new TeamsImpl(name);
+        Teams team = new TeamsImpl(name);
+        teams.add(team);
+        return team;
     }
 
     @Override
     public Member createMember(String memberName) {
-        return new MemberImpl(memberName);
+        Member member = new MemberImpl(memberName);
+        members.add(member);
+        return member;
     }
 
     @Override
     public Board createBoard(String boardName) {
-        return new BoardImpl(boardName);
+        Board board = new BoardImpl(boardName);
+        boards.add(board);
+        return board;
     }
 
     @Override
