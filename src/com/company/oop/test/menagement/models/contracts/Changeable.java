@@ -4,7 +4,7 @@ import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 
-public interface Changable {
+public interface Changeable {
     void changeStatus();
 
     void changePriority(PriorityType newPriorityType);
