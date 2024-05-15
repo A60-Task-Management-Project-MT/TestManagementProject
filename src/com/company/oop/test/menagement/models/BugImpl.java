@@ -23,7 +23,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private String assignee;
 
     public BugImpl(int id, String title, String description, PriorityType priorityType,
-                   BugSeverityType severityType, String assignee) {
+                   BugSeverityType severityType, String assignee, List<String> stepsToReproduce) {
 
         super(id, title, description, TaskType.BUG);
         this.stepsToReproduce = new ArrayList<>();
