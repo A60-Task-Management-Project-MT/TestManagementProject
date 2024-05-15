@@ -13,7 +13,7 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 import java.util.List;
 
 public class CreateNewStoryToBoardCommand implements Command {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
     private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %d added to board %s!";
 
     private final TaskManagementRepository taskManagementRepository;
