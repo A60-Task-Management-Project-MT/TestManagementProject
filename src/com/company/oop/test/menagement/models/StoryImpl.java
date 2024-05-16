@@ -1,11 +1,15 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class StoryImpl extends TaskImpl implements Story {
 
@@ -92,8 +96,16 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public String viewInfo() {
-        return String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee: %s\nComments:\n",
-                getTitle(),getDescription(),getPriority(),getSize(),getStatus(),getAssignee());
+        StringBuilder sb = new StringBuilder();
+        List<Comment> currentTaskComments = this.getComments();
+        AtomicInteger count = new AtomicInteger(1);
+
+        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee %s",
+                getTitle(),getDescription(),getPriority(),getSize(),getStatus(), getAssignee())).append(System.lineSeparator());
+
+        currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
+
+        return sb.toString().trim();
     }
 
     private void setStatusType(StoryStatusType statusType) {
@@ -109,9 +121,6 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     private void setAssignee(String assignee) {
-        if (this.assignee.equals(assignee)) {
-            throw new IllegalArgumentException(String.format(STORY_ALREADY_ASSIGNED_TO_ASSIGNEE_ERROR, assignee));
-        }
         this.assignee = assignee;
     }
 }

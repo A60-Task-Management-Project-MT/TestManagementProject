@@ -116,8 +116,8 @@ public class BugImpl extends TaskImpl implements Bug {
         List<Comment> currentTaskComments = this.getComments();
         AtomicInteger count = new AtomicInteger(1);
 
-        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s",
-                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus())).append(System.lineSeparator());
+        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s | Assignee: %s",
+                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus(), getAssignee())).append(System.lineSeparator());
 
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
 
