@@ -3,12 +3,9 @@ package com.company.oop.test.menagement.core;
 import com.company.oop.test.menagement.commands.*;
 import com.company.oop.test.menagement.commands.changebug.ChangeBugPriorityCommand;
 import com.company.oop.test.menagement.commands.changebug.ChangeBugSeverityCommand;
-import com.company.oop.test.menagement.commands.changebug.ChangeBugStatusCommand;
 import com.company.oop.test.menagement.commands.changefeedback.ChangeFeedbackRatingCommand;
-import com.company.oop.test.menagement.commands.changefeedback.ChangeFeedbackStatusCommand;
 import com.company.oop.test.menagement.commands.changestory.ChangeStoryPriorityCommand;
 import com.company.oop.test.menagement.commands.changestory.ChangeStorySizeCommand;
-import com.company.oop.test.menagement.commands.changestory.ChangeStoryStatusCommand;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.commands.CreateNewPersonCommand;
 import com.company.oop.test.menagement.commands.creation.CreateNewBugToBoardCommand;
@@ -76,23 +73,17 @@ public class CommandFactoryImpl implements CommandFactory {
             case CHANGE_BUG_SEVERITY -> {
                 return new ChangeBugSeverityCommand(taskManagementRepository);
             }
-            case CHANGE_BUG_STATUS -> {
-                return new ChangeBugStatusCommand(taskManagementRepository);
+            case CHANGE_TASK_STATUS -> {
+                return new ChangeTaskStatus(taskManagementRepository);
             }
             case CHANGE_FEEDBACK_RATING -> {
                 return new ChangeFeedbackRatingCommand(taskManagementRepository);
-            }
-            case CHANGE_FEEDBACK_STATUS -> {
-                return new ChangeFeedbackStatusCommand(taskManagementRepository);
             }
             case CHANGE_STORY_PRIORITY -> {
                 return new ChangeStoryPriorityCommand(taskManagementRepository);
             }
             case CHANGE_STORY_SIZE -> {
                 return new ChangeStorySizeCommand(taskManagementRepository);
-            }
-            case CHANGE_STORY_STATUS -> {
-                return new ChangeStoryStatusCommand(taskManagementRepository);
             }
             default:
                 throw new IllegalArgumentException();
