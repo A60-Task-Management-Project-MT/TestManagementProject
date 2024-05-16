@@ -72,6 +72,7 @@ public class BoardImpl implements Board {
     @Override
     public String printHistory() {
         StringBuilder builder = new StringBuilder();
+        builder.append(String.format("~~~ BOARD %s HISTORY ~~~", getBoardName().toUpperCase())).append(System.lineSeparator());
         if (histories.isEmpty()) {
             builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {

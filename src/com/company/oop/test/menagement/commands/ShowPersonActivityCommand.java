@@ -25,18 +25,6 @@ public class ShowPersonActivityCommand implements Command {
 
         Member member = taskManagementRepository.findMemberByMemberName(memberName);
 
-        return showMemberActivity(member);
-    }
-
-    private String showMemberActivity(Member member) {
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        sb.append(String.format("~~~ MEMBER %s ACTIVITY ~~~",member.getMemberName().toUpperCase())).append(System.lineSeparator());
-        for (Member person : taskManagementRepository.getMembers()) {
-            sb.append(count).append(". ");
-            sb.append(person.printHistory()).append(System.lineSeparator());
-            count++;
-        }
-        return sb.toString().trim();
+        return member.printHistory();
     }
 }

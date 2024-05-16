@@ -95,6 +95,7 @@ public class MemberImpl implements Member {
     @Override
     public String printHistory() {
         StringBuilder builder = new StringBuilder();
+        builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
         if (histories.isEmpty()) {
             builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {
