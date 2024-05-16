@@ -23,14 +23,14 @@ public class ChangeFeedbackRatingCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        int id = ParsingHelpers.tryParseInt(parameters.get(0),ID_ERROR_MESSAGE);
-        int newRating = ParsingHelpers.tryParseInt(parameters.get(1),RATING_ERROR_MESSAGE);
+        int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
+        int newRating = ParsingHelpers.tryParseInt(parameters.get(1), RATING_ERROR_MESSAGE);
 
         Task task = taskManagementRepository.findTaskById(id);
         task.changeRating(newRating);
 
-        return String.format(FEEDBACK_RATING_CHANGE_MESSAGE,task.getTaskType(),task.getId(),newRating);
+        return String.format(FEEDBACK_RATING_CHANGE_MESSAGE, task.getTaskType(), task.getId(), newRating);
     }
 }
