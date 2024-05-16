@@ -92,7 +92,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public String viewInfo() {
-        return String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee: %s%n",
+        return String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee: %s\nComments:\n",
                 getTitle(),getDescription(),getPriority(),getSize(),getStatus(),getAssignee());
     }
 

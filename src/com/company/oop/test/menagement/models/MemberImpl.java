@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Member;
@@ -42,15 +43,23 @@ public class MemberImpl implements Member {
 
     @Override
     public void assignTask(Task task) {
-        tasks.add(task);
-
-        createNewHistory(String.format("A new %s task was assigned to member %s.", task, memberName));
+        boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
+        if (!exists) {
+            tasks.add(task);
+            createNewHistory(String.format("A new %s task was assigned to member %s.", task, memberName));
+        } else {
+            throw new DuplicateEntityException(String.format("Task already assigned to member %s!", getMemberName()));
+        }
     }
 
     @Override
     public void unassignTask(Task task) {
-        tasks.remove(task);
+        boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
+        if (!exists) {
+            throw new IllegalArgumentException(String.format("This member does not have a task with ID %s!", task.getId()));
+        }
 
+        tasks.remove(task);
         createNewHistory(String.format("A new %s task was unassigned from member %s.", task, memberName));
     }
 
