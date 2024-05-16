@@ -1,4 +1,4 @@
 package com.company.oop.test.menagement.commands;
 
-public class ShowTeamsActivityCommand {
+public class ShowTeamActivityCommand {
 }

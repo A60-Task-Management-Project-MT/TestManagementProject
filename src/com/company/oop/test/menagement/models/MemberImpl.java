@@ -95,14 +95,13 @@ public class MemberImpl implements Member {
     @Override
     public String printHistory() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("~~~ %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
         if (histories.isEmpty()) {
             builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {
             for (ActivityHistory activityHistory : histories) {
                 builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
             }
-            builder.append("~~~ HISTORY ~~~").append(System.lineSeparator());
+            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }

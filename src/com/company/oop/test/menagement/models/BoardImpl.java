@@ -71,7 +71,16 @@ public class BoardImpl implements Board {
 
     @Override
     public String printHistory() {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        if (histories.isEmpty()) {
+            builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
+        } else {
+            for (ActivityHistory activityHistory : histories) {
+                builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
+            }
+            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
+        }
+        return builder.toString().trim();
     }
 
     @Override
