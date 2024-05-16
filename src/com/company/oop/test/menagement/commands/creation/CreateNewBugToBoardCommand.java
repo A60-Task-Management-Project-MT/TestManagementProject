@@ -19,6 +19,9 @@ public class CreateNewBugToBoardCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
     private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %s added to board %s!";
+    private static final String INVALID_PRIORITY_TYPE = "Invalid priority type!";
+    private static final String INVALID_SEVERITY_TYPE = "Invalid severity type!";
+
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -32,8 +35,8 @@ public class CreateNewBugToBoardCommand implements Command {
 
         String title = parameters.get(0);
         String description = parameters.get(1);
-        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
-        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(3), BugSeverityType.class);
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class, INVALID_PRIORITY_TYPE);
+        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(3), BugSeverityType.class, INVALID_SEVERITY_TYPE);
         String assignee = parameters.get(4);
         String boardName = parameters.get(5);
         List<String> steps = Arrays.asList(parameters.get(6).split("; "));

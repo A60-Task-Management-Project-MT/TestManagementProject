@@ -15,6 +15,8 @@ import java.util.List;
 public class CreateNewStoryToBoardCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
     private static final String TASK_SUCCESSFULLY_ADDED_TO_BOARD = "Task %s with ID %d added to board %s!";
+    private static final String INVALID_PRIORITY_TYPE = "Invalid priority type!";
+    private static final String INVALID_SIZE_TYPE = "Invalid size type!";
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -28,8 +30,8 @@ public class CreateNewStoryToBoardCommand implements Command {
 
         String title = parameters.get(0);
         String description = parameters.get(1);
-        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
-        StorySizeType storySizeType = ParsingHelpers.tryParseEnum(parameters.get(3), StorySizeType.class);
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class, INVALID_PRIORITY_TYPE);
+        StorySizeType storySizeType = ParsingHelpers.tryParseEnum(parameters.get(3), StorySizeType.class, INVALID_SIZE_TYPE);
         String assignee = parameters.get(4);
         String boardName = parameters.get(5);
 

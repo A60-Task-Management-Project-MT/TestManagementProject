@@ -18,9 +18,11 @@ import com.company.oop.test.menagement.units.ParsingHelpers;
 
 public class CommandFactoryImpl implements CommandFactory {
 
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command name: %s!";
+
     @Override
     public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
-        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
+        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class, String.format(INVALID_COMMAND_MESSAGE, commandTypeAsString));
         switch (commandType) {
             case ADD_COMMENT -> {
                 return new AddCommentToTaskCommand(taskManagementRepository);
@@ -85,8 +87,8 @@ public class CommandFactoryImpl implements CommandFactory {
             case CHANGE_STORY_SIZE -> {
                 return new ChangeStorySizeCommand(taskManagementRepository);
             }
-            default:
-                throw new IllegalArgumentException();
+            default ->
+                throw new IllegalArgumentException(String.format(INVALID_COMMAND_MESSAGE, commandTypeAsString));
         }
     }
 }

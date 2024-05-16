@@ -14,6 +14,7 @@ public class ChangeBugSeverityCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String ID_ERROR_MESSAGE = "ID needs to be a number!";
     public static final String BUG_SEVERITY_CHANGE_MESSAGE = "Severity of task %s with ID %d was changed to %s!";
+    private static final String INVALID_ENUM_TYPE = "Invalid severity type!";
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -26,7 +27,7 @@ public class ChangeBugSeverityCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
-        BugSeverityType newSeverityType = ParsingHelpers.tryParseEnum(parameters.get(1), BugSeverityType.class);
+        BugSeverityType newSeverityType = ParsingHelpers.tryParseEnum(parameters.get(1), BugSeverityType.class, INVALID_ENUM_TYPE);
 
         Task task = taskManagementRepository.findTaskById(id);
         task.changeSeverity(newSeverityType);

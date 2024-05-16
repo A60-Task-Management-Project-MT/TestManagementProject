@@ -1,15 +1,8 @@
 package com.company.oop.test.menagement.units;
 
-public class ParsingHelpers {
-    public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+import com.company.oop.test.menagement.exceptions.InvalidUserInputException;
 
-    public static double tryParseDouble(String valueToParse, String errorMessage) {
-        try {
-            return Double.parseDouble(valueToParse);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
-        }
-    }
+public class ParsingHelpers {
 
     public static int tryParseInt(String valueToParse, String errorMessage) {
         try {
@@ -19,11 +12,11 @@ public class ParsingHelpers {
         }
     }
 
-    public static <E extends Enum<E>> E tryParseEnum(String valueToParse, Class<E> type) {
+    public static <E extends Enum<E>> E tryParseEnum(String valueToParse, Class<E> type, String errorMessage) {
         try {
             return Enum.valueOf(type, valueToParse.replace(" ", "_").toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
+            throw new InvalidUserInputException(String.format(errorMessage, valueToParse));
         }
     }
 }
