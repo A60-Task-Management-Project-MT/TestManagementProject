@@ -102,7 +102,6 @@ public class MemberImpl implements Member {
             for (ActivityHistory activityHistory : histories) {
                 builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
             }
-            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }

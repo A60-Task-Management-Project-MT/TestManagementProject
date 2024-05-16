@@ -32,7 +32,7 @@ public class AddPersonToTeamCommand implements Command {
             teams.addMember(member);
             return String.format("Member with name %s successfully added to team %s!", personName, teamName);
         } else {
-            throw new IllegalArgumentException(String.format("Person %s already part of a team!", member.getMemberName()));
+            throw new IllegalArgumentException(String.format("Person %s is already part of a team!", member.getMemberName()));
         }
     }
 
