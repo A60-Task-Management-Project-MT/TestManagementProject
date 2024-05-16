@@ -32,8 +32,8 @@ public class ShowAllTeamMembersCommand implements Command {
         StringBuilder sb = new StringBuilder();
         int count = 1;
         sb.append(String.format("~~~ TEAM %s MEMBERS ~~~", team.getName())).append(System.lineSeparator());
-        sb.append(count).append(". ");
         for (Member member : team.getMembers()) {
+            sb.append(count).append(". ");
             sb.append(member.getMemberName()).append(System.lineSeparator());
             count++;
         }

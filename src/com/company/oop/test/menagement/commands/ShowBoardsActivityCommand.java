@@ -19,8 +19,8 @@ public class ShowBoardsActivityCommand implements Command {
         StringBuilder sb = new StringBuilder();
         int count = 1;
         sb.append("~~~ BOARDS ACTIVITY ~~~").append(System.lineSeparator());
-        sb.append(count).append(". ");
         for (Board board : taskManagementRepository.getBoards()) {
+            sb.append(count).append(". ");
             sb.append(board.printHistory()).append(System.lineSeparator());
             count++;
         }
