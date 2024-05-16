@@ -20,12 +20,13 @@ public class ChangeBugSeverityCommand implements Command {
     public ChangeBugSeverityCommand(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
+
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        int id = ParsingHelpers.tryParseInt(parameters.get(0),ID_ERROR_MESSAGE);
-        BugSeverityType newSeverityType = ParsingHelpers.tryParseEnum(parameters.get(1),BugSeverityType.class);
+        int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
+        BugSeverityType newSeverityType = ParsingHelpers.tryParseEnum(parameters.get(1), BugSeverityType.class);
 
         Task task = taskManagementRepository.findTaskById(id);
         task.changeSeverity(newSeverityType);
