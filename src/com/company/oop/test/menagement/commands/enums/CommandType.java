@@ -24,6 +24,4 @@ public enum CommandType {
     CHANGESTORYPRIORITY,
     CHANGESTORYSIZE,
     CHANGETASKSTATUS;
-
-
 }
