@@ -31,7 +31,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
             createNewHistory(String.format("Feedback status changed from %s to %s.", getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            createNewHistory(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
         }
     }
 
@@ -90,5 +90,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     private void setRating(int rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return getStatus().toString();
     }
 }

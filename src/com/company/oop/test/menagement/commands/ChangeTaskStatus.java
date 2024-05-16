@@ -28,6 +28,6 @@ public class ChangeTaskStatus implements Command {
         Task task = taskManagementRepository.findTaskById(id);
         task.changeStatus();
 
-        return String.format("Status of task %s successfully changed!",task.getTaskType());
+        return String.format("Status of task %s successfully changed to %s!",task.getTaskType(), task);
     }
 }

@@ -44,7 +44,7 @@ public class BugImpl extends TaskImpl implements Bug {
             createNewHistory(String.format("Bug status changed from %s to %s", getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            createNewHistory(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
         }
     }
 
@@ -138,5 +138,10 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private void setSeverityType(BugSeverityType severityType) {
         this.severityType = severityType;
+    }
+
+    @Override
+    public String toString() {
+        return getStatus().toString();
     }
 }

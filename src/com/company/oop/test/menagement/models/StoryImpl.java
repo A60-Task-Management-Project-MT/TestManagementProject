@@ -40,7 +40,7 @@ public class StoryImpl extends TaskImpl implements Story {
             createNewHistory(String.format("Story status changed from %s to %s", getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            createNewHistory(String.format("Can't change, already at %s", getStatus()));
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
         }
     }
 
@@ -122,5 +122,10 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private void setAssignee(String assignee) {
         this.assignee = assignee;
+    }
+
+    @Override
+    public String toString() {
+        return getStatus().toString();
     }
 }

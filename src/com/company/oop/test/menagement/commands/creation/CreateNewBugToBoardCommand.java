@@ -36,11 +36,11 @@ public class CreateNewBugToBoardCommand implements Command {
 
         String title = parameters.get(0);
         String description = parameters.get(1);
-        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class, INVALID_PRIORITY_TYPE);
-        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(3), BugSeverityType.class, INVALID_SEVERITY_TYPE);
-        String assignee = parameters.get(4);
-        String boardName = parameters.get(5);
-        List<String> steps = Arrays.asList(parameters.get(6).split("; "));
+        List<String> steps = Arrays.asList(parameters.get(2).split("; "));
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(3), PriorityType.class, INVALID_PRIORITY_TYPE);
+        BugSeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(4), BugSeverityType.class, INVALID_SEVERITY_TYPE);
+        String assignee = parameters.get(5);
+        String boardName = parameters.get(6);
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
         Member member = taskManagementRepository.findMemberByMemberName(assignee);
