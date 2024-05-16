@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 public class TaskManagementEngineImpl implements TaskManagementEngine {
 
@@ -34,7 +35,7 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
             try {
                 String inputLine = scanner.nextLine();
                 if (inputLine.isBlank()) {
-                    System.out.println(EMPTY_COMMAND_ERROR);
+                    print(EMPTY_COMMAND_ERROR);
                     continue;
                 }
                 if (inputLine.equalsIgnoreCase(TERMINATION_COMMAND)) {
@@ -43,9 +44,9 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
                 processCommand(inputLine);
             } catch (Exception ex) {
                 if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
-                    System.out.println(ex.getMessage());
+                    print(ex.getMessage());
                 } else {
-                    System.out.println(ex.toString());
+                    print(ex.toString());
                 }
             }
         }
@@ -56,7 +57,7 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
         Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
         List<String> parameters = extractCommandParameters(inputLine);
         String executionResult = command.execute(parameters);
-        System.out.println(executionResult);
+        print(executionResult);
     }
 
     private String extractCommandName(String inputLine) {
@@ -76,13 +77,17 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
     }
 
     public List<String> extractCommentParameters(String fullCommand) {
+
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
         int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
-        if (indexOfOpenComment >= 0) {
-            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+        while (indexOfOpenComment != -1) {
+            String currentCutString = fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment);
+            parameters.add(currentCutString);
+            fullCommand = fullCommand.replace(String.format("%s%s%s", COMMENT_OPEN_SYMBOL, currentCutString, COMMENT_CLOSE_SYMBOL), "");
+            indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
+            indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         }
 
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
