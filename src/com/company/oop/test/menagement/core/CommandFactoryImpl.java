@@ -24,70 +24,53 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class, String.format(INVALID_COMMAND_MESSAGE, commandTypeAsString));
         switch (commandType) {
-            case ADD_COMMENT -> {
+            case ADDCOMMENT:
                 return new AddCommentToTaskCommand(taskManagementRepository);
-            }
-            case ADD_PERSON -> {
+            case ADDPERSON:
                 return new AddPersonToTeamCommand(taskManagementRepository);
-            }
-            case CREATE_BOARD -> {
+            case ASSIGNTASK:
+                return new AssignTaskCommand(taskManagementRepository);
+            case UNASSIGNTASK:
+                return new UnassignTaskCommand(taskManagementRepository);
+            case CREATEBOARD:
                 return new CreateBoardInTeamCommand(taskManagementRepository);
-            }
-            case CREATE_PERSON -> {
+            case CREATEPERSON:
                 return new CreateNewPersonCommand(taskManagementRepository);
-            }
-            case CREATE_BUG -> {
+            case CREATEBUG:
                 return new CreateNewBugToBoardCommand(taskManagementRepository);
-            }
-            case CREATE_STORY -> {
+            case CREATESTORY:
                 return new CreateNewStoryToBoardCommand(taskManagementRepository);
-            }
-            case CREATE_FEEDBACK -> {
+            case CREATEFEEDBACK:
                 return new CreateNewFeedbackToBoardCommand(taskManagementRepository);
-            }
-            case CREATE_TEAM -> {
+            case CREATETEAM:
                 return new CreateNewTeamCommand(taskManagementRepository);
-            }
-            case SHOW_PEOPLE -> {
+            case SHOWPEOPLE:
                 return new ShowAllPeopleCommand(taskManagementRepository);
-            }
-            case SHOW_TEAM_BOARDS -> {
+            case SHOWTEAMBOARDS:
                 return new ShowAllTeamBoardsCommand(taskManagementRepository);
-            }
-            case SHOW_TEAM_MEMBERS -> {
+            case SHOWTEAMMEMBERS:
                 return new ShowAllTeamMembersCommand(taskManagementRepository);
-            }
-            case SHOW_TEAMS -> {
+            case SHOWTEAMS:
                 return new ShowAllTeamsCommand(taskManagementRepository);
-            }
-            case SHOW_BOARDS_ACTIVITY -> {
+            case SHOWBOARDSACTIVITY:
                 return new ShowBoardActivityCommand(taskManagementRepository);
-            }
-            case SHOW_PERSONS_ACTIVITY -> {
+            case SHOWPERSONSACTIVITY:
                 return new ShowPersonActivityCommand(taskManagementRepository);
-            }
-            case SHOW_TEAMS_ACTIVITY -> {
+            case SHOWTEAMSACTIVITY:
                 return new ShowTeamActivityCommand(taskManagementRepository);
-            }
-            case CHANGE_BUG_PRIORITY -> {
+            case CHANGEBUGPRIORITY:
                 return new ChangeBugPriorityCommand(taskManagementRepository);
-            }
-            case CHANGE_BUG_SEVERITY -> {
+            case CHANGEBUGSEVERITY:
                 return new ChangeBugSeverityCommand(taskManagementRepository);
-            }
-            case CHANGE_TASK_STATUS -> {
+            case CHANGETASKSTATUS:
                 return new ChangeTaskStatus(taskManagementRepository);
-            }
-            case CHANGE_FEEDBACK_RATING -> {
+            case CHANGEFEEDBACKRATING:
                 return new ChangeFeedbackRatingCommand(taskManagementRepository);
-            }
-            case CHANGE_STORY_PRIORITY -> {
+            case CHANGESTORYPRIORITY:
                 return new ChangeStoryPriorityCommand(taskManagementRepository);
-            }
-            case CHANGE_STORY_SIZE -> {
+            case CHANGESTORYSIZE:
                 return new ChangeStorySizeCommand(taskManagementRepository);
-            }
-            default ->
+            default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND_MESSAGE, commandTypeAsString));
         }
     }
