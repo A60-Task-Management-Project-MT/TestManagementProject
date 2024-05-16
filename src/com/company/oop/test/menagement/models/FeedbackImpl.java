@@ -1,11 +1,15 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Feedback;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.feedback_enums.FeedbackStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
@@ -68,8 +72,16 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     @Override
     public String viewInfo() {
-        return String.format("Title: %s | Description: %s | Rating: %d | Status: %s%n",
-                getTitle(),getDescription(),getRating(),getStatus());
+        StringBuilder sb = new StringBuilder();
+        List<Comment> currentTaskComments = this.getComments();
+        AtomicInteger count = new AtomicInteger(1);
+
+        sb.append(String.format("Title: %s | Description: %s | Rating: %d | Status: %s",
+                getTitle(), getDescription(), getRating(), getStatus())).append(System.lineSeparator());
+
+        currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
+
+        return sb.toString().trim();
     }
 
     private void setStatusType(FeedbackStatusType statusType) {
