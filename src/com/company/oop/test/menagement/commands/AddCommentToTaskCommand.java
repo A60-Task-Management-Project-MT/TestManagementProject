@@ -3,6 +3,7 @@ package com.company.oop.test.menagement.commands;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.models.contracts.Comment;
+import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ParsingHelpers;
 import com.company.oop.test.menagement.units.ValidationHelpers;
@@ -27,6 +28,7 @@ public class AddCommentToTaskCommand implements Command {
         String content = parameters.get(1);
         int taskId = ParsingHelpers.tryParseInt(parameters.get(2), INVALID_PARAMETER_ERROR);
 
+        taskManagementRepository.findMemberByMemberName(author);
         Comment comment = createComment(author, content);
         Task task = taskManagementRepository.findTaskById(taskId);
 

@@ -29,6 +29,10 @@ public class AssignTaskCommand implements Command {
         Task task = taskManagementRepository.findTaskById(id);
         Member member = taskManagementRepository.findMemberByMemberName(personName);
 
+        if (member.getTasks().contains(task)) {
+            throw new IllegalArgumentException("Task already assigned to this person!");
+        }
+
         member.assignTask(task);
 
         return String.format("Task %s was assigned to member %s!", task.getTaskType(), personName);

@@ -129,9 +129,6 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     private void setAssignee(String assignee) {
-        if (this.assignee.equals(assignee)) {
-            throw new IllegalArgumentException(String.format(BUG_ALREADY_ASSIGNED_TO_ASSIGNEE_ERROR, assignee));
-        }
         this.assignee = assignee;
     }
 

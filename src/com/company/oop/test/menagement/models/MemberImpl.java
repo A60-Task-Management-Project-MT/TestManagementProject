@@ -46,7 +46,7 @@ public class MemberImpl implements Member {
         boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
         if (!exists) {
             tasks.add(task);
-            createNewHistory(String.format("A new %s task was assigned to member %s.", task, memberName));
+            createNewHistory(String.format("A new %s task was assigned to member %s.", task.getTaskType(), memberName));
         } else {
             throw new DuplicateEntityException(String.format("Task already assigned to member %s!", getMemberName()));
         }
@@ -60,7 +60,7 @@ public class MemberImpl implements Member {
         }
 
         tasks.remove(task);
-        createNewHistory(String.format("A new %s task was unassigned from member %s.", task, memberName));
+        createNewHistory(String.format("A new %s task was unassigned from member %s.", task.getTaskType(), memberName));
     }
 
     @Override

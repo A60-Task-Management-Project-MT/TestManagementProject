@@ -15,7 +15,7 @@ public class TeamsImpl implements Teams {
     public static final int NAME_MIN_LENGTH = 5;
     public static final int NAME_MAX_LENGTH = 15;
     public static final String NAME_MIN_OR_MAX_LENGTH_ERROR = String.format(
-            "Member name must be between %s and %s characters long!",
+            "Team name must be between %s and %s characters long!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
 

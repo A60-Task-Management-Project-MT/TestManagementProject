@@ -28,8 +28,23 @@ public class AddPersonToTeamCommand implements Command {
         Member member = taskManagementRepository.findMemberByMemberName(personName);
         Teams teams = taskManagementRepository.findTeamByTeamName(teamName);
 
-        teams.addMember(member);
+        if (!isPartOfTeam(member)) {
+            teams.addMember(member);
+            return String.format("Member with name %s successfully added to team %s!", personName, teamName);
+        } else {
+            throw new IllegalArgumentException(String.format("Person %s already part of a team!", member.getMemberName()));
+        }
+    }
 
-        return String.format("Member with name %s successfully added to team %s!", personName, teamName);
+    private boolean isPartOfTeam(Member member) {
+        boolean exist = false;
+
+        for (Teams team : taskManagementRepository.getTeams()) {
+            if (team.getMembers().contains(member)) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
     }
 }
