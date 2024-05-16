@@ -48,7 +48,7 @@ public class BoardImpl implements Board {
         boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
         if (!exists) {
             tasks.add(task);
-            createNewHistory(String.format("A new %s task was added to board %s.", task, boardName));
+            createNewHistory(String.format("A new %s task was added to board %s.", task.getTaskType(), boardName));
         } else {
             throw new DuplicateEntityException(String.format("Task already added to board %s!", getBoardName()));
         }

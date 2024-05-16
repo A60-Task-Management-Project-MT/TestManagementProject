@@ -15,7 +15,6 @@ public class StoryImpl extends TaskImpl implements Story {
 
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
     public static final String SIZE_SET_ERROR = "Size is already set to %s!";
-    public static final String STORY_ALREADY_ASSIGNED_TO_ASSIGNEE_ERROR = "This story was already assigned to assignee %s!";
 
     private PriorityType priorityType;
     private StorySizeType storySizeType;

@@ -16,7 +16,6 @@ public class BugImpl extends TaskImpl implements Bug {
 
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
     public static final String SEVERITY_SET_ERROR = "Severity is already set to %s!";
-    public static final String BUG_ALREADY_ASSIGNED_TO_ASSIGNEE_ERROR = "This Bug was already assigned to assignee %s.";
 
     private List<String> stepsToReproduce;
     private PriorityType priorityType;
