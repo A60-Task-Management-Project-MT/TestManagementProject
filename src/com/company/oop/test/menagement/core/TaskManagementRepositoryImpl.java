@@ -18,17 +18,24 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String TEAM_EXIST_ERROR = "Team %s does not exist!";
     private int nextId;
     private final List<Teams> teams = new ArrayList<>();
-    private final List<Task> tasks = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
+    private final List<Bug> bugs = new ArrayList<>();
+    private final List<Feedback> feedbacks = new ArrayList<>();
+    private final List<Story> stories = new ArrayList<>();
 
     public TaskManagementRepositoryImpl() {
         this.nextId = 0;
     }
 
     @Override
-    public List<Task> getTask() {
-        return new ArrayList<>(tasks);
+    public List<Task> getTasks() {
+        List<Task> result = new ArrayList<>();
+        result.addAll(bugs);
+        result.addAll(feedbacks);
+        result.addAll(stories);
+
+        return result;
     }
 
     @Override
@@ -42,6 +49,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public List<Story> getStories() {
+        return new ArrayList<>(stories);
+    }
+
+    @Override
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
+
+    @Override
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugs);
+    }
+
+    @Override
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
@@ -49,21 +71,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee, List<String> steps) {
         Bug bug = new BugImpl(++nextId, title, description, priorityType, severityType, assignee, steps);
-        tasks.add(bug);
+        bugs.add(bug);
         return bug;
     }
 
     @Override
     public Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, String assignee) {
         Story story = new StoryImpl(++nextId, title, description, priorityType, storySizeType, assignee);
-        tasks.add(story);
+        stories.add(story);
         return story;
     }
 
     @Override
     public Feedback createFeedback(String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
-        tasks.add(feedback);
+        feedbacks.add(feedback);
         return feedback;
     }
 
@@ -95,7 +117,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Task findTaskById(int id) {
-        for (Task task : tasks) {
+        for (Task task : getTasks()) {
             if (task.getId() == id) {
                 return task;
             }

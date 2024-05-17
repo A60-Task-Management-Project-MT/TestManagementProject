@@ -10,11 +10,17 @@ import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 import java.util.List;
 
 public interface TaskManagementRepository {
-    List<Task> getTask();
+    List<Task> getTasks();
 
     List<Teams> getTeams();
 
     List<Member> getMembers();
+
+    List<Story> getStories();
+
+    List<Feedback> getFeedbacks();
+
+    List<Bug> getBugs();
 
     List<Board> getBoards();
 
