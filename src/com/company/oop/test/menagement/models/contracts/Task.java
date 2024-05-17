@@ -17,7 +17,7 @@ public interface Task extends Commentable, HistorySavable, Changeable {
 
     void removeComment(Comment comment);
 
-    void displayFullHistory();
+    String displayFullHistory();
 
     String viewInfo();
 }

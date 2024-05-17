@@ -8,9 +8,5 @@ public interface Member extends Taskable, HistorySavable, Printable{
 
     void unassignTask(Task task);
 
-    void addComment(Comment commentToAdd, Task taskToAddComment);
-
-    void removeComment(Comment commentToRemove, Task taskToRemoveComment);
-
     void createNewHistory(String activity);
 }

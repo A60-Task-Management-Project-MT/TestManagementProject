@@ -24,8 +24,8 @@ public class AddCommentToTaskCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String author = parameters.get(0);
-        String content = parameters.get(1);
+        String content = parameters.get(0);
+        String author = parameters.get(1);
         int taskId = ParsingHelpers.tryParseInt(parameters.get(2), INVALID_PARAMETER_ERROR);
 
         taskManagementRepository.findMemberByMemberName(author);

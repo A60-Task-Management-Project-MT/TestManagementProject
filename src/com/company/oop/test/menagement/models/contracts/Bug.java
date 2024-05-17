@@ -12,7 +12,7 @@ public interface Bug extends Task, Reproducible {
 
     BugStatusType getStatus();
 
-    void addStep(String step);
-
     String getAssignee();
+
+    void setAssignee(String name);
 }

@@ -7,13 +7,11 @@ import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
-import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
-import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
@@ -197,9 +195,18 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Task> findTasksByTaskType(TaskType taskType) {
-        return getTasks().stream()
-                .filter(task -> task.getTaskType() == taskType).collect(Collectors.toList());
+    public <T extends Task> List<T> findByTaskType(TaskType taskType) {
+        switch (taskType) {
+            case BUG -> {
+                return (List<T>) getBugs();
+            }
+            case STORY -> {
+                return (List<T>) getStories();
+            }
+            case FEEDBACK -> {
+                return (List<T>) getFeedbacks();
+            }
+            default -> throw new ClassCastException("Unsupported task type: " + taskType);
+        }
     }
-
 }

@@ -25,6 +25,6 @@ public class ShowPersonActivityCommand implements Command {
 
         Member member = taskManagementRepository.findMemberByMemberName(memberName);
 
-        return member.printHistory();
+        return member.printTasks();
     }
 }

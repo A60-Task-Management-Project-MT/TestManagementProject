@@ -61,7 +61,7 @@ public abstract class TaskImpl implements Task {
     public void addComment(Comment comment) {
         comments.add(comment);
 
-        createNewHistory(String.format("New comment was added to task %s", title));
+        createNewHistory(String.format("A new comment %s was add to task with ID %d.", comment.getContent(), getId()));
     }
 
     @Override
@@ -84,10 +84,12 @@ public abstract class TaskImpl implements Task {
     }
 
     @Override
-    public void displayFullHistory() {
+    public String displayFullHistory() {
+        StringBuilder sb = new StringBuilder();
         for (ActivityHistory activity : history) {
-            System.out.println(activity.viewInfo());
+           sb.append(activity.viewInfo()).append(System.lineSeparator());
         }
+        return sb.toString().trim();
     }
 
     @Override

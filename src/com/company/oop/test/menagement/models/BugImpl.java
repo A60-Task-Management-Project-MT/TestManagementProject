@@ -40,10 +40,10 @@ public class BugImpl extends TaskImpl implements Bug {
     public void changeStatus() {
         if (getStatus() != BugStatusType.DONE) {
             BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Bug status changed from %s to %s", getStatus(), newStatus));
+            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s\n", getId(), getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.\n", getStatus()));
         }
     }
 
@@ -60,13 +60,6 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override
     public BugStatusType getStatus() {
         return statusType;
-    }
-
-    @Override
-    public void addStep(String step) {
-        stepsToReproduce.add(step);
-
-        createNewHistory(String.format("A new Bug step %s was added to be reproduced!", step));
     }
 
     @Override
@@ -127,7 +120,8 @@ public class BugImpl extends TaskImpl implements Bug {
         this.statusType = statusType;
     }
 
-    private void setAssignee(String assignee) {
+    @Override
+    public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
 

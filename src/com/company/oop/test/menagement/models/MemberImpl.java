@@ -64,20 +64,6 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public void addComment(Comment commentToAdd, Task taskToAddComment) {
-        taskToAddComment.addComment(commentToAdd);
-
-        createNewHistory(String.format("A new comment %s was add to task %s.", commentToAdd, taskToAddComment));
-    }
-
-    @Override
-    public void removeComment(Comment commentToRemove, Task taskToRemoveComment) {
-        taskToRemoveComment.removeComment(commentToRemove);
-
-        createNewHistory(String.format("A comment %s was removed from task %s.", commentToRemove, taskToRemoveComment));
-    }
-
-    @Override
     public void createNewHistory(String activity) {
         histories.add(new ActivityHistoryImpl(activity));
     }
@@ -109,14 +95,15 @@ public class MemberImpl implements Member {
     @Override
     public String printTasks() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("~~~ %s TASKS ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
+        builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
         if (tasks.isEmpty()) {
-            builder.append(" ~~~ NO AVAILABLE TASKS ~~~").append(System.lineSeparator());
+            builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {
             for (Task task : tasks) {
-                builder.append(task.viewInfo()).append(System.lineSeparator());
+//                builder.append(task.viewInfo()).append(System.lineSeparator());
+                builder.append(task.displayFullHistory()).append(System.lineSeparator());
             }
-            builder.append("~~~ TASKS ~~~").append(System.lineSeparator());
+            builder.append("~~~ HISTORY ~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
