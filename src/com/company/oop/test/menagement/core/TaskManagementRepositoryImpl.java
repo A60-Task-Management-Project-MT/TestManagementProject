@@ -5,6 +5,7 @@ import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.*;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
@@ -12,6 +13,7 @@ import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
@@ -193,4 +195,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         throw new ElementNotFoundException(String.format("Board %s does not exist!", boardName));
     }
+
+    @Override
+    public List<Task> findTasksByTaskType(TaskType taskType) {
+        return getTasks().stream()
+                .filter(task -> task.getTaskType() == taskType).collect(Collectors.toList());
+    }
+
 }

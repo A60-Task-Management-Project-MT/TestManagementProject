@@ -22,7 +22,7 @@ public class ShowAllTeamsCommand implements Command {
         sb.append("~~~ TEAMS ~~~").append(System.lineSeparator());
         for (Teams team : taskManagementRepository.getTeams()) {
             sb.append(count).append(". ");
-            sb.append(team).append(System.lineSeparator());
+            sb.append(team.getName()).append(System.lineSeparator());
             count++;
         }
         return sb.toString().trim();
