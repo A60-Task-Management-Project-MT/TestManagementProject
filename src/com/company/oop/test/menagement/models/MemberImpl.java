@@ -31,9 +31,14 @@ public class MemberImpl implements Member {
         createNewHistory(String.format("A new member with name %s was created!", memberName));
     }
 
-    private void setMemberName(String memberName) {
-        ValidationHelpers.validateStringLength(memberName, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_MIN_OR_MAX_LENGTH_ERROR);
-        this.memberName = memberName;
+    @Override
+    public List<ActivityHistory> getHistory() {
+        return new ArrayList<>(histories);
+    }
+
+    @Override
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
     }
 
     @Override
@@ -69,16 +74,6 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public List<ActivityHistory> getHistory() {
-        return new ArrayList<>(histories);
-    }
-
-    @Override
-    public List<Task> getTasks() {
-        return new ArrayList<>(tasks);
-    }
-
-    @Override
     public String printHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
@@ -101,24 +96,14 @@ public class MemberImpl implements Member {
         } else {
             for (Task task : tasks) {
                 builder.append(task.viewInfo()).append(System.lineSeparator());
-//                builder.append(task.displayFullHistory()).append(System.lineSeparator());
             }
             builder.append("~~~ HISTORY ~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MemberImpl member = (MemberImpl) o;
-        return Objects.equals(memberName, member.memberName) && Objects.equals(tasks, member.tasks)
-                && Objects.equals(histories, member.histories);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(memberName, tasks, histories);
+    private void setMemberName(String memberName) {
+        ValidationHelpers.validateStringLength(memberName, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_MIN_OR_MAX_LENGTH_ERROR);
+        this.memberName = memberName;
     }
 }

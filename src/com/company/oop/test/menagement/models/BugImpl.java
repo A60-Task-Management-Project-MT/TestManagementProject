@@ -36,17 +36,6 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     }
 
     @Override
-    public void changeStatus() {
-        if (getStatus() != BugStatusType.DONE) {
-            BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s", getId(), getStatus(), newStatus));
-            setStatusType(newStatus);
-        } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
-        }
-    }
-
-    @Override
     public BugStatusType getStatus() {
         return statusType;
     }
@@ -59,6 +48,34 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     @Override
     public BugSeverityType getSeverity() {
         return severityType;
+    }
+
+    @Override
+    public String getAssignee() {
+        return assignee;
+    }
+
+    @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
+    }
+
+    @Override
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+
+        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
+    }
+
+    @Override
+    public void changeStatus() {
+        if (getStatus() != BugStatusType.DONE) {
+            BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
+            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s", getId(), getStatus(), newStatus));
+            setStatusType(newStatus);
+        } else {
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+        }
     }
 
     @Override
@@ -82,16 +99,6 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     }
 
     @Override
-    public String getAssignee() {
-        return assignee;
-    }
-
-    @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
-    }
-
-    @Override
     public String viewInfo() {
         StringBuilder sb = new StringBuilder();
         List<Comment> currentTaskComments = this.getComments();
@@ -107,13 +114,6 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
     private void setStatusType(BugStatusType statusType) {
         this.statusType = statusType;
-    }
-
-    @Override
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-
-        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
     }
 
     private void setPriorityType(PriorityType priorityType) {

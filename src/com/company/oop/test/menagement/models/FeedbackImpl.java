@@ -25,6 +25,16 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
     }
 
     @Override
+    public FeedbackStatusType getStatus() {
+        return statusType;
+    }
+
+    @Override
+    public int getRating() {
+        return rating;
+    }
+
+    @Override
     public void changeStatus() {
         if (getStatus() != FeedbackStatusType.DONE) {
             FeedbackStatusType newStatus = FeedbackStatusType.values()[getStatus().ordinal() + 1];
@@ -33,16 +43,6 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
         } else {
             throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
         }
-    }
-
-    @Override
-    public FeedbackStatusType getStatus() {
-        return statusType;
-    }
-
-    @Override
-    public int getRating() {
-        return rating;
     }
 
     @Override

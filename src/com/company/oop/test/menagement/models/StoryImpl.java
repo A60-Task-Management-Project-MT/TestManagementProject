@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
-
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
+
     public static final String SIZE_SET_ERROR = "Size is already set to %s!";
 
     private PriorityType priorityType;
@@ -32,10 +32,8 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     }
 
     @Override
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-
-        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
+    public String getAssignee() {
+        return assignee;
     }
 
     @Override
@@ -51,6 +49,13 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     @Override
     public StoryStatusType getStatus() {
         return statusType;
+    }
+
+    @Override
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+
+        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
     }
 
     @Override
@@ -82,11 +87,6 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         setStorySizeType(newSizeType);
 
         createNewHistory(String.format("Story size was changed from %s to %s!", storySizeType, newSizeType));
-    }
-
-    @Override
-    public String getAssignee() {
-        return assignee;
     }
 
     @Override

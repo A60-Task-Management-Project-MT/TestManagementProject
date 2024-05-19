@@ -43,6 +43,16 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
     }
 
     @Override
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments);
+    }
+
+    @Override
+    public List<ActivityHistory> getHistory() {
+        return new ArrayList<>(history);
+    }
+
+    @Override
     public int getId() {
         return id;
     }
@@ -74,16 +84,6 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
     public abstract void changeStatus();
 
     @Override
-    public List<Comment> getComments() {
-        return new ArrayList<>(comments);
-    }
-
-    @Override
-    public List<ActivityHistory> getHistory() {
-        return new ArrayList<>(history);
-    }
-
-    @Override
     public String displayFullHistory() {
         StringBuilder sb = new StringBuilder();
         for (ActivityHistory activity : history) {
@@ -102,6 +102,19 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
         history.add(new ActivityHistoryImpl(event));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskImpl task = (TaskImpl) o;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, comments, history);
+    }
+
     private void setTitle(String title) {
         ValidationHelpers.validateStringLength(title,
                 MIN_TITLE_SYMBOLS,
@@ -116,18 +129,5 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
                 MAX_DESCRIPTION_SYMBOLS,
                 DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR);
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TaskImpl task = (TaskImpl) o;
-        return id == task.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, comments, history);
     }
 }

@@ -30,12 +30,14 @@ public class BoardImpl implements Board {
         createNewHistory(String.format("A new board with name %s was created!", boardName));
     }
 
-    private void setBoardName(String boardName) {
-        ValidationHelpers.validateStringLength(boardName,
-                BOARD_NAME_MIN_LENGTH,
-                BOARD_NAME_MAX_LENGTH,
-                NAME_MIN_OR_MAX_LENGTH_ERROR);
-        this.boardName = boardName;
+    @Override
+    public List<ActivityHistory> getHistory() {
+        return histories;
+    }
+
+    @Override
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     @Override
@@ -60,16 +62,6 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public List<ActivityHistory> getHistory() {
-        return histories;
-    }
-
-    @Override
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    @Override
     public String printHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ BOARD %s HISTORY ~~~", getBoardName().toUpperCase())).append(System.lineSeparator());
@@ -86,6 +78,14 @@ public class BoardImpl implements Board {
     @Override
     public String printTasks() {
         return null;
+    }
+
+    private void setBoardName(String boardName) {
+        ValidationHelpers.validateStringLength(boardName,
+                BOARD_NAME_MIN_LENGTH,
+                BOARD_NAME_MAX_LENGTH,
+                NAME_MIN_OR_MAX_LENGTH_ERROR);
+        this.boardName = boardName;
     }
 
     @Override
