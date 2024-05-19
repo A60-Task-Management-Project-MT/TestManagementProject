@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
@@ -43,6 +44,14 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     }
 
     @Override
+    public void changeAssignee(String assignee) {
+        if (this.assignee.equals(assignee)) {
+            throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
+        }
+        setAssignee(assignee);
+    }
+
+    @Override
     public PriorityType getPriority() {
         return priorityType;
     }
@@ -55,13 +64,6 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     @Override
     public StoryStatusType getStatus() {
         return statusType;
-    }
-
-    @Override
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-
-        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     @Override
@@ -107,6 +109,12 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
 
         return sb.toString().trim();
+    }
+
+    private void setAssignee(String assignee) {
+        this.assignee = assignee;
+
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     private void setStatusType(StoryStatusType statusType) {

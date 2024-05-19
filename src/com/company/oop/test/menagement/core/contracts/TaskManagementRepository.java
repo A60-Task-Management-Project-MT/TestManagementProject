@@ -23,8 +23,6 @@ public interface TaskManagementRepository {
 
     List<Bug> getBugs();
 
-    List<Board> getBoards();
-
     Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee, List<String> steps);
 
     Story createStory(String title, String description, PriorityType priorityType, StorySizeType storySizeType, String assignee);

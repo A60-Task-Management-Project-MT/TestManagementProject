@@ -64,11 +64,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
-    }
-
-    @Override
     public Bug createBug(String title, String description, PriorityType priorityType, BugSeverityType severityType, String assignee, List<String> steps) {
         Bug bug = new BugImpl(++nextId, title, description, priorityType, severityType, assignee, steps);
         bugs.add(bug);

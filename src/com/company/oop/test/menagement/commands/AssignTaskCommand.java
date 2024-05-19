@@ -39,7 +39,7 @@ public class AssignTaskCommand implements Command {
                 List<Bug> bugs = taskManagementRepository.getBugs();
                 bugs = filterBugsList(bugs, filter);
                 bugs.stream().forEach(bug -> {
-                    bug.setAssignee(member.getMemberName());
+                    bug.changeAssignee(member.getMemberName());
                     member.assignTask(bug);
                     taskManagementRepository.unassignTask(bug);
                 });
@@ -49,7 +49,7 @@ public class AssignTaskCommand implements Command {
                 List<Story> stories = taskManagementRepository.getStories();
                 stories = filterStoryList(stories, filter);
                 stories.stream().forEach(story -> {
-                    story.setAssignee(member.getMemberName());
+                    story.changeAssignee(member.getMemberName());
                     member.assignTask(story);
                     taskManagementRepository.unassignTask(story);
                 });

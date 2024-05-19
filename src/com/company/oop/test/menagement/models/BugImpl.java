@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.enums.PriorityType;
@@ -62,15 +63,16 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     }
 
     @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
+    public void changeAssignee(String assignee) {
+        if (this.assignee.equals(assignee)) {
+            throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
+        }
+        setAssignee(assignee);
     }
 
     @Override
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-
-        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
     }
 
     @Override
@@ -128,5 +130,11 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
     private void setSeverityType(BugSeverityType severityType) {
         this.severityType = severityType;
+    }
+
+    private void setAssignee(String assignee) {
+        this.assignee = assignee;
+
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 }
