@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public abstract class TaskImpl implements Task {
+public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
 
     public static final int MIN_TITLE_SYMBOLS = 10;
     public static final int MAX_TITLE_SYMBOLS = 100;
@@ -98,19 +98,6 @@ public abstract class TaskImpl implements Task {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TaskImpl task = (TaskImpl) o;
-        return id == task.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, comments, history);
-    }
-
-    @Override
     public void createNewHistory(String event) {
         history.add(new ActivityHistoryImpl(event));
     }
@@ -129,5 +116,18 @@ public abstract class TaskImpl implements Task {
                 MAX_DESCRIPTION_SYMBOLS,
                 DESCRIPTION_MIN_OR_MAX_LENGTH_ERROR);
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskImpl task = (TaskImpl) o;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, comments, history);
     }
 }

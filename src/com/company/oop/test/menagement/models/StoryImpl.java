@@ -4,14 +4,13 @@ import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
-import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StoryImpl extends TaskImpl implements Story {
+public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
 
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
     public static final String SIZE_SET_ERROR = "Size is already set to %s!";
@@ -114,10 +113,5 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private void setStorySizeType(StorySizeType storySizeType) {
         this.storySizeType = storySizeType;
-    }
-
-    @Override
-    public String toString() {
-        return getStatus().toString();
     }
 }

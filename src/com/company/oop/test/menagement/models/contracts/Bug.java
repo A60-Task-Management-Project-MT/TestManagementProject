@@ -6,13 +6,11 @@ import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 
 import java.util.List;
 
-public interface Bug extends Task {
+public interface Bug extends Task<BugStatusType> {
 
     PriorityType getPriority();
 
     BugSeverityType getSeverity();
-
-    BugStatusType getStatus();
 
     String getAssignee();
 

@@ -6,13 +6,12 @@ import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
-import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class BugImpl extends TaskImpl implements Bug {
+public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
     public static final String SEVERITY_SET_ERROR = "Severity is already set to %s!";
@@ -40,11 +39,16 @@ public class BugImpl extends TaskImpl implements Bug {
     public void changeStatus() {
         if (getStatus() != BugStatusType.DONE) {
             BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s\n", getId(), getStatus(), newStatus));
+            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s", getId(), getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.\n", getStatus()));
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
         }
+    }
+
+    @Override
+    public BugStatusType getStatus() {
+        return statusType;
     }
 
     @Override
@@ -55,11 +59,6 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override
     public BugSeverityType getSeverity() {
         return severityType;
-    }
-
-    @Override
-    public BugStatusType getStatus() {
-        return statusType;
     }
 
     @Override
@@ -123,10 +122,5 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private void setSeverityType(BugSeverityType severityType) {
         this.severityType = severityType;
-    }
-
-    @Override
-    public String toString() {
-        return getStatus().toString();
     }
 }

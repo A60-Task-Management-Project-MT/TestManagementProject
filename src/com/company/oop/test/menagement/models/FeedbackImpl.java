@@ -11,7 +11,7 @@ import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FeedbackImpl extends TaskImpl implements Feedback {
+public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedback {
 
     private int rating;
     private FeedbackStatusType statusType;
@@ -36,13 +36,13 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    public int getRating() {
-        return rating;
+    public FeedbackStatusType getStatus() {
+        return statusType;
     }
 
     @Override
-    public FeedbackStatusType getStatus() {
-        return statusType;
+    public int getRating() {
+        return rating;
     }
 
     @Override
@@ -75,10 +75,5 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     private void setRating(int rating) {
         this.rating = rating;
-    }
-
-    @Override
-    public String toString() {
-        return getStatus().toString();
     }
 }

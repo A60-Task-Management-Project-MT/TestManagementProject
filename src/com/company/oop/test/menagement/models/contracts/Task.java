@@ -5,7 +5,7 @@ import com.company.oop.test.menagement.models.enums.TaskType;
 
 import java.util.List;
 
-public interface Task extends HistorySavable {
+public interface Task<T extends Enum<T>> extends HistorySavable {
 
     int getId();
 
@@ -26,4 +26,6 @@ public interface Task extends HistorySavable {
     void changeStatus();
 
     List<Comment> getComments();
+
+    T getStatus();
 }

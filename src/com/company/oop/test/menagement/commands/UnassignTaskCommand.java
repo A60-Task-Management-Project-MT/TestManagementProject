@@ -2,17 +2,18 @@ package com.company.oop.test.menagement.commands;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ParsingHelpers;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UnassignTaskCommand implements Command {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    public static final String ID_ERROR_MESSAGE = "ID should be a number!";
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
     private TaskManagementRepository taskManagementRepository;
 
     public UnassignTaskCommand(TaskManagementRepository taskManagementRepository) {
@@ -20,17 +21,19 @@ public class UnassignTaskCommand implements Command {
     }
     @Override
     public String execute(List<String> parameters) {
+        List<Task> tasks = taskManagementRepository.getTasks();
+        tasks = filterTaskList(tasks);
+        tasks.forEach(task -> taskManagementRepository.unassignTask(task));
 
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        return "All tasks with status Done unassigned!";
+    }
 
-        int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
-        String personName = parameters.get(1);
+    private List<Task> filterTaskList(List<Task> tasks) {
+        List<Task> filteredTasks = new ArrayList<>();
 
-        Task task = taskManagementRepository.findTaskById(id);
-        Member member = taskManagementRepository.findMemberByMemberName(personName);
+        filteredTasks.addAll(taskManagementRepository.getTasks().stream()
+                .filter(task -> task.getStatus().toString().equals("Done")).toList());
 
-        member.unassignTask(task);
-
-        return String.format("Task %s was unassigned from member %s!", task.getTaskType(), personName);
+        return filteredTasks;
     }
 }

@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.commands;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Teams;
 import com.company.oop.test.menagement.units.ValidationHelpers;
@@ -30,6 +31,9 @@ public class ShowAllTeamBoardsCommand implements Command {
     }
 
     private String showTeamBoards(Teams team) {
+        if (team.getBoards().isEmpty()) {
+            throw new ElementNotFoundException(String.format("Team %s does not have active boards!", team.getName()));
+        }
         StringBuilder sb = new StringBuilder();
         int count = 1;
         sb.append(String.format("~~~ TEAM %s BOARDS ~~~", team.getName())).append(System.lineSeparator());
