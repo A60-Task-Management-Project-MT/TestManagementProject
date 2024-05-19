@@ -100,8 +100,8 @@ public class MemberImpl implements Member {
             builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {
             for (Task task : tasks) {
-//                builder.append(task.viewInfo()).append(System.lineSeparator());
-                builder.append(task.displayFullHistory()).append(System.lineSeparator());
+                builder.append(task.viewInfo()).append(System.lineSeparator());
+//                builder.append(task.displayFullHistory()).append(System.lineSeparator());
             }
             builder.append("~~~ HISTORY ~~~").append(System.lineSeparator());
         }

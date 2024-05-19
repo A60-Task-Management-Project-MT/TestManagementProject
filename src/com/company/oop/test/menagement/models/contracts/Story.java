@@ -15,4 +15,6 @@ public interface Story extends Task {
     void changePriority(PriorityType newPriorityType);
 
     String getAssignee();
+
+    void setAssignee(String name);
 }

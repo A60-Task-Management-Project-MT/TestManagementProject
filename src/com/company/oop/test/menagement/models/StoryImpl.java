@@ -33,14 +33,8 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public void changeStatus() {
-        if (getStatus() != StoryStatusType.DONE) {
-            StoryStatusType newStatus = StoryStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Story status changed from %s to %s", getStatus(), newStatus));
-            setStatusType(newStatus);
-        } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
-        }
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     @Override
@@ -56,6 +50,17 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override
     public StoryStatusType getStatus() {
         return statusType;
+    }
+
+    @Override
+    public void changeStatus() {
+        if (getStatus() != StoryStatusType.DONE) {
+            StoryStatusType newStatus = StoryStatusType.values()[getStatus().ordinal() + 1];
+            createNewHistory(String.format("Story status changed from %s to %s", getStatus(), newStatus));
+            setStatusType(newStatus);
+        } else {
+            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+        }
     }
 
     @Override
@@ -117,10 +122,6 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private void setStorySizeType(StorySizeType storySizeType) {
         this.storySizeType = storySizeType;
-    }
-
-    private void setAssignee(String assignee) {
-        this.assignee = assignee;
     }
 
     @Override
