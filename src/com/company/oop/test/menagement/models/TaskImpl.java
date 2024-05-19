@@ -102,8 +102,7 @@ public abstract class TaskImpl implements Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskImpl task = (TaskImpl) o;
-        return id == task.id && Objects.equals(title, task.title) && Objects.equals(description,
-                task.description) && Objects.equals(comments, task.comments) && Objects.equals(history, task.history);
+        return id == task.id;
     }
 
     @Override

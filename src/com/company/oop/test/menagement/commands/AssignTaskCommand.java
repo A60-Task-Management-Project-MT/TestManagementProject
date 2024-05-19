@@ -3,6 +3,7 @@ package com.company.oop.test.menagement.commands;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.commands.enums.SeverityStatusPrioritySizeEnum;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -40,6 +41,7 @@ public class AssignTaskCommand implements Command {
                 bugs.stream().forEach(bug -> {
                     bug.setAssignee(member.getMemberName());
                     member.assignTask(bug);
+                    taskManagementRepository.unassignTask(bug);
                 });
                 countOfTasks += bugs.size();
             }
@@ -49,6 +51,7 @@ public class AssignTaskCommand implements Command {
                 stories.stream().forEach(story -> {
                     story.setAssignee(member.getMemberName());
                     member.assignTask(story);
+                    taskManagementRepository.unassignTask(story);
                 });
                 countOfTasks += stories.size();
             }
@@ -57,6 +60,10 @@ public class AssignTaskCommand implements Command {
     }
 
     private List<Bug> filterBugsList(List<Bug> bugs, String filter) {
+        if (bugs.isEmpty()) {
+            throw new ElementNotFoundException(String.format("No tasks of type Bug with specification %s were found!", filter));
+        }
+
         List<Bug> filteredTasks = new ArrayList<>();
         filteredTasks.addAll(bugs.stream()
                 .filter(task -> task.getPriority().toString().equals(filter))
@@ -75,6 +82,10 @@ public class AssignTaskCommand implements Command {
 
     private List<Story> filterStoryList(List<Story> stories, String filter) {
         List<Story> filteredTasks = new ArrayList<>();
+        if (stories.isEmpty()) {
+            throw new ElementNotFoundException(String.format("No tasks of type Story with specification %s were found!", filter));
+        }
+
         filteredTasks.addAll(stories.stream()
                 .filter(task -> task.getPriority().toString().equals(filter))
                 .toList());

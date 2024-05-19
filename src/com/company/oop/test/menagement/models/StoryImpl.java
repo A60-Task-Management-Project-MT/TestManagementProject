@@ -35,6 +35,8 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override
     public void setAssignee(String assignee) {
         this.assignee = assignee;
+
+        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
     }
 
     @Override

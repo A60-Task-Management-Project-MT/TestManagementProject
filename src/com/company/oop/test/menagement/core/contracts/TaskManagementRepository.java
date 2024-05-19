@@ -54,4 +54,6 @@ public interface TaskManagementRepository {
     Board findBoardByBoardName(String boardName);
 
     <T extends Task> List<T> findByTaskType(TaskType taskType);
+
+    void unassignTask(Task task);
 }

@@ -123,6 +123,8 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override
     public void setAssignee(String assignee) {
         this.assignee = assignee;
+
+        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
     }
 
     private void setPriorityType(PriorityType priorityType) {

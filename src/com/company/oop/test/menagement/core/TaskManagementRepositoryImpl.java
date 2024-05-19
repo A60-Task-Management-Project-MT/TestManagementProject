@@ -209,4 +209,15 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             default -> throw new ClassCastException("Unsupported task type: " + taskType);
         }
     }
+
+    @Override
+    public void unassignTask(Task task) {
+        for (Member member : members) {
+            if (member.getTasks().contains(task)) {
+                member.unassignTask(task);
+                return;
+            }
+        }
+        throw new ElementNotFoundException("Task not found!");
+    }
 }
