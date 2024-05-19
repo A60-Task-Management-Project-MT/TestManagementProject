@@ -1,6 +1,6 @@
 package com.company.oop.test.menagement.models.contracts;
 
-public interface Board extends Taskable, HistorySavable ,Printable{
+public interface Board extends TaskRegistry, HistoryTrackable,Printable{
 
     String getBoardName();
 

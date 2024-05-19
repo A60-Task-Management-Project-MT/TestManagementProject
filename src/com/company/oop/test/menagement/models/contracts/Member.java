@@ -1,6 +1,6 @@
 package com.company.oop.test.menagement.models.contracts;
 
-public interface Member extends Taskable, HistorySavable, Printable{
+public interface Member extends TaskRegistry, HistoryTrackable, Printable{
 
     String getMemberName();
 
