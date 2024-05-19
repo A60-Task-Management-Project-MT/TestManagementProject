@@ -83,8 +83,6 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
         createNewHistory(String.format(COMMENT_REMOVED_MESSAGE, title));
     }
 
-    public abstract void changeStatus();
-
     @Override
     public String displayFullHistory() {
         StringBuilder sb = new StringBuilder();
@@ -116,6 +114,8 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
     public int hashCode() {
         return Objects.hash(id, title, description, comments, history);
     }
+
+    public abstract void changeStatus();
 
     private void setTitle(String title) {
         ValidationHelpers.validateStringLength(title,
