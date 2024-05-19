@@ -2,7 +2,6 @@ package com.company.oop.test.menagement.commands;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
-import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 

@@ -6,7 +6,6 @@ import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.enums.PriorityType;
-import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
 import com.company.oop.test.menagement.units.ValidationHelpers;

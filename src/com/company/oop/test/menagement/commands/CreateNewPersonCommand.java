@@ -6,8 +6,6 @@ import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.List;
-import java.util.zip.DataFormatException;
-
 
 public class CreateNewPersonCommand implements Command {
 
