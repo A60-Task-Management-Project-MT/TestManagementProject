@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.commands.changebug;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -29,7 +30,7 @@ public class ChangeBugPriorityCommand implements Command {
         int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
         PriorityType newPriorityType = ParsingHelpers.tryParseEnum(parameters.get(1), PriorityType.class, INVALID_ENUM_TYPE);
 
-        Task task = taskManagementRepository.findTaskById(id);
+        Bug task = taskManagementRepository.findBugById(id);
         task.changePriority(newPriorityType);
 
         return String.format(BUG_PRIORITY_CHANGE_MESSAGE, task.getTaskType(), task.getId(), newPriorityType);

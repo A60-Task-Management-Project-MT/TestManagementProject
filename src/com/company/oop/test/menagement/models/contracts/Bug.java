@@ -19,4 +19,8 @@ public interface Bug extends Task {
     void setAssignee(String name);
 
     List<String> getStepsToReproduce();
+
+    void changeSeverity(BugSeverityType newSeverityType);
+
+    void changePriority(PriorityType newPriorityType);
 }

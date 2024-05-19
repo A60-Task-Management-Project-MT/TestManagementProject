@@ -76,16 +76,6 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public void changeSeverity(BugSeverityType newSeverityType) {
-        throw new IllegalArgumentException("Story does not have severity type!");
-    }
-
-    @Override
-    public void changeRating(int newRating) {
-        throw new IllegalArgumentException("Story does not have rating!");
-    }
-
-    @Override
     public void changeSize(StorySizeType newSizeType) {
         if (newSizeType.equals(storySizeType)) {
             throw new IllegalArgumentException(String.format(SIZE_SET_ERROR, storySizeType));

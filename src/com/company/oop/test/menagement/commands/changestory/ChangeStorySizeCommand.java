@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.commands.changestory;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -29,7 +30,7 @@ public class ChangeStorySizeCommand implements Command {
         int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
         StorySizeType newSizeType = ParsingHelpers.tryParseEnum(parameters.get(1), StorySizeType.class, INVALID_ENUM_TYPE);
 
-        Task task = taskManagementRepository.findTaskById(id);
+        Story task = taskManagementRepository.findStoryById(id);
         task.changeSize(newSizeType);
 
         return String.format(STORY_SIZE_CHANGE_MESSAGE, task.getTaskType(), task.getId(), newSizeType);

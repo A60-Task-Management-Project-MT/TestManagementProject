@@ -110,7 +110,8 @@ public abstract class TaskImpl implements Task {
         return Objects.hash(id, title, description, comments, history);
     }
 
-    protected void createNewHistory(String event) {
+    @Override
+    public void createNewHistory(String event) {
         history.add(new ActivityHistoryImpl(event));
     }
 

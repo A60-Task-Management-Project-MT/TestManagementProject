@@ -116,34 +116,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Task findTaskById(int id) {
-        for (Task task : getTasks()) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        throw new IllegalArgumentException(String.format("No task find with id %d", id));
-    }
-
-    @Override
     public boolean teamExist(String teamName) {
         boolean exist = false;
 
         for (Teams team : teams) {
             if (team.getName().equalsIgnoreCase(teamName)) {
-                exist = true;
-                break;
-            }
-        }
-        return exist;
-    }
-
-    @Override
-    public boolean boardExist(String boardName) {
-        boolean exist = false;
-
-        for (Board board : boards) {
-            if (board.getBoardName().equalsIgnoreCase(boardName)) {
                 exist = true;
                 break;
             }
@@ -195,22 +172,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public <T extends Task> List<T> findByTaskType(TaskType taskType) {
-        switch (taskType) {
-            case BUG -> {
-                return (List<T>) getBugs();
-            }
-            case STORY -> {
-                return (List<T>) getStories();
-            }
-            case FEEDBACK -> {
-                return (List<T>) getFeedbacks();
-            }
-            default -> throw new ClassCastException("Unsupported task type: " + taskType);
-        }
-    }
-
-    @Override
     public void unassignTask(Task task) {
         for (Member member : members) {
             if (member.getTasks().contains(task)) {
@@ -220,4 +181,35 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         throw new ElementNotFoundException("Task not found!");
     }
+
+    @Override
+    public Task findTaskById(int id) {
+        return findElementById(id, getTasks());
+    }
+
+    @Override
+    public Feedback findFeedbackById(int id) {
+        return findElementById(id, getFeedbacks());
+    }
+
+    @Override
+    public Bug findBugById(int id) {
+        return findElementById(id, getBugs());
+    }
+
+    @Override
+    public Story findStoryById(int id) {
+        return findElementById(id, getStories());
+    }
+
+    private <T extends Task> T findElementById(int id, List<T> elements) {
+        for (T task : elements) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        throw new IllegalArgumentException(String.format("No task find with id %d", id));
+    }
+
+
 }

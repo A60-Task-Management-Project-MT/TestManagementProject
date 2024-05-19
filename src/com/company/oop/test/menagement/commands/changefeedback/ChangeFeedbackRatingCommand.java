@@ -2,6 +2,7 @@ package com.company.oop.test.menagement.commands.changefeedback;
 
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
+import com.company.oop.test.menagement.models.contracts.Feedback;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ParsingHelpers;
 import com.company.oop.test.menagement.units.ValidationHelpers;
@@ -28,7 +29,7 @@ public class ChangeFeedbackRatingCommand implements Command {
         int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
         int newRating = ParsingHelpers.tryParseInt(parameters.get(1), RATING_ERROR_MESSAGE);
 
-        Task task = taskManagementRepository.findTaskById(id);
+        Feedback task = taskManagementRepository.findFeedbackById(id);
         task.changeRating(newRating);
 
         return String.format(FEEDBACK_RATING_CHANGE_MESSAGE, task.getTaskType(), task.getId(), newRating);

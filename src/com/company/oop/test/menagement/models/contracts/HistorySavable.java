@@ -5,4 +5,6 @@ import java.util.List;
 public interface HistorySavable {
 
     List<ActivityHistory> getHistory();
+
+    void createNewHistory(String event);
 }

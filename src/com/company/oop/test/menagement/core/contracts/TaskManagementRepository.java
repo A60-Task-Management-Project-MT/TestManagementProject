@@ -39,11 +39,7 @@ public interface TaskManagementRepository {
 
     Comment createComment(String author, String content);
 
-    Task findTaskById(int id);
-
     boolean teamExist(String teamName);
-
-    boolean boardExist(String boardName);
 
     boolean memberExist(String memberName);
 
@@ -53,7 +49,13 @@ public interface TaskManagementRepository {
 
     Board findBoardByBoardName(String boardName);
 
-    <T extends Task> List<T> findByTaskType(TaskType taskType);
-
     void unassignTask(Task task);
+
+    Task findTaskById(int id);
+
+    Feedback findFeedbackById(int id);
+
+    Bug findBugById(int id);
+
+    Story findStoryById(int id);
 }

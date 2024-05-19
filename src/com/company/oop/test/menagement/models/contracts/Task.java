@@ -3,7 +3,9 @@ package com.company.oop.test.menagement.models.contracts;
 
 import com.company.oop.test.menagement.models.enums.TaskType;
 
-public interface Task extends Commentable, HistorySavable, Changeable {
+import java.util.List;
+
+public interface Task extends HistorySavable {
 
     int getId();
 
@@ -20,4 +22,8 @@ public interface Task extends Commentable, HistorySavable, Changeable {
     String displayFullHistory();
 
     String viewInfo();
+
+    void changeStatus();
+
+    List<Comment> getComments();
 }

@@ -36,21 +36,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    public void changePriority(PriorityType newPriorityType) {
-        throw new IllegalArgumentException("Feedback does not have priority type!");
-    }
-
-    @Override
-    public void changeSeverity(BugSeverityType newSeverityType) {
-        throw new IllegalArgumentException("Feedback does not have severity type!");
-    }
-
-    @Override
-    public void changeSize(StorySizeType newSizeType) {
-        throw new IllegalArgumentException("Feedback does not have size type!");
-    }
-
-    @Override
     public int getRating() {
         return rating;
     }

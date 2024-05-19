@@ -17,4 +17,6 @@ public interface Story extends Task {
     String getAssignee();
 
     void setAssignee(String name);
+
+    void changeSize(StorySizeType newSizeType);
 }

@@ -83,16 +83,6 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public void changeRating(int newRating) {
-        throw new IllegalArgumentException("Bug does not have rating!");
-    }
-
-    @Override
-    public void changeSize(StorySizeType newSizeType) {
-        throw new IllegalArgumentException("Bug does not have size type!");
-    }
-
-    @Override
     public String getAssignee() {
         return assignee;
     }

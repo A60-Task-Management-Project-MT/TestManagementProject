@@ -7,6 +7,4 @@ public interface Member extends Taskable, HistorySavable, Printable{
     void assignTask(Task task);
 
     void unassignTask(Task task);
-
-    void createNewHistory(String activity);
 }
