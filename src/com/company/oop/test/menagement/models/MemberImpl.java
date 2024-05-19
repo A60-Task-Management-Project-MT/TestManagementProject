@@ -2,14 +2,12 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
-import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MemberImpl implements Member {
     public static final int NAME_MIN_LENGTH = 5;
@@ -18,6 +16,12 @@ public class MemberImpl implements Member {
             "Member name must be between %s and %s characters long!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
+
+    public static final String UNASSIGNE_MESSAGE = "%s task was unassigned from member %s.";
+    public static final String TASK_NOT_EXIST_ERROR_MESSAGE = "This member does not have a task with ID %s!";
+    public static final String TASK_ALREADY_ASSIGNED_ERROR_MESSAGE = "Task already assigned to member %s!";
+    public static final String NEW_TASK_ASSIGNED_MESSAGE = "A new %s task was assigned to member %s.";
+    public static final String NEW_MEMBER_CREATION_MESSAGE = "A new member with name %s was created!";
 
     private String memberName;
     private List<Task> tasks;
@@ -28,7 +32,7 @@ public class MemberImpl implements Member {
         this.tasks = new ArrayList<>();
         this.histories = new ArrayList<>();
 
-        createNewHistory(String.format("A new member with name %s was created!", memberName));
+        createNewHistory(String.format(NEW_MEMBER_CREATION_MESSAGE, memberName));
     }
 
     @Override
@@ -51,21 +55,22 @@ public class MemberImpl implements Member {
         boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
         if (!exists) {
             tasks.add(task);
-            createNewHistory(String.format("A new %s task was assigned to member %s.", task.getTaskType(), memberName));
+            createNewHistory(String.format(NEW_TASK_ASSIGNED_MESSAGE, task.getTaskType(), memberName));
         } else {
-            throw new DuplicateEntityException(String.format("Task already assigned to member %s!", getMemberName()));
+            throw new DuplicateEntityException(String.format(TASK_ALREADY_ASSIGNED_ERROR_MESSAGE, getMemberName()));
         }
     }
+
 
     @Override
     public void unassignTask(Task task) {
         boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
         if (!exists) {
-            throw new IllegalArgumentException(String.format("This member does not have a task with ID %s!", task.getId()));
+            throw new IllegalArgumentException(String.format(TASK_NOT_EXIST_ERROR_MESSAGE, task.getId()));
         }
 
         tasks.remove(task);
-        createNewHistory(String.format("A new %s task was unassigned from member %s.", task.getTaskType(), memberName));
+        createNewHistory(String.format(UNASSIGNE_MESSAGE, task.getTaskType(), memberName));
     }
 
     @Override

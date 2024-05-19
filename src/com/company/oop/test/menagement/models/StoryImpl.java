@@ -14,6 +14,12 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
 
     public static final String SIZE_SET_ERROR = "Size is already set to %s!";
+    public static final String STORY_SIZE_CHANGED_MESSAGE = "Story size was changed from %s to %s!";
+    public static final String STORY_PRIORITY_CHANGED_MESSAGE = "Story priority was changed from %s to %s!";
+    public static final String STORY_STATUS_CHANGED_MESSAGE = "Story with ID: %d status changed from %s to %s";
+    public static final String STORY_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
+    public static final String ADDED_NEW_ASSIGNEE_MESSAGE = "A new assignee %s was set for task %s with ID: %d";
+    public static final String NEW_STORY_CREATION_MESSAGE = "New Story was created: %s!";
 
     private PriorityType priorityType;
     private StorySizeType storySizeType;
@@ -28,7 +34,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         this.statusType = StoryStatusType.NOT_DONE;
         setAssignee(assignee);
 
-        createNewHistory(String.format("New Story was created: %s!", viewInfo()));
+        createNewHistory(String.format(NEW_STORY_CREATION_MESSAGE, viewInfo()));
     }
 
     @Override
@@ -55,17 +61,17 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     public void setAssignee(String assignee) {
         this.assignee = assignee;
 
-        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     @Override
     public void changeStatus() {
         if (getStatus() != StoryStatusType.DONE) {
             StoryStatusType newStatus = StoryStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Story status changed from %s to %s", getStatus(), newStatus));
+            createNewHistory(String.format(STORY_STATUS_CHANGED_MESSAGE, getId(), getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format(STORY_STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
     }
 
@@ -76,7 +82,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         }
         setPriorityType(newPriorityType);
 
-        createNewHistory(String.format("Story priority was changed from %s to %s!", priorityType, newPriorityType));
+        createNewHistory(String.format(STORY_PRIORITY_CHANGED_MESSAGE, priorityType, newPriorityType));
     }
 
     @Override
@@ -86,7 +92,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         }
         setStorySizeType(newSizeType);
 
-        createNewHistory(String.format("Story size was changed from %s to %s!", storySizeType, newSizeType));
+        createNewHistory(String.format(STORY_SIZE_CHANGED_MESSAGE, storySizeType, newSizeType));
     }
 
     @Override

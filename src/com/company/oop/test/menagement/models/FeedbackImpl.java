@@ -2,16 +2,19 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Feedback;
-import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
-import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.feedback_enums.FeedbackStatusType;
-import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedback {
+
+    public static final String FEEDBACK_RATING_CHANGE_MESSAGE = "Feedback rating was changed from %d to %d";
+    public static final String FEEDBACK_RATING_ALREADY_SET_ERROR_MESSAGE = "Feedback rating is already %d!";
+    public static final String FEEDBACK_STATUS_CHANGED_MESSAGE = "Feedback with ID: %d status changed from %s to %s.";
+    public static final String FEEDBACK_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
+    public static final String FEEDBACK_CREATION_MESSAGE = "New Feedback was created: %s!";
 
     private int rating;
     private FeedbackStatusType statusType;
@@ -21,7 +24,7 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
         setRating(rating);
         setStatusType(FeedbackStatusType.NEW);
 
-        createNewHistory(String.format("New Feedback was created: %s!", viewInfo()));
+        createNewHistory(String.format(FEEDBACK_CREATION_MESSAGE, viewInfo()));
     }
 
     @Override
@@ -38,21 +41,21 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
     public void changeStatus() {
         if (getStatus() != FeedbackStatusType.DONE) {
             FeedbackStatusType newStatus = FeedbackStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Feedback status changed from %s to %s.", getStatus(), newStatus));
+            createNewHistory(String.format(FEEDBACK_STATUS_CHANGED_MESSAGE, getId(), getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format(FEEDBACK_STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
     }
 
     @Override
     public void changeRating(int newRating) {
         if (newRating == rating) {
-            throw new IllegalArgumentException(String.format("Feedback rating is already %d!", rating));
+            throw new IllegalArgumentException(String.format(FEEDBACK_RATING_ALREADY_SET_ERROR_MESSAGE, rating));
         }
         setRating(newRating);
 
-        createNewHistory(String.format("Feedback rating was changed from %d to %d", rating, newRating));
+        createNewHistory(String.format(FEEDBACK_RATING_CHANGE_MESSAGE, rating, newRating));
     }
 
     @Override

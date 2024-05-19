@@ -18,6 +18,7 @@ public class TeamsImpl implements Teams {
             "Team name must be between %s and %s characters long!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
+    public static final String BOARD_EXIST_ERROR_MESSAGE = "Board with name %s already exist in team %s!";
 
     private String name;
     private List<Member> members;
@@ -65,7 +66,7 @@ public class TeamsImpl implements Teams {
     @Override
     public void addBoard(Board board) {
         if (boards.contains(board)) {
-            throw new DuplicateEntityException(String.format("Board with name %s already exist in team %s!", board.getBoardName(), name));
+            throw new DuplicateEntityException(String.format(BOARD_EXIST_ERROR_MESSAGE, board.getBoardName(), name));
         }
         boards.add(board);
     }

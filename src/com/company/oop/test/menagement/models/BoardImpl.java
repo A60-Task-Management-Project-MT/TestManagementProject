@@ -17,6 +17,9 @@ public class BoardImpl implements Board {
             "Board name must be between %s and %s characters long!",
             BOARD_NAME_MIN_LENGTH,
             BOARD_NAME_MAX_LENGTH);
+    public static final String TASK_ADD_TO_BOARD_ERROR_MESSAGE = "Task already added to board %s!";
+    public static final String NEW_TASK_ADDED_MESSAGE = "A new %s task was added to board %s.";
+    public static final String NEW_BOARD_CREATION_MESSAGE = "A new board with name %s was created!";
 
     private String boardName;
     private List<Task> tasks;
@@ -27,7 +30,7 @@ public class BoardImpl implements Board {
         tasks = new ArrayList<>();
         histories = new ArrayList<>();
 
-        createNewHistory(String.format("A new board with name %s was created!", boardName));
+        createNewHistory(String.format(NEW_BOARD_CREATION_MESSAGE, boardName));
     }
 
     @Override
@@ -50,9 +53,9 @@ public class BoardImpl implements Board {
         boolean exists = tasks.stream().anyMatch(t -> t.getId() == task.getId());
         if (!exists) {
             tasks.add(task);
-            createNewHistory(String.format("A new %s task was added to board %s.", task.getTaskType(), boardName));
+            createNewHistory(String.format(NEW_TASK_ADDED_MESSAGE, task.getTaskType(), boardName));
         } else {
-            throw new DuplicateEntityException(String.format("Task already added to board %s!", getBoardName()));
+            throw new DuplicateEntityException(String.format(TASK_ADD_TO_BOARD_ERROR_MESSAGE, getBoardName()));
         }
     }
 

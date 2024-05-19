@@ -15,6 +15,12 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
     public static final String PRIORITY_SET_ERROR = "Priority is already set to %s!";
     public static final String SEVERITY_SET_ERROR = "Severity is already set to %s!";
+    public static final String BUG_SEVERITY_CHANGE_MESSAGE = "Bug severity was changed from %s to %s!";
+    public static final String BUG_PRIORITY_CHANGE_MESSAGE = "Bug priority was changed from %s to %s!";
+    public static final String BUG_STATUS_CHANGED_MESSAGE = "Bug with ID: %d status changed from %s to %s";
+    public static final String BUG_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
+    public static final String ADDED_NEW_ASSIGNEE_MESSAGE = "A new assignee %s was set for task %s with ID: %d";
+    public static final String NEW_BUG_CREATION_MESSAGE = "New Bug was created: %s!";
 
     private List<String> stepsToReproduce;
     private PriorityType priorityType;
@@ -32,7 +38,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         this.statusType = BugStatusType.ACTIVE;
         setAssignee(assignee);
 
-        createNewHistory(String.format("New Bug was created: %s!", viewInfo()));
+        createNewHistory(String.format(NEW_BUG_CREATION_MESSAGE, viewInfo()));
     }
 
     @Override
@@ -64,17 +70,17 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     public void setAssignee(String assignee) {
         this.assignee = assignee;
 
-        createNewHistory(String.format("A new assignee %s was set for task %s with ID: %d", assignee, getTaskType(), getId()));
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     @Override
     public void changeStatus() {
         if (getStatus() != BugStatusType.DONE) {
             BugStatusType newStatus = BugStatusType.values()[getStatus().ordinal() + 1];
-            createNewHistory(String.format("Bug with ID: %d status changed from %s to %s", getId(), getStatus(), newStatus));
+            createNewHistory(String.format(BUG_STATUS_CHANGED_MESSAGE, getId(), getStatus(), newStatus));
             setStatusType(newStatus);
         } else {
-            throw new IllegalArgumentException(String.format("Can't change, already at %s.", getStatus()));
+            throw new IllegalArgumentException(String.format(BUG_STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
     }
 
@@ -85,7 +91,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         }
         setPriorityType(newPriorityType);
 
-        createNewHistory(String.format("Bug priority was changed from %s to %s!", priorityType, newPriorityType));
+        createNewHistory(String.format(BUG_PRIORITY_CHANGE_MESSAGE, priorityType, newPriorityType));
     }
 
     @Override
@@ -95,7 +101,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         }
         setSeverityType(newSeverityType);
 
-        createNewHistory(String.format("Bug severity was changed from %s to %s!", severityType, newSeverityType));
+        createNewHistory(String.format(BUG_SEVERITY_CHANGE_MESSAGE, severityType, newSeverityType));
     }
 
     @Override
