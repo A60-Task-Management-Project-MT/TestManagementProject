@@ -76,7 +76,7 @@ public class ListBugsCommand implements Command {
                     throw new ElementNotFoundException(String.format("Invalid searching type %s!", wordToSearch));
                 }
             default:
-                return String.format("Invalid searching type %s!", filterOrSort);
+                return String.format("Invalid searching or filtering type %s!", filterOrSort);
         }
     }
 }
