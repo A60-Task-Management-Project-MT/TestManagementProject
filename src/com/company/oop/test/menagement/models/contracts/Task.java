@@ -5,7 +5,7 @@ import com.company.oop.test.menagement.models.enums.TaskType;
 
 import java.util.List;
 
-public interface Task<T extends Enum<T>> extends HistoryTrackable {
+public interface Task<T extends Enum<T>> extends HistoryTrackable, Printable {
 
     int getId();
 

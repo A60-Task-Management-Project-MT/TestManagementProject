@@ -45,7 +45,6 @@ public class AssignTaskCommand implements Command {
                 });
                 countOfTasks += bugs.size();
             }
-
             case STORY -> {
                 List<Story> stories = taskManagementRepository.getStories();
                 stories = filterStoryList(stories, filter);
