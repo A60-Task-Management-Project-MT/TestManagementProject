@@ -115,8 +115,6 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
         return Objects.hash(id, title, description, comments, history);
     }
 
-    public abstract void changeStatus();
-
     private void setTitle(String title) {
         ValidationHelpers.validateStringLength(title,
                 MIN_TITLE_SYMBOLS,

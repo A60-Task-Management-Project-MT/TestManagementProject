@@ -174,7 +174,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return;
             }
         }
-        throw new ElementNotFoundException("Task not found!");
     }
 
     @Override

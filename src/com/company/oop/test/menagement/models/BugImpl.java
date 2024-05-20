@@ -63,16 +63,16 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     }
 
     @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
+    }
+
+    @Override
     public void changeAssignee(String assignee) {
         if (this.assignee.equals(assignee)) {
             throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
         }
         setAssignee(assignee);
-    }
-
-    @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
     }
 
     @Override
