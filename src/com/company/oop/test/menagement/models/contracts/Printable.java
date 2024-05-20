@@ -5,4 +5,6 @@ public interface Printable {
     String printHistory();
 
     String printTasks();
+
+    String getAsString();
 }
