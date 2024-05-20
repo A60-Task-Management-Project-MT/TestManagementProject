@@ -29,6 +29,6 @@ public class CommentImpl implements Comment {
                 %s
                 User: %s
                 **********
-                """.formatted(content, author).trim();
+                """.formatted(getContent(), getAuthor()).trim();
     }
 }

@@ -25,7 +25,7 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
             "Description must be between %s and %s characters long!",
             MIN_DESCRIPTION_SYMBOLS,
             MAX_DESCRIPTION_SYMBOLS);
-    public static final String NEW_COMMENT_ADD_MESSAGE = "A new comment %s was add to task with ID %d.";
+    public static final String NEW_COMMENT_ADD_MESSAGE = "A new comment %s from author %s was add to task with ID %d.";
     public static final String COMMENT_REMOVED_MESSAGE = "A comment was removed from task %s";
 
     private int id;
@@ -73,7 +73,7 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
     public void addComment(Comment comment) {
         comments.add(comment);
 
-        createNewHistory(String.format(NEW_COMMENT_ADD_MESSAGE, comment.getContent(), getId()));
+        createNewHistory(String.format(NEW_COMMENT_ADD_MESSAGE, comment.getContent(), comment.getAuthor(), getId()));
     }
 
     @Override
