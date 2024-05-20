@@ -12,6 +12,7 @@ import com.company.oop.test.menagement.commands.creation.CreateNewBugToBoardComm
 import com.company.oop.test.menagement.commands.creation.CreateNewFeedbackToBoardCommand;
 import com.company.oop.test.menagement.commands.creation.CreateNewStoryToBoardCommand;
 import com.company.oop.test.menagement.commands.enums.CommandType;
+import com.company.oop.test.menagement.commands.listings.*;
 import com.company.oop.test.menagement.core.contracts.CommandFactory;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -70,6 +71,16 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ChangeStoryPriorityCommand(taskManagementRepository);
             case CHANGESTORYSIZE:
                 return new ChangeStorySizeCommand(taskManagementRepository);
+            case LISTALLTASKS:
+                return new ListAllTaskCommand(taskManagementRepository);
+            case LISTBUGS:
+                return new ListBugsCommand(taskManagementRepository);
+            case LISTFEEDBACKS:
+                return new ListFeedbacksCommand(taskManagementRepository);
+            case LISTSTORIES:
+                return new ListStoriesCommand(taskManagementRepository);
+            case LISTTASKSWITHASSIGNEE:
+                return new ListTasksWithAssigneeCommand(taskManagementRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND_MESSAGE, commandTypeAsString));
         }

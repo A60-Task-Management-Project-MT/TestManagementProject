@@ -28,10 +28,10 @@ public class ListAllTaskCommand implements Command {
             return "There are no registered tasks!";
         }
         String filterOrSort = parameters.get(0);
-        return sortingOrFiltering(filterOrSort, tasks);
+        return filteringOrSorting(filterOrSort, tasks);
     }
 
-    private String sortingOrFiltering(String filterOrSort, List<Task> tasks) {
+    private String filteringOrSorting(String filterOrSort, List<Task> tasks) {
         if (filterOrSort.equals("Sort")) {
             List<Task> sortedTasks = tasks.stream()
                     .sorted(Comparator.comparing(Task::getTitle)).toList();

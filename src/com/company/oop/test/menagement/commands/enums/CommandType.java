@@ -1,5 +1,7 @@
 package com.company.oop.test.menagement.commands.enums;
 
+import com.company.oop.test.menagement.commands.listings.ListAllTaskCommand;
+
 public enum CommandType {
     ADDCOMMENT,
     ADDPERSON,
@@ -23,5 +25,11 @@ public enum CommandType {
     CHANGEFEEDBACKRATING,
     CHANGESTORYPRIORITY,
     CHANGESTORYSIZE,
-    CHANGETASKSTATUS;
+    CHANGETASKSTATUS,
+    LISTALLTASKS,
+
+    LISTBUGS,
+    LISTFEEDBACKS,
+    LISTSTORIES,
+    LISTTASKSWITHASSIGNEE;
 }

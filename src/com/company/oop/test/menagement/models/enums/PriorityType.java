@@ -1,19 +1,19 @@
 package com.company.oop.test.menagement.models.enums;
 
 public enum PriorityType {
-    HIGH,
+    LOW,
     MEDIUM,
-    LOW;
+    HIGH;
 
     @Override
     public String toString() {
         switch (this) {
-            case HIGH:
-                return "High";
-            case MEDIUM:
-                return "Medium";
             case LOW:
                 return "Low";
+            case MEDIUM:
+                return "Medium";
+            case HIGH:
+                return "High";
             default:
                 return "Unknown";
         }

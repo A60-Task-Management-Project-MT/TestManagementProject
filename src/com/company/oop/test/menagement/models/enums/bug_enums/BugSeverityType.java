@@ -1,20 +1,20 @@
 package com.company.oop.test.menagement.models.enums.bug_enums;
 
 public enum BugSeverityType {
-    CRITICAL,
+    MINOR,
     MAJOR,
-    MINOR;
+    CRITICAL;
 
 
     @Override
     public String toString() {
         switch (this) {
-            case CRITICAL:
-                return "Critical";
-            case MAJOR:
-                return "Major";
             case MINOR:
                 return "Minor";
+            case MAJOR:
+                return "Major";
+            case CRITICAL:
+                return "Critical";
             default:
                 return "Unknown";
         }
