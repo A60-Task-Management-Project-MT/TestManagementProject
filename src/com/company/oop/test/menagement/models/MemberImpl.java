@@ -111,4 +111,9 @@ public class MemberImpl implements Member {
         ValidationHelpers.validateStringLength(memberName, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_MIN_OR_MAX_LENGTH_ERROR);
         this.memberName = memberName;
     }
+
+    @Override
+    public String viewInfo() {
+        return "";
+    }
 }

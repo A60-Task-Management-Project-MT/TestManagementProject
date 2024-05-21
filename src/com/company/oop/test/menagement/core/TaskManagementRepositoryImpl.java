@@ -205,5 +205,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         throw new IllegalArgumentException(String.format("No task find with id %d", id));
     }
 
+    @Override
+    public List<Task> filterTasksWithAssignee(List<Task> tasks) {
+        return tasks.stream()
+                .filter(task -> (task instanceof Bug && ((Bug) task).getAssignee() != null) ||
+                        (task instanceof Story && ((Story) task).getAssignee() != null))
+                .toList();
+    }
 
 }

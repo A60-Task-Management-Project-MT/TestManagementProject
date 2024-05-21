@@ -79,4 +79,14 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
     private void setRating(int rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String printHistory() {
+        return "";
+    }
+
+    @Override
+    public String printTasks() {
+        return "";
+    }
 }

@@ -6,5 +6,5 @@ public interface Printable {
 
     String printTasks();
 
-    String getAsString();
+    String viewInfo();
 }

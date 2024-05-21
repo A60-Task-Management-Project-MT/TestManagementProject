@@ -27,7 +27,9 @@ public class ListAllTaskCommand implements Command {
         if (tasks.isEmpty()) {
             return "There are no registered tasks!";
         }
-        String filterOrSort = parameters.get(0);
+        String filterWordToFind = parameters.get(0);
+        String filterOrSort = parameters.get(1);
+
         return filteringOrSorting(filterOrSort, tasks);
     }
 

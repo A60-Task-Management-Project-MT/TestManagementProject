@@ -21,8 +21,6 @@ public interface Task<T extends Enum<T>> extends HistoryTrackable, Printable {
 
     String displayFullHistory();
 
-    String viewInfo();
-
     void changeStatus();
 
     List<Comment> getComments();

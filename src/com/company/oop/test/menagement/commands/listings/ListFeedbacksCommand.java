@@ -18,7 +18,6 @@ public class ListFeedbacksCommand implements Command {
 
     public ListFeedbacksCommand(TaskManagementRepository taskManagementRepository) {
         this.feedbacks = taskManagementRepository.getFeedbacks();
-        this.taskManagementRepository = taskManagementRepository;
     }
 
     @Override
@@ -28,10 +27,10 @@ public class ListFeedbacksCommand implements Command {
         String filterOrSort = parameters.get(0);
         String wordToSearch = parameters.get(1);
 
-        return filteringOrSorting(filterOrSort, wordToSearch, feedbacks, taskManagementRepository);
+        return filteringOrSorting(filterOrSort, wordToSearch, feedbacks);
     }
 
-    private String filteringOrSorting(String filterOrSort, String wordToSearch, List<Feedback> feedbacks, TaskManagementRepository taskManagementRepository) {
+    private String filteringOrSorting(String filterOrSort, String wordToSearch, List<Feedback> feedbacks) {
         switch (filterOrSort) {
             case "Filter":
                 if (wordToSearch.equals("New") || wordToSearch.equals("Unscheduled")

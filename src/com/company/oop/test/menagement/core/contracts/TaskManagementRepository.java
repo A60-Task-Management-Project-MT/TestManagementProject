@@ -56,4 +56,6 @@ public interface TaskManagementRepository {
     Bug findBugById(int id);
 
     Story findStoryById(int id);
+
+    List<Task> filterTasksWithAssignee(List<Task> tasks);
 }

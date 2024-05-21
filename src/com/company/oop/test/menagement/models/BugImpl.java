@@ -137,4 +137,14 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
         createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
+
+    @Override
+    public String printHistory() {
+        return "";
+    }
+
+    @Override
+    public String printTasks() {
+        return "";
+    }
 }

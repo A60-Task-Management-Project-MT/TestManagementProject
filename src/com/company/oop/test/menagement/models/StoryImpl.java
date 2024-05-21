@@ -103,7 +103,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         List<Comment> currentTaskComments = this.getComments();
         AtomicInteger count = new AtomicInteger(1);
 
-        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee %s",
+        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee %s\n",
                 getTitle(),getDescription(),getPriority(),getSize(),getStatus(), getAssignee())).append(System.lineSeparator());
 
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
@@ -127,5 +127,15 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
 
     private void setStorySizeType(StorySizeType storySizeType) {
         this.storySizeType = storySizeType;
+    }
+
+    @Override
+    public String printHistory() {
+        return "";
+    }
+
+    @Override
+    public String printTasks() {
+        return "";
     }
 }

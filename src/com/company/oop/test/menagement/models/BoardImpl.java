@@ -104,4 +104,9 @@ public class BoardImpl implements Board {
     public int hashCode() {
         return Objects.hash(boardName, tasks, histories);
     }
+
+    @Override
+    public String viewInfo() {
+        return "";
+    }
 }

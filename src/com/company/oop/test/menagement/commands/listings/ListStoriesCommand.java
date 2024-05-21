@@ -26,8 +26,8 @@ public class ListStoriesCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String filterOrSort = parameters.get(0);
-        String wordToSearch = parameters.get(1);
+        String wordToSearch = parameters.get(0);
+        String filterOrSort = parameters.get(1);
 
         return filteringOrSorting(filterOrSort, wordToSearch, stories, taskManagementRepository);
     }
