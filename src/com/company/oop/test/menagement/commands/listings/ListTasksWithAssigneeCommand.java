@@ -24,43 +24,43 @@ public class ListTasksWithAssigneeCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
 
-        String filterOrSort = parameters.get(0);
+        String wordForFilter = parameters.get(0);
+        String filterOrSort = parameters.get(1);
 
-        if (parameters.size() == 2 && filterOrSort.equals("Filter")) {
-            String wordForFilter = parameters.get(1);
-            return filterByWord(tasks, wordForFilter, taskManagementRepository);
-        } else if (parameters.size() == 1 && filterOrSort.equals("Sort")) {
-            return sort(tasks);
-        } else {
-            throw new IllegalArgumentException("Invalid number of arguments. Expect 1 parameter if sorting and 2 if filtering!");
-        }
+        return filterOrSortByWord(tasks, filterOrSort, wordForFilter, taskManagementRepository);
     }
 
-    private String filterByWord(List<Task> tasks, String filterWord, TaskManagementRepository taskManagementRepository) {
-        if (filterWord.equals("Active") || filterWord.equals("Done") || filterWord.equals("Not done") || filterWord.equals("In progress")) {
-            List<Task> filteredTasks = tasks
-                    .stream()
-                    .filter(t -> t.getStatus().toString().equals(filterWord))
-                    .toList();
-            return ListingHelpers.elementsToString(filteredTasks);
+    private String filterOrSortByWord(List<Task> tasks, String filterOrSort, String filterWord, TaskManagementRepository taskManagementRepository) {
+        switch (filterOrSort) {
+            case "Filter":
+                if (filterWord.equals("Active") || filterWord.equals("Done") || filterWord.equals("Not Done") || filterWord.equals("In Progress")) {
+                    List<Task> filteredTasks = tasks
+                            .stream()
+                            .filter(t -> t.getStatus().toString().equals(filterWord))
+                            .toList();
+                    if (filteredTasks.isEmpty()) {
+                        throw new ElementNotFoundException(String.format("There is not tasks with such a filter %s", filterWord));
+                    }
+                    return ListingHelpers.elementsToString(filteredTasks);
 
-        } else if (taskManagementRepository.memberExist(filterWord)) {
-            List<Task> filteredTasksWithAssignee = tasks.stream()
-                    .filter(task -> (task instanceof Bug && ((Bug) task).getAssignee().equals(filterWord)) ||
-                            (task instanceof Story && ((Story) task).getAssignee().equals(filterWord)))
-                    .toList();
-            return ListingHelpers.elementsToString(filteredTasksWithAssignee);
+                } else if (taskManagementRepository.memberExist(filterWord)) {
+                    List<Task> filteredTasksWithAssignee = tasks.stream()
+                            .filter(task -> (task instanceof Bug && ((Bug) task).getAssignee().equals(filterWord)) ||
+                                    (task instanceof Story && ((Story) task).getAssignee().equals(filterWord)))
+                            .toList();
+                    return ListingHelpers.elementsToString(filteredTasksWithAssignee);
 
-        } else {
-            throw new ElementNotFoundException("Invalid searching type!");
+                } else {
+                    throw new ElementNotFoundException("Invalid searching type!");
+                }
+            case "Sort":
+                List<Task> sortedTasks = tasks
+                        .stream()
+                        .sorted(Comparator.comparing(Task::getTitle))
+                        .toList();
+                return ListingHelpers.elementsToString(sortedTasks);
+            default:
+                throw new ElementNotFoundException("There is not such a filter type!");
         }
-    }
-
-    private String sort(List<Task> tasks) {
-        List<Task> sortedTasks = tasks
-                .stream()
-                .sorted(Comparator.comparing(Task::getTitle))
-                .toList();
-        return ListingHelpers.elementsToString(sortedTasks);
     }
 }

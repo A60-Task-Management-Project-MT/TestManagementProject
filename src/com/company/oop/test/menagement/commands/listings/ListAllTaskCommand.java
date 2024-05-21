@@ -30,18 +30,19 @@ public class ListAllTaskCommand implements Command {
         String filterWordToFind = parameters.get(0);
         String filterOrSort = parameters.get(1);
 
-        return filteringOrSorting(filterOrSort, tasks);
+        return filteringOrSorting(filterOrSort, filterWordToFind, tasks);
     }
 
-    private String filteringOrSorting(String filterOrSort, List<Task> tasks) {
+    private String filteringOrSorting(String filterOrSort, String filterWordToFind, List<Task> tasks) {
         if (filterOrSort.equals("Sort")) {
             List<Task> sortedTasks = tasks.stream()
                     .sorted(Comparator.comparing(Task::getTitle)).toList();
 
             return ListingHelpers.elementsToString(sortedTasks);
         } else {
+            //TODO:
             List<Task> filteredTask = tasks.stream()
-                    .filter(task -> task.getTitle().contains(filterOrSort)).toList();
+                    .filter(task -> task.getTitle().contains(filterWordToFind)).toList();
             if (filteredTask.isEmpty()) {
                 throw new ElementNotFoundException(String.format(NO_TASKS_FOUND_ERROR, filterOrSort));
             }
