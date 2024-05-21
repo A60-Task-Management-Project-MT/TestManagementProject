@@ -40,7 +40,6 @@ public class ListAllTaskCommand implements Command {
 
             return ListingHelpers.elementsToString(sortedTasks);
         } else {
-            //TODO:
             List<Task> filteredTask = tasks.stream()
                     .filter(task -> task.getTitle().contains(filterWordToFind)).toList();
             if (filteredTask.isEmpty()) {
