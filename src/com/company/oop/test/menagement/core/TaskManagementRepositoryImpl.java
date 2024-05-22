@@ -213,4 +213,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .toList();
     }
 
+    @Override
+    public Teams findTeamByBoardName(Board board) {
+        for (Teams team : getTeams()) {
+            if (team.getBoards().contains(board)) {
+                return team;
+            }
+        }
+        throw new ElementNotFoundException("This board %s is not part of a team!");
+    }
 }

@@ -77,9 +77,9 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
 
     @Override
     public String displayFullHistory() {
-        StringBuilder sb = new StringBuilder();
-        for (ActivityHistory activity : getHistory()) {
-           sb.append(activity.viewInfo()).append(System.lineSeparator());
+        StringBuilder sb = new StringBuilder(); 
+        for (ActivityHistory activity : history) {
+           sb.append(activity.displayHistory()).append(System.lineSeparator());
         }
         return sb.toString().trim();
     }

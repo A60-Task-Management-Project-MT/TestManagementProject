@@ -21,7 +21,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
     public static final String BUG_STATUS_CHANGED_MESSAGE = "Bug with ID: %d status changed from %s to %s";
     public static final String BUG_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
     public static final String ADDED_NEW_ASSIGNEE_MESSAGE = "A new assignee %s was set for task %s with ID: %d";
-    public static final String NEW_BUG_CREATION_MESSAGE = "New Bug was created: %s!";
+    public static final String NEW_BUG_CREATION_MESSAGE = "New Bug with was created: %s";
 
     private List<String> stepsToReproduce;
     private PriorityType priorityType;
@@ -33,7 +33,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
                    BugSeverityType severityType, String assignee, List<String> stepsToReproduce) {
 
         super(id, title, description, TaskType.BUG);
-        this.stepsToReproduce = new ArrayList<>();
+        this.stepsToReproduce = new ArrayList<>(stepsToReproduce);
         setPriorityType(priorityType);
         setSeverityType(severityType);
         this.statusType = BugStatusType.ACTIVE;
@@ -113,11 +113,20 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         List<Comment> currentTaskComments = this.getComments();
         AtomicInteger count = new AtomicInteger(1);
 
-        sb.append(String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s | Assignee: %s",
-                getTitle(), getDescription(), getPriority(), getSeverity(), getStatus(), getAssignee())).append(System.lineSeparator());
+        sb.append(String.format("Task ID: %d", getId())).append(System.lineSeparator());
+        sb.append(String.format(" #Title: %s", getTitle())).append(System.lineSeparator());
+        sb.append(String.format(" #Description: %s", getDescription())).append(System.lineSeparator());
+        sb.append(String.format(" #Priority: %s", getPriority())).append(System.lineSeparator());
+        sb.append(String.format(" #Severity: %s", getSeverity())).append(System.lineSeparator());
+        sb.append(String.format(" #Status: %s", getStatus())).append(System.lineSeparator());
+        sb.append(String.format(" #Assignee: %s", getAssignee())).append(System.lineSeparator());
+        sb.append(" #Steps: ").append(System.lineSeparator());
 
+
+        int counter = 1;
         for (String step : getStepsToReproduce()) {
-            sb.append(" - ").append(step).append(System.lineSeparator());
+            sb.append("  - ").append(counter).append(". ").append(step).append(System.lineSeparator());
+            counter++;
         }
 
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
@@ -125,7 +134,6 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
         }
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
-        sb.append("~~~~~~~~~~~~~~~~").append(System.lineSeparator());
 
         return sb.toString().trim();
     }

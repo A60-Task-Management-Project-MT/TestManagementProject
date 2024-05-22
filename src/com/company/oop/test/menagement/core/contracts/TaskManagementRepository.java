@@ -58,4 +58,6 @@ public interface TaskManagementRepository {
     Story findStoryById(int id);
 
     List<Task> filterTasksWithAssignee(List<Task> tasks);
+
+    Teams findTeamByBoardName(Board board);
 }

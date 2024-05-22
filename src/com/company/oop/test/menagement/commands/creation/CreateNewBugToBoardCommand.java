@@ -5,6 +5,7 @@ import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
+import com.company.oop.test.menagement.models.contracts.Teams;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -12,6 +13,8 @@ import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.company.oop.test.menagement.commands.creation.CreateNewStoryToBoardCommand.MEMBER_NOT_PART_OF_A_TEAM_WITH_BOARD_ERROR;
 
 public class CreateNewBugToBoardCommand implements Command {
 
@@ -41,6 +44,12 @@ public class CreateNewBugToBoardCommand implements Command {
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
         Member member = taskManagementRepository.findMemberByMemberName(assignee);
+
+        Teams team = taskManagementRepository.findTeamByBoardName(board);
+
+        if (!team.getMembers().contains(member)) {
+            throw new IllegalArgumentException(String.format(MEMBER_NOT_PART_OF_A_TEAM_WITH_BOARD_ERROR, assignee, team.getName(), boardName));
+        }
         Task task = createBug(title, description, priorityType, severityType, assignee, steps);
 
         member.assignTask(task);

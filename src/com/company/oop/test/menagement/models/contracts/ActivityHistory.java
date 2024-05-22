@@ -4,6 +4,6 @@ public interface ActivityHistory {
 
     String getDescription();
 
-    String viewInfo();
+    String displayHistory();
 
 }

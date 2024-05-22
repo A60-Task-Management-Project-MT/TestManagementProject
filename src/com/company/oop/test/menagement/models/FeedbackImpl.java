@@ -14,7 +14,7 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
     public static final String FEEDBACK_RATING_ALREADY_SET_ERROR_MESSAGE = "Feedback rating is already %d!";
     public static final String FEEDBACK_STATUS_CHANGED_MESSAGE = "Feedback with ID: %d status changed from %s to %s.";
     public static final String FEEDBACK_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
-    public static final String FEEDBACK_CREATION_MESSAGE = "New Feedback was created: %s!";
+    public static final String FEEDBACK_CREATION_MESSAGE = "New Bug with ID: %d was created: Title %s";
 
     private int rating;
     private FeedbackStatusType statusType;
@@ -24,7 +24,7 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
         setRating(rating);
         setStatusType(FeedbackStatusType.NEW);
 
-        createNewHistory(String.format(FEEDBACK_CREATION_MESSAGE, viewInfo()));
+        createNewHistory(String.format(FEEDBACK_CREATION_MESSAGE, getId(), getTitle()));
     }
 
     @Override

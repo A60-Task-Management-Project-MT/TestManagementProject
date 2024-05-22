@@ -96,7 +96,6 @@ public class TeamsImpl implements Teams {
                 builder.append(board.getBoardName()).append(System.lineSeparator());
                 count++;
             }
-            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }

@@ -20,7 +20,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     public static final String STORY_STATUS_CHANGED_MESSAGE = "Story with ID: %d status changed from %s to %s";
     public static final String STORY_STATUS_CHANGE_ERROR_MESSAGE = "Can't change, already at %s.";
     public static final String ADDED_NEW_ASSIGNEE_MESSAGE = "A new assignee %s was set for task %s with ID: %d";
-    public static final String NEW_STORY_CREATION_MESSAGE = "New Story was created: %s!";
+    public static final String NEW_STORY_CREATION_MESSAGE = "New Story with ID: %d was created: Title %s";
 
     private PriorityType priorityType;
     private StorySizeType storySizeType;
@@ -35,7 +35,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         this.statusType = StoryStatusType.NOT_DONE;
         setAssignee(assignee);
 
-        createNewHistory(String.format(NEW_STORY_CREATION_MESSAGE, viewInfo()));
+        createNewHistory(String.format(NEW_STORY_CREATION_MESSAGE, getId(), getTitle()));
     }
 
     @Override

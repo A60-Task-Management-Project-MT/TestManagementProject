@@ -86,9 +86,8 @@ public class MemberImpl implements Member {
             builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
         } else {
             for (ActivityHistory activityHistory : histories) {
-                builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
+                builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
             }
-            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
