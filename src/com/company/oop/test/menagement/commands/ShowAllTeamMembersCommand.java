@@ -28,20 +28,4 @@ public class ShowAllTeamMembersCommand implements Command {
 
         return team.printMembers();
     }
-
-//    private String showTeamMembers(Teams team) {
-//        if (team.getMembers().isEmpty()) {
-//            throw new ElementNotFoundException(String.format("Team %s does not have active members!", team.getName()));
-//        }
-//
-//        StringBuilder sb = new StringBuilder();
-//        int count = 1;
-//        sb.append(String.format("~~~ TEAM %s MEMBERS ~~~", team.getName())).append(System.lineSeparator());
-//        for (Member member : team.getMembers()) {
-//            sb.append(count).append(". ");
-//            sb.append(member.getMemberName()).append(System.lineSeparator());
-//            count++;
-//        }
-//        return sb.toString().trim();
-//    }
 }

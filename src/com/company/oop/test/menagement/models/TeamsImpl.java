@@ -78,7 +78,6 @@ public class TeamsImpl implements Teams {
                 builder.append(member.getMemberName()).append(System.lineSeparator());
                 count++;
             }
-            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }

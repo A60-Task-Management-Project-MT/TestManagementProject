@@ -74,7 +74,6 @@ public class BoardImpl implements Board {
             for (ActivityHistory activityHistory : histories) {
                 builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
             }
-            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
