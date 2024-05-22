@@ -4,7 +4,7 @@ import com.company.oop.test.menagement.commands.listings.ListAllTaskCommand;
 
 public enum CommandType {
     ADDCOMMENT,
-    ADDPERSON,
+    ADDPERSONTOTEAM,
     ASSIGNTASK,
     UNASSIGNTASK,
     CREATEBOARD,

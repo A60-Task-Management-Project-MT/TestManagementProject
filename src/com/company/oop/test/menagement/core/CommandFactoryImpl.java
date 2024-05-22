@@ -27,7 +27,7 @@ public class CommandFactoryImpl implements CommandFactory {
         switch (commandType) {
             case ADDCOMMENT:
                 return new AddCommentToTaskCommand(taskManagementRepository);
-            case ADDPERSON:
+            case ADDPERSONTOTEAM:
                 return new AddPersonToTeamCommand(taskManagementRepository);
             case ASSIGNTASK:
                 return new AssignTaskCommand(taskManagementRepository);

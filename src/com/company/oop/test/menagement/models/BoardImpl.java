@@ -1,6 +1,7 @@
 package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Task;
@@ -98,5 +99,21 @@ public class BoardImpl implements Board {
     @Override
     public int hashCode() {
         return Objects.hash(boardName, tasks, histories);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("~~~ BOARD %s TASKS ~~~", boardName.toUpperCase())).append(System.lineSeparator());
+        if (tasks.isEmpty()) {
+            throw new ElementNotFoundException(String.format("Board with name %s is empty.", boardName));
+        }
+        int count = 1;
+        for (Task task : tasks ) {
+            sb.append(count).append(". ");
+            sb.append(task.viewInfo()).append(System.lineSeparator());
+            count ++;
+        }
+        return sb.toString().trim();
     }
 }

@@ -1,6 +1,7 @@
 package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
@@ -95,5 +96,21 @@ public class MemberImpl implements Member {
     private void setMemberName(String memberName) {
         ValidationHelpers.validateStringLength(memberName, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_MIN_OR_MAX_LENGTH_ERROR);
         this.memberName = memberName;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("~~~ MEMBER %s TASKS ~~~", memberName.toUpperCase())).append(System.lineSeparator());
+        if (tasks.isEmpty()) {
+            throw new ElementNotFoundException(String.format("Member with name %s has no tasks.", memberName));
+        }
+        int count = 1;
+        for (Task task : tasks ) {
+            sb.append(count).append(". ");
+            sb.append(task.viewInfo()).append(System.lineSeparator());
+            count ++;
+        }
+        return sb.toString().trim();
     }
 }

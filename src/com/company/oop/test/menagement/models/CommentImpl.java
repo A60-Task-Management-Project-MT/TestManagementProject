@@ -27,7 +27,7 @@ public class CommentImpl implements Comment {
         return """
                 **********
                 %s
-                User: %s
+                Author: %s
                 **********
                 """.formatted(getContent(), getAuthor()).trim();
     }
