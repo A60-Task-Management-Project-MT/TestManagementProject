@@ -104,14 +104,20 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         List<Comment> currentTaskComments = this.getComments();
         AtomicInteger count = new AtomicInteger(1);
 
-        sb.append(String.format("ID: %d | Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee %s",
-                getId(), getTitle(), getDescription(), getPriority(), getSize(), getStatus(), getAssignee())).append(System.lineSeparator());
+        sb.append(String.format("Task ID: %d", getId())).append(System.lineSeparator());
+        sb.append(String.format(" #Title: %s", getTitle())).append(System.lineSeparator());
+        sb.append(String.format(" #Description: %s", getDescription())).append(System.lineSeparator());
+        sb.append(String.format(" #Priority: %s", getPriority())).append(System.lineSeparator());
+        sb.append(String.format(" #Size: %s", getSize())).append(System.lineSeparator());
+        sb.append(String.format(" #Status: %s", getStatus())).append(System.lineSeparator());
+        sb.append(String.format(" #Assignee: %s", getAssignee())).append(System.lineSeparator());
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
+
         if (currentTaskComments.isEmpty()) {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
         }
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
-        sb.append("~~~~~~~~~~~~~~~~").append(System.lineSeparator());
+
         return sb.toString().trim();
     }
 

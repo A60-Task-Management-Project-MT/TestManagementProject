@@ -64,14 +64,17 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
         List<Comment> currentTaskComments = this.getComments();
         AtomicInteger count = new AtomicInteger(1);
 
-        sb.append(String.format("Title: %s | Description: %s | Rating: %d | Status: %s",
-                getTitle(), getDescription(), getRating(), getStatus())).append(System.lineSeparator());
+        sb.append(String.format("Task ID: %d", getId())).append(System.lineSeparator());
+        sb.append(String.format(" #Title: %s", getTitle())).append(System.lineSeparator());
+        sb.append(String.format(" #Description: %s", getDescription())).append(System.lineSeparator());
+        sb.append(String.format(" #Rating: %d", getRating())).append(System.lineSeparator());
+        sb.append(String.format(" #Status: %s", getStatus())).append(System.lineSeparator());
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
+
         if (currentTaskComments.isEmpty()) {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
         }
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
-        sb.append("~~~~~~~~~~~~~~~~").append(System.lineSeparator());
 
         return sb.toString().trim();
     }

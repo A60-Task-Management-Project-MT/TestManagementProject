@@ -120,15 +120,13 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         sb.append(String.format(" #Severity: %s", getSeverity())).append(System.lineSeparator());
         sb.append(String.format(" #Status: %s", getStatus())).append(System.lineSeparator());
         sb.append(String.format(" #Assignee: %s", getAssignee())).append(System.lineSeparator());
-        sb.append(" #Steps: ").append(System.lineSeparator());
-
+        sb.append(" #Steps:").append(System.lineSeparator());
 
         int counter = 1;
         for (String step : getStepsToReproduce()) {
             sb.append("  - ").append(counter).append(". ").append(step).append(System.lineSeparator());
             counter++;
         }
-
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
         if (currentTaskComments.isEmpty()) {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
