@@ -65,7 +65,7 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public String printHistory() {
+    public String displayFullHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ BOARD %s HISTORY ~~~", getBoardName().toUpperCase())).append(System.lineSeparator());
         if (histories.isEmpty()) {
@@ -74,13 +74,9 @@ public class BoardImpl implements Board {
             for (ActivityHistory activityHistory : histories) {
                 builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
             }
+            builder.append(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
-    }
-
-    @Override
-    public String printTasks() {
-        return null;
     }
 
     private void setBoardName(String boardName) {
@@ -103,10 +99,5 @@ public class BoardImpl implements Board {
     @Override
     public int hashCode() {
         return Objects.hash(boardName, tasks, histories);
-    }
-
-    @Override
-    public String viewInfo() {
-        return "";
     }
 }

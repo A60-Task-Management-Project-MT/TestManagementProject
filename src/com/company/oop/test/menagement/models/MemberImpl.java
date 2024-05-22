@@ -79,7 +79,7 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public String printHistory() {
+    public String displayFullHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
         if (histories.isEmpty()) {
@@ -88,21 +88,7 @@ public class MemberImpl implements Member {
             for (ActivityHistory activityHistory : histories) {
                 builder.append(activityHistory.viewInfo()).append(System.lineSeparator());
             }
-        }
-        return builder.toString().trim();
-    }
-
-    @Override
-    public String printTasks() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
-        if (tasks.isEmpty()) {
-            builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
-        } else {
-            for (Task task : tasks) {
-                builder.append(task.viewInfo()).append(System.lineSeparator());
-            }
-            builder.append("~~~ HISTORY ~~~").append(System.lineSeparator());
+            builder.append(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
@@ -110,10 +96,5 @@ public class MemberImpl implements Member {
     private void setMemberName(String memberName) {
         ValidationHelpers.validateStringLength(memberName, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_MIN_OR_MAX_LENGTH_ERROR);
         this.memberName = memberName;
-    }
-
-    @Override
-    public String viewInfo() {
-        return "";
     }
 }

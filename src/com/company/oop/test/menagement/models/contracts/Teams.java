@@ -2,7 +2,7 @@ package com.company.oop.test.menagement.models.contracts;
 
 import java.util.List;
 
-public interface Teams {
+public interface Teams extends Printable {
 
     String getName();
 
@@ -12,11 +12,7 @@ public interface Teams {
 
     void addMember(Member member);
 
-    void removeMember(Member member);
-
     void addBoard(Board board);
-
-    void removeBoard(Board board);
 
     String printMembers();
 

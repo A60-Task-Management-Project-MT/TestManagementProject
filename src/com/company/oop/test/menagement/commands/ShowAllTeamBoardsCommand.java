@@ -27,21 +27,21 @@ public class ShowAllTeamBoardsCommand implements Command {
 
         Teams team = taskManagementRepository.findTeamByTeamName(teamName);
 
-        return showTeamBoards(team);
+        return team.printBoards();
     }
 
-    private String showTeamBoards(Teams team) {
-        if (team.getBoards().isEmpty()) {
-            throw new ElementNotFoundException(String.format("Team %s does not have active boards!", team.getName()));
-        }
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        sb.append(String.format("~~~ TEAM %s BOARDS ~~~", team.getName())).append(System.lineSeparator());
-        for (Board board : team.getBoards()) {
-            sb.append(count).append(". ");
-            sb.append(board.getBoardName()).append(System.lineSeparator());
-            count++;
-        }
-        return sb.toString().trim();
-    }
+//    private String showTeamBoards(Teams team) {
+//        if (team.getBoards().isEmpty()) {
+//            throw new ElementNotFoundException(String.format("Team %s does not have active boards!", team.getName()));
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        int count = 1;
+//        sb.append(String.format("~~~ TEAM %s BOARDS ~~~", team.getName())).append(System.lineSeparator());
+//        for (Board board : team.getBoards()) {
+//            sb.append(count).append(". ");
+//            sb.append(board.getBoardName()).append(System.lineSeparator());
+//            count++;
+//        }
+//        return sb.toString().trim();
+//    }
 }

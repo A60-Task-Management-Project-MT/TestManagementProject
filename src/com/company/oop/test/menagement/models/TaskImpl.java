@@ -77,16 +77,9 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
     }
 
     @Override
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-
-        createNewHistory(String.format(COMMENT_REMOVED_MESSAGE, title));
-    }
-
-    @Override
     public String displayFullHistory() {
         StringBuilder sb = new StringBuilder();
-        for (ActivityHistory activity : history) {
+        for (ActivityHistory activity : getHistory()) {
            sb.append(activity.viewInfo()).append(System.lineSeparator());
         }
         return sb.toString().trim();

@@ -59,11 +59,6 @@ public class TeamsImpl implements Teams {
     }
 
     @Override
-    public void removeMember(Member member) {
-        members.remove(member);
-    }
-
-    @Override
     public void addBoard(Board board) {
         if (boards.contains(board)) {
             throw new DuplicateEntityException(String.format(BOARD_EXIST_ERROR_MESSAGE, board.getBoardName(), name));
@@ -72,19 +67,17 @@ public class TeamsImpl implements Teams {
     }
 
     @Override
-    public void removeBoard(Board board) {
-        boards.remove(board);
-    }
-
-    @Override
     public String printMembers() {
         StringBuilder builder = new StringBuilder();
+        int count = 1;
         builder.append("~~~ MEMBERS ~~~").append(System.lineSeparator());
         if (members.isEmpty()) {
             builder.append(" ~~~ NO AVAILABLE MEMBERS ~~~").append(System.lineSeparator());
         } else {
             for (Member member : members) {
-                builder.append(member).append(System.lineSeparator());
+                builder.append(count).append(". ");
+                builder.append(member.getMemberName()).append(System.lineSeparator());
+                count++;
             }
             builder.append("~~~ MEMBERS ~~~").append(System.lineSeparator());
         }
@@ -94,12 +87,15 @@ public class TeamsImpl implements Teams {
     @Override
     public String printBoards() {
         StringBuilder builder = new StringBuilder();
+        int count = 1;
         builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
         if (boards.isEmpty()) {
             builder.append(" ~~~ NO AVAILABLE BOARDS ~~~").append(System.lineSeparator());
         } else {
             for (Board board : boards) {
-                builder.append(board).append(System.lineSeparator());
+                builder.append(count).append(". ");
+                builder.append(board.getBoardName()).append(System.lineSeparator());
+                count++;
             }
             builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
         }
@@ -118,5 +114,10 @@ public class TeamsImpl implements Teams {
     @Override
     public int hashCode() {
         return Objects.hash(name, members, boards);
+    }
+
+    @Override
+    public String viewInfo() {
+        return null;
     }
 }

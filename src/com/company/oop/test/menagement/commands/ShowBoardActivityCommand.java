@@ -25,6 +25,6 @@ public class ShowBoardActivityCommand implements Command {
 
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
 
-        return board.printHistory();
+        return board.displayFullHistory();
     }
 }

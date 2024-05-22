@@ -113,9 +113,14 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         AtomicInteger count = new AtomicInteger(1);
 
         sb.append(String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s | Assignee: %s",
-                getTitle(),getDescription(),getPriority(),getSeverity(),getStatus(), getAssignee())).append(System.lineSeparator());
+                getTitle(), getDescription(), getPriority(), getSeverity(), getStatus(), getAssignee())).append(System.lineSeparator());
 
+        sb.append("~~~ Comments ~~~").append(System.lineSeparator());
+        if (currentTaskComments.isEmpty()) {
+            sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
+        }
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
+        sb.append("~~~~~~~~~~~~~~~~").append(System.lineSeparator());
 
         return sb.toString().trim();
     }
@@ -136,15 +141,5 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         this.assignee = assignee;
 
         createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
-    }
-
-    @Override
-    public String printHistory() {
-        return "";
-    }
-
-    @Override
-    public String printTasks() {
-        return "";
     }
 }

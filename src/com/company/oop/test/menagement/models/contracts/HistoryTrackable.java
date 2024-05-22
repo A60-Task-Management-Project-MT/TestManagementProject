@@ -7,4 +7,7 @@ public interface HistoryTrackable {
     List<ActivityHistory> getHistory();
 
     void createNewHistory(String event);
+
+    String displayFullHistory();
+
 }

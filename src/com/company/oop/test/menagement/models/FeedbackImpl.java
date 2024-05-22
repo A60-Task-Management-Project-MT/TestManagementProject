@@ -66,8 +66,12 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
 
         sb.append(String.format("Title: %s | Description: %s | Rating: %d | Status: %s",
                 getTitle(), getDescription(), getRating(), getStatus())).append(System.lineSeparator());
-
+        sb.append("~~~ Comments ~~~").append(System.lineSeparator());
+        if (currentTaskComments.isEmpty()) {
+            sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
+        }
         currentTaskComments.stream().map(c -> sb.append(count.getAndIncrement()).append(c.toString()));
+        sb.append("~~~~~~~~~~~~~~~~").append(System.lineSeparator());
 
         return sb.toString().trim();
     }
@@ -78,15 +82,5 @@ public class FeedbackImpl extends TaskImpl<FeedbackStatusType> implements Feedba
 
     private void setRating(int rating) {
         this.rating = rating;
-    }
-
-    @Override
-    public String printHistory() {
-        return "";
-    }
-
-    @Override
-    public String printTasks() {
-        return "";
     }
 }
