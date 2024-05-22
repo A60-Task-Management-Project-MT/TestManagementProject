@@ -44,14 +44,6 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     }
 
     @Override
-    public void changeAssignee(String assignee) {
-        if (this.assignee.equals(assignee)) {
-            throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
-        }
-        setAssignee(assignee);
-    }
-
-    @Override
     public PriorityType getPriority() {
         return priorityType;
     }
@@ -64,6 +56,15 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
     @Override
     public StoryStatusType getStatus() {
         return statusType;
+    }
+
+    @Override
+    public void changeAssignee(String assignee) {
+        if (this.assignee.equals(assignee)) {
+            throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
+        }
+        setAssignee(assignee);
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     @Override
@@ -104,7 +105,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         AtomicInteger count = new AtomicInteger(1);
 
         sb.append(String.format("ID: %d | Title: %s | Description: %s | Priority: %s | Size: %s | Status: %s | Assignee %s",
-                getId() ,getTitle(), getDescription(), getPriority(), getSize(), getStatus(), getAssignee())).append(System.lineSeparator());
+                getId(), getTitle(), getDescription(), getPriority(), getSize(), getStatus(), getAssignee())).append(System.lineSeparator());
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
         if (currentTaskComments.isEmpty()) {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
@@ -116,8 +117,6 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
 
     private void setAssignee(String assignee) {
         this.assignee = assignee;
-
-        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     private void setStatusType(StoryStatusType statusType) {

@@ -26,7 +26,6 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
             MIN_DESCRIPTION_SYMBOLS,
             MAX_DESCRIPTION_SYMBOLS);
     public static final String NEW_COMMENT_ADD_MESSAGE = "A new comment %s from author %s was add to task with ID %d.";
-    public static final String COMMENT_REMOVED_MESSAGE = "A comment was removed from task %s";
 
     private int id;
     private String title;

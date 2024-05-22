@@ -73,6 +73,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
             throw new DuplicateEntityException(String.format("%s already assigned to %s!", getTaskType(), getAssignee()));
         }
         setAssignee(assignee);
+        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 
     @Override
@@ -115,6 +116,10 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         sb.append(String.format("Title: %s | Description: %s | Priority: %s | Severity: %s | Status: %s | Assignee: %s",
                 getTitle(), getDescription(), getPriority(), getSeverity(), getStatus(), getAssignee())).append(System.lineSeparator());
 
+        for (String step : getStepsToReproduce()) {
+            sb.append(" - ").append(step).append(System.lineSeparator());
+        }
+
         sb.append("~~~ Comments ~~~").append(System.lineSeparator());
         if (currentTaskComments.isEmpty()) {
             sb.append(" # NO COMMENTS AVAILABLE").append(System.lineSeparator());
@@ -139,7 +144,5 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
 
     private void setAssignee(String assignee) {
         this.assignee = assignee;
-
-        createNewHistory(String.format(ADDED_NEW_ASSIGNEE_MESSAGE, assignee, getTaskType(), getId()));
     }
 }

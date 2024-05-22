@@ -3,7 +3,6 @@ package com.company.oop.test.menagement.models;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
-import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.models.contracts.Teams;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
@@ -79,7 +78,7 @@ public class TeamsImpl implements Teams {
                 builder.append(member.getMemberName()).append(System.lineSeparator());
                 count++;
             }
-            builder.append("~~~ MEMBERS ~~~").append(System.lineSeparator());
+            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
@@ -97,7 +96,7 @@ public class TeamsImpl implements Teams {
                 builder.append(board.getBoardName()).append(System.lineSeparator());
                 count++;
             }
-            builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
+            builder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~").append(System.lineSeparator());
         }
         return builder.toString().trim();
     }
@@ -118,6 +117,27 @@ public class TeamsImpl implements Teams {
 
     @Override
     public String viewInfo() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        sb.append(String.format("~~~ TEAM %s BOARDS ACTIVITY ~~~", getName().toUpperCase())).append(System.lineSeparator());
+        if (getBoards().isEmpty()) {
+            sb.append("~~~ NO AVAILABLE BOARDS ACTIVITY ~~~").append(System.lineSeparator());
+        }
+        for (Board board : boards) {
+            sb.append(count).append(". ");
+            sb.append(board.displayFullHistory()).append(System.lineSeparator());
+            count++;
+        }
+        count = 1;
+        sb.append(String.format("~~~ TEAM %s MEMBERS ACTIVITY ~~~", getName().toUpperCase())).append(System.lineSeparator());
+        if (getMembers().isEmpty()) {
+            sb.append("~~~ NO AVAILABLE MEMBERS ACTIVITY ~~~").append(System.lineSeparator());
+        }
+        for (Member member : members) {
+            sb.append(count).append(". ");
+            sb.append(member.displayFullHistory()).append(System.lineSeparator());
+            count++;
+        }
+        return sb.toString().trim();
     }
 }
