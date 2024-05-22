@@ -55,6 +55,8 @@ public class AssignTaskCommand implements Command {
                 });
                 countOfTasks += stories.size();
             }
+            default -> throw new IllegalArgumentException("Feedbacks can not have assignees!");
+
         }
         return String.format("New %d %s tasks were added to person %s!", countOfTasks, taskType, member.getMemberName());
     }
