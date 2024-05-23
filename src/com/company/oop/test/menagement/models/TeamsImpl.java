@@ -83,7 +83,8 @@ public class TeamsImpl implements Teams {
     }
 
     @Override
-    public String printBoards() {
+    public String printBoards()
+    {
         StringBuilder builder = new StringBuilder();
         int count = 1;
         builder.append("~~~ BOARDS ~~~").append(System.lineSeparator());
