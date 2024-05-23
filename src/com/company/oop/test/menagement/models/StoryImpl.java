@@ -1,10 +1,10 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 

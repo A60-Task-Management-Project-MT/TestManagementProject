@@ -1,12 +1,9 @@
 package com.company.oop.test.menagement.core.contracts;
 
-import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
-import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
-import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
-import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
+import com.company.oop.test.menagement.models.contracts.*;
 
 import java.util.List;
 

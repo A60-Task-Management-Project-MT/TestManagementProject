@@ -1,10 +1,10 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.models.contracts.Member;
+import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
-import com.company.oop.test.menagement.models.contracts.Member;
-import com.company.oop.test.menagement.models.contracts.Task;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Teams;
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
 import java.util.ArrayList;
