@@ -46,7 +46,7 @@ Task ID: #
 
 ### **Story**
 
-- `id` - a long, must be unique
+- `id` - an int, must be unique
 - `title` - a string between `10` and `100` symbols.
 - `description` - a string between `10` and `500` symbols.
 - `priority` - one of the following: **High**, **Medium** or **Low**.
@@ -75,7 +75,7 @@ Task ID#
 
 ### **Feedback**
 
-- `id` - a long, must be unique
+- `id` - an int, must be unique
 - `title` - a string between `10` and `100` symbols.
 - `description` - a string between `10` and `500` symbols.
 - `rating` - an integer.
