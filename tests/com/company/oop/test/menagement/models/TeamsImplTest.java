@@ -20,10 +20,6 @@ class TeamsImplTest {
     }
 
     @Test
-    void getBoards() {
-    }
-
-    @Test
     void addMember() {
     }
 
