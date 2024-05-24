@@ -110,11 +110,6 @@ public class TeamsImpl implements Teams {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, members, boards);
-    }
-
-    @Override
     public String viewInfo() {
         StringBuilder sb = new StringBuilder();
         int count = 1;

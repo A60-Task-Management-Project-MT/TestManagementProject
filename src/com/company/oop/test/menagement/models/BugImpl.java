@@ -36,7 +36,7 @@ public class BugImpl extends TaskImpl<BugStatusType> implements Bug {
         this.stepsToReproduce = new ArrayList<>(stepsToReproduce);
         setPriorityType(priorityType);
         setSeverityType(severityType);
-        this.statusType = BugStatusType.ACTIVE;
+        setStatusType(BugStatusType.ACTIVE);
         setAssignee(assignee);
 
         createNewHistory(String.format(NEW_BUG_CREATION_MESSAGE, viewInfo()));

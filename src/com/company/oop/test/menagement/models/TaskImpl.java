@@ -102,11 +102,6 @@ public abstract class TaskImpl<T extends Enum<T>> implements Task<T> {
         return id == task.id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, comments, history);
-    }
-
     private void setTitle(String title) {
         ValidationHelpers.validateStringLength(title,
                 MIN_TITLE_SYMBOLS,

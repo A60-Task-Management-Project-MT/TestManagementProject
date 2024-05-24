@@ -32,7 +32,7 @@ public class StoryImpl extends TaskImpl<StoryStatusType> implements Story {
         super(id, title, description, TaskType.STORY);
         setPriorityType(priorityType);
         setStorySizeType(storySizeType);
-        this.statusType = StoryStatusType.NOT_DONE;
+        setStatusType(StoryStatusType.NOT_DONE);
         setAssignee(assignee);
 
         createNewHistory(String.format(NEW_STORY_CREATION_MESSAGE, getId(), getTitle()));

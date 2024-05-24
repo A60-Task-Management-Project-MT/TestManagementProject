@@ -36,12 +36,12 @@ public class BoardImpl implements Board {
 
     @Override
     public List<ActivityHistory> getHistory() {
-        return histories;
+        return new ArrayList<>(histories);
     }
 
     @Override
     public List<Task> getTasks() {
-        return tasks;
+        return new ArrayList<>(tasks);
     }
 
     @Override
@@ -94,11 +94,6 @@ public class BoardImpl implements Board {
         BoardImpl board = (BoardImpl) o;
         return Objects.equals(boardName, board.boardName) &&
                 Objects.equals(tasks, board.tasks) && Objects.equals(histories, board.histories);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(boardName, tasks, histories);
     }
 
     @Override

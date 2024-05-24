@@ -1,12 +1,10 @@
-package com.company.oop.test.menagement;
+package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.contracts.Board;
-import com.company.oop.test.menagement.models.contracts.Member;
-import com.company.oop.test.menagement.models.contracts.Teams;
+import com.company.oop.test.menagement.models.*;
+import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
-import com.company.oop.test.menagement.models.BoardImpl;
-import com.company.oop.test.menagement.models.MemberImpl;
-import com.company.oop.test.menagement.models.TeamsImpl;
+import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +24,7 @@ class TeamsImplTest {
     }
 
     @Test
-    public void constructor_Should_NotInitializeName_When_ArgumentsAreInValid() {
+    public void constructor_Should_NotInitializeName_When_ArgumentsAreInvalid() {
         String inValidName = "C".repeat(MIN_NAME_LENGTH - 1);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> new TeamsImpl(inValidName));
@@ -69,5 +67,18 @@ class TeamsImplTest {
         team.addBoard(board);
 
         Assertions.assertThrows(DuplicateEntityException.class, () -> team.addBoard(board));
+    }
+
+    @Test
+    public void getBoards_Should_ReturnCopyOfTheCollection() {
+        String validBoard = "C".repeat(MIN_NAME_LENGTH);
+        String validTeam = "C".repeat(MAX_NAME_LENGTH);
+
+        Board board = new BoardImpl(validBoard);
+        Teams team = new TeamsImpl(validTeam);
+
+        team.getBoards().add(board);
+
+        Assertions.assertEquals(0, team.getBoards().size());
     }
 }
