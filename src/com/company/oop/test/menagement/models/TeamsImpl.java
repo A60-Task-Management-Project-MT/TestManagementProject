@@ -105,8 +105,7 @@ public class TeamsImpl implements Teams {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TeamsImpl teams = (TeamsImpl) o;
-        return Objects.equals(name, teams.name) && Objects.equals(members, teams.members)
-                && Objects.equals(boards, teams.boards);
+        return Objects.equals(name, teams.name);
     }
 
     @Override

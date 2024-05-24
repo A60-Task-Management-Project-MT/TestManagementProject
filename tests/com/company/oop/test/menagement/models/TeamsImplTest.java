@@ -8,6 +8,8 @@ import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.BooleanSupplier;
+
 
 class TeamsImplTest {
     private static final int MIN_NAME_LENGTH = 5;
@@ -80,5 +82,51 @@ class TeamsImplTest {
         team.getBoards().add(board);
 
         Assertions.assertEquals(0, team.getBoards().size());
+    }
+
+    @Test
+    void printMembers_Should_PrintMembers() {
+        String validTeam = "C".repeat(MAX_NAME_LENGTH);
+        Teams team = new TeamsImpl(validTeam);
+        Member member = new MemberImpl("Gosho");
+        team.addMember(member);
+        String result = team.printMembers();
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(2, team.printMembers().split("\n").length);
+    }
+
+    @Test
+    void printBoards_Should_PrintBoards() {
+        String validTeam = "C".repeat(MAX_NAME_LENGTH);
+        Teams team = new TeamsImpl(validTeam);
+        Board board = new BoardImpl("Gosho");
+        team.addBoard(board);
+        String result = team.printBoards();
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(2, team.printBoards().split("\n").length);
+    }
+
+    @Test
+    void equalsMethod_Should_ReturnFalse_When_TwoDifferentTeams_AreMade() {
+        Teams team = new TeamsImpl("TeamOne");
+        Teams team1 = new TeamsImpl("TeamTwo");
+
+        Assertions.assertNotEquals(team1, team);
+    }
+
+    @Test
+    void viewInfo_Should_PrintFullHistoryInfo() {
+        String validTeam = "C".repeat(MAX_NAME_LENGTH);
+        Teams team = new TeamsImpl(validTeam);
+        Board board = new BoardImpl("Gosho");
+        Member member = new MemberImpl("Pesho");
+        team.addBoard(board);
+        team.addMember(member);
+        String result = team.viewInfo();
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(6, team.viewInfo().split("\n").length);
     }
 }
