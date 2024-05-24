@@ -201,7 +201,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return task;
             }
         }
-        throw new IllegalArgumentException(String.format("No task find with id %d", id));
+        throw new ElementNotFoundException(String.format("No task find with id %d", id));
     }
 
     @Override
