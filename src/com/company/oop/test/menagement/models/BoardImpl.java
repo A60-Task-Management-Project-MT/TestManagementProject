@@ -69,13 +69,11 @@ public class BoardImpl implements Board {
     public String displayFullHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ BOARD %s HISTORY ~~~", getBoardName().toUpperCase())).append(System.lineSeparator());
-        if (histories.isEmpty()) {
-            builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
-        } else {
-            for (ActivityHistory activityHistory : histories) {
-                builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
-            }
+
+        for (ActivityHistory activityHistory : histories) {
+            builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
         }
+
         return builder.toString().trim();
     }
 
@@ -92,8 +90,7 @@ public class BoardImpl implements Board {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardImpl board = (BoardImpl) o;
-        return Objects.equals(boardName, board.boardName) &&
-                Objects.equals(tasks, board.tasks) && Objects.equals(histories, board.histories);
+        return Objects.equals(boardName, board.boardName);
     }
 
     @Override
