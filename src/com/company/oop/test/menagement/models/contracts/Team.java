@@ -2,7 +2,7 @@ package com.company.oop.test.menagement.models.contracts;
 
 import java.util.List;
 
-public interface Teams extends Printable {
+public interface Team extends Printable {
 
     String getName();
 

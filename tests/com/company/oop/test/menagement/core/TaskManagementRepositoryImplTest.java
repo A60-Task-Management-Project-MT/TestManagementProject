@@ -4,7 +4,7 @@ import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.BoardImpl;
 import com.company.oop.test.menagement.models.MemberImpl;
-import com.company.oop.test.menagement.models.TeamsImpl;
+import com.company.oop.test.menagement.models.TeamImpl;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
@@ -157,7 +157,7 @@ class TaskManagementRepositoryImplTest {
 
     @Test
     public void getTeams_Should_ReturnCopyOfTheCollection() {
-        Teams team = new TeamsImpl("TeamOne");
+        Team team = new TeamImpl("TeamOne");
         taskManagementRepository.getTeams().add(team);
 
         assertEquals(0, taskManagementRepository.getTeams().size());
@@ -174,7 +174,7 @@ class TaskManagementRepositoryImplTest {
     @Test
     void findTeamByBoardName_Should_returnTeam_WhenExists() {
         Board board = new BoardImpl("BoardOne");
-        Teams team = taskManagementRepository.createTeam("TeamOne");
+        Team team = taskManagementRepository.createTeam("TeamOne");
         Board board2 = new BoardImpl("BoardTwo");
         team.addBoard(board);
 

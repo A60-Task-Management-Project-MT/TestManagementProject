@@ -1,17 +1,12 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.*;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
-import com.company.oop.test.menagement.models.enums.PriorityType;
-import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.BooleanSupplier;
 
-
-class TeamsImplTest {
+class TeamImplTest {
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
 
@@ -20,7 +15,7 @@ class TeamsImplTest {
     public void constructor_Should_InitializeName_When_ArgumentsAreValid() {
         String validName = "C".repeat(MIN_NAME_LENGTH);
 
-        Teams team = new TeamsImpl(validName);
+        Team team = new TeamImpl(validName);
 
         Assertions.assertEquals(validName, team.getName());
     }
@@ -29,7 +24,7 @@ class TeamsImplTest {
     public void constructor_Should_NotInitializeName_When_ArgumentsAreInvalid() {
         String inValidName = "C".repeat(MIN_NAME_LENGTH - 1);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new TeamsImpl(inValidName));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new TeamImpl(inValidName));
     }
 
     @Test
@@ -38,7 +33,7 @@ class TeamsImplTest {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
 
         Member member = new MemberImpl(validMember);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
 
         team.addMember(member);
 
@@ -51,7 +46,7 @@ class TeamsImplTest {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
 
         Board board = new BoardImpl(validBoard);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
 
         team.addBoard(board);
 
@@ -64,7 +59,7 @@ class TeamsImplTest {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
 
         Board board = new BoardImpl(validBoard);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
 
         team.addBoard(board);
 
@@ -77,7 +72,7 @@ class TeamsImplTest {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
 
         Board board = new BoardImpl(validBoard);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
 
         team.getBoards().add(board);
 
@@ -87,7 +82,7 @@ class TeamsImplTest {
     @Test
     void printMembers_Should_PrintMembers() {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
         Member member = new MemberImpl("Gosho");
         team.addMember(member);
         String result = team.printMembers();
@@ -99,7 +94,7 @@ class TeamsImplTest {
     @Test
     void printBoards_Should_PrintBoards() {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
         Board board = new BoardImpl("Gosho");
         team.addBoard(board);
         String result = team.printBoards();
@@ -110,8 +105,8 @@ class TeamsImplTest {
 
     @Test
     void equalsMethod_Should_ReturnFalse_When_TwoDifferentTeams_AreMade() {
-        Teams team = new TeamsImpl("TeamOne");
-        Teams team1 = new TeamsImpl("TeamTwo");
+        Team team = new TeamImpl("TeamOne");
+        Team team1 = new TeamImpl("TeamTwo");
 
         Assertions.assertNotEquals(team1, team);
     }
@@ -119,7 +114,7 @@ class TeamsImplTest {
     @Test
     void viewInfo_Should_PrintFullHistoryInfo() {
         String validTeam = "C".repeat(MAX_NAME_LENGTH);
-        Teams team = new TeamsImpl(validTeam);
+        Team team = new TeamImpl(validTeam);
         Board board = new BoardImpl("Gosho");
         Member member = new MemberImpl("Pesho");
         team.addBoard(board);

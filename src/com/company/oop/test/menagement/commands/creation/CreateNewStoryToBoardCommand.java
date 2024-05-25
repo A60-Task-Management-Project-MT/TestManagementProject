@@ -5,7 +5,7 @@ import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Task;
-import com.company.oop.test.menagement.models.contracts.Teams;
+import com.company.oop.test.menagement.models.contracts.Team;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.units.ParsingHelpers;
@@ -40,7 +40,7 @@ public class CreateNewStoryToBoardCommand implements Command {
         Board board = taskManagementRepository.findBoardByBoardName(boardName);
         Member member = taskManagementRepository.findMemberByMemberName(assignee);
 
-        Teams team = taskManagementRepository.findTeamByBoardName(board);
+        Team team = taskManagementRepository.findTeamByBoardName(board);
 
         if (!team.getMembers().contains(member)) {
             throw new IllegalArgumentException(String.format(MEMBER_NOT_PART_OF_A_TEAM_WITH_BOARD_ERROR, assignee, team.getName(), boardName));

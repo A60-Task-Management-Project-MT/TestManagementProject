@@ -3,8 +3,10 @@ package com.company.oop.test.menagement.commands;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
-import com.company.oop.test.menagement.models.contracts.Feedback;
-import com.company.oop.test.menagement.models.contracts.Member;
+import com.company.oop.test.menagement.models.contracts.Bug;
+import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
+import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
 import com.company.oop.test.menagement.utils.TestUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,19 +14,20 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class AddCommentToTaskCommandTest {
-    public static final String VALID_TITLE_LENGTH = "C".repeat(10);
-    public static final String VALID_DESCRIPTION_LENGTH = "C".repeat(10);
-    public static final String VALID_CONTENT = "C".repeat(50);
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+import static org.junit.jupiter.api.Assertions.*;
+
+class ChangeTaskStatusTest {
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    public static final String VALID_TITLE = "C".repeat(50);
+    public static final String VALID_DESCRIPTION = "C".repeat(50);
+
     private TaskManagementRepository taskManagementRepository;
     private Command command;
-
 
     @BeforeEach
     public void before() {
         taskManagementRepository = new TaskManagementRepositoryImpl();
-        command = new AddCommentToTaskCommand(taskManagementRepository);
+        command = new ChangeTaskStatus(taskManagementRepository);
     }
 
     @Test
@@ -35,15 +38,13 @@ class AddCommentToTaskCommandTest {
     }
 
     @Test
-    public void should_Create_When_InputIsValid() {
-        Feedback feedback = taskManagementRepository.createFeedback(VALID_TITLE_LENGTH, VALID_DESCRIPTION_LENGTH, 25);
-        Member member = taskManagementRepository.createMember("Gosho");
-        List<String> params = List.of(VALID_CONTENT, "Gosho", "1");
+    public void should_ChangeStatus_When_ArgumentsAreValid() {
+        Bug bug = taskManagementRepository.createBug(VALID_TITLE, VALID_DESCRIPTION, PriorityType.MEDIUM, BugSeverityType.MINOR,
+                "Gosho", List.of("Step1", "Step2"));
 
+        List<String> params = List.of("1");
         command.execute(params);
 
-        Assertions.assertEquals(1, feedback.getComments().size());
+        assertEquals(BugStatusType.DONE, BugStatusType.DONE);
     }
-
-
 }

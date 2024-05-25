@@ -10,7 +10,7 @@ import java.util.List;
 public interface TaskManagementRepository {
     List<Task> getTasks();
 
-    List<Teams> getTeams();
+    List<Team> getTeams();
 
     List<Member> getMembers();
 
@@ -26,7 +26,7 @@ public interface TaskManagementRepository {
 
     Feedback createFeedback(String title, String description, int rating);
 
-    Teams createTeam(String name);
+    Team createTeam(String name);
 
     Member createMember(String memberName);
 
@@ -38,7 +38,7 @@ public interface TaskManagementRepository {
 
     boolean memberExist(String memberName);
 
-    Teams findTeamByTeamName(String teamName);
+    Team findTeamByTeamName(String teamName);
 
     Member findMemberByMemberName(String memberName);
 
@@ -56,5 +56,5 @@ public interface TaskManagementRepository {
 
     List<Task> filterTasksWithAssignee(List<Task> tasks);
 
-    Teams findTeamByBoardName(Board board);
+    Team findTeamByBoardName(Board board);
 }

@@ -16,7 +16,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     public static final String TEAM_EXIST_ERROR = "Team %s does not exist!";
     private int nextId;
-    private final List<Teams> teams = new ArrayList<>();
+    private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
     private final List<Bug> bugs = new ArrayList<>();
@@ -38,7 +38,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Teams> getTeams() {
+    public List<Team> getTeams() {
         return new ArrayList<>(teams);
     }
 
@@ -84,8 +84,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Teams createTeam(String name) {
-        Teams team = new TeamsImpl(name);
+    public Team createTeam(String name) {
+        Team team = new TeamImpl(name);
         teams.add(team);
         return team;
     }
@@ -113,7 +113,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public boolean teamExist(String teamName) {
         boolean exist = false;
 
-        for (Teams team : teams) {
+        for (Team team : teams) {
             if (team.getName().equalsIgnoreCase(teamName)) {
                 exist = true;
                 break;
@@ -136,8 +136,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Teams findTeamByTeamName(String teamName) {
-        for (Teams team : teams) {
+    public Team findTeamByTeamName(String teamName) {
+        for (Team team : teams) {
             if (team.getName().equalsIgnoreCase(teamName)) {
                 return team;
             }
@@ -213,8 +213,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Teams findTeamByBoardName(Board board) {
-        for (Teams team : getTeams()) {
+    public Team findTeamByBoardName(Board board) {
+        for (Team team : getTeams()) {
             if (team.getBoards().contains(board)) {
                 return team;
             }

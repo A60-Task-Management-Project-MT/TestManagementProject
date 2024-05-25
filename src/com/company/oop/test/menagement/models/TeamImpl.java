@@ -2,7 +2,7 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.models.contracts.Board;
 import com.company.oop.test.menagement.models.contracts.Member;
-import com.company.oop.test.menagement.models.contracts.Teams;
+import com.company.oop.test.menagement.models.contracts.Team;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.units.ValidationHelpers;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TeamsImpl implements Teams {
+public class TeamImpl implements Team {
     public static final int NAME_MIN_LENGTH = 5;
     public static final int NAME_MAX_LENGTH = 15;
     public static final String NAME_MIN_OR_MAX_LENGTH_ERROR = String.format(
@@ -23,7 +23,7 @@ public class TeamsImpl implements Teams {
     private List<Member> members;
     private List<Board> boards;
 
-    public TeamsImpl(String name) {
+    public TeamImpl(String name) {
         setName(name);
         members = new ArrayList<>();
         boards = new ArrayList<>();
@@ -104,7 +104,7 @@ public class TeamsImpl implements Teams {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TeamsImpl teams = (TeamsImpl) o;
+        TeamImpl teams = (TeamImpl) o;
         return Objects.equals(name, teams.name);
     }
 

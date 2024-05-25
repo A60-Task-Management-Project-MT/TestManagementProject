@@ -3,8 +3,8 @@ package com.company.oop.test.menagement.commands;
 import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
-import com.company.oop.test.menagement.models.contracts.Feedback;
-import com.company.oop.test.menagement.models.contracts.Member;
+import com.company.oop.test.menagement.models.contracts.Board;
+import com.company.oop.test.menagement.models.contracts.Team;
 import com.company.oop.test.menagement.utils.TestUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,11 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class AddCommentToTaskCommandTest {
-    public static final String VALID_TITLE_LENGTH = "C".repeat(10);
-    public static final String VALID_DESCRIPTION_LENGTH = "C".repeat(10);
-    public static final String VALID_CONTENT = "C".repeat(50);
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CreateBoardInTeamCommandTest {
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final String VALID_TEAM_NAME = "C".repeat(8);
+    public static final String VALID_BOARD_NAME = "C".repeat(10);
+
     private TaskManagementRepository taskManagementRepository;
     private Command command;
 
@@ -24,7 +26,7 @@ class AddCommentToTaskCommandTest {
     @BeforeEach
     public void before() {
         taskManagementRepository = new TaskManagementRepositoryImpl();
-        command = new AddCommentToTaskCommand(taskManagementRepository);
+        command = new CreateBoardInTeamCommand(taskManagementRepository);
     }
 
     @Test
@@ -35,15 +37,14 @@ class AddCommentToTaskCommandTest {
     }
 
     @Test
-    public void should_Create_When_InputIsValid() {
-        Feedback feedback = taskManagementRepository.createFeedback(VALID_TITLE_LENGTH, VALID_DESCRIPTION_LENGTH, 25);
-        Member member = taskManagementRepository.createMember("Gosho");
-        List<String> params = List.of(VALID_CONTENT, "Gosho", "1");
+    public void should_AddBoard_ToTeam_WhenArguments_AreValid() {
+        Team team = taskManagementRepository.createTeam(VALID_TEAM_NAME);
+        Board board = taskManagementRepository.createBoard(VALID_BOARD_NAME);
+
+        List<String> params = List.of(VALID_BOARD_NAME, VALID_TEAM_NAME);
 
         command.execute(params);
 
-        Assertions.assertEquals(1, feedback.getComments().size());
+        assertEquals(1, team.getBoards().size());
     }
-
-
 }
