@@ -4,9 +4,14 @@ import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.models.contracts.Bug;
+import com.company.oop.test.menagement.models.contracts.Feedback;
+import com.company.oop.test.menagement.models.contracts.Story;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugStatusType;
+import com.company.oop.test.menagement.models.enums.feedback_enums.FeedbackStatusType;
+import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
+import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 import com.company.oop.test.menagement.utils.TestUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +43,7 @@ class ChangeTaskStatusTest {
     }
 
     @Test
-    public void should_ChangeStatus_When_ArgumentsAreValid() {
+    public void should_ChangeBugStatus_When_ArgumentsAreValid() {
         Bug bug = taskManagementRepository.createBug(VALID_TITLE, VALID_DESCRIPTION, PriorityType.MEDIUM, BugSeverityType.MINOR,
                 "Gosho", List.of("Step1", "Step2"));
 
@@ -46,5 +51,61 @@ class ChangeTaskStatusTest {
         command.execute(params);
 
         assertEquals(BugStatusType.DONE, BugStatusType.DONE);
+    }
+
+    @Test
+    public void should_ThrowException_WhenAlready_AtFinalBugStatus() {
+        Bug bug = taskManagementRepository.createBug(VALID_TITLE, VALID_DESCRIPTION, PriorityType.MEDIUM, BugSeverityType.MINOR,
+                "Gosho", List.of("Step1", "Step2"));
+
+        List<String> params = List.of("1");
+        command.execute(params);
+
+        assertThrows(IllegalArgumentException.class, () -> command.execute(params));
+    }
+
+    @Test
+    public void should_ChangeStoryStatus_When_ArgumentsAreValid() {
+        Story story = taskManagementRepository.createStory(VALID_TITLE, VALID_DESCRIPTION,
+                PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
+
+        List<String> params = List.of("1");
+        command.execute(params);
+
+        assertEquals(StoryStatusType.IN_PROGRESS, StoryStatusType.IN_PROGRESS);
+    }
+
+    @Test
+    public void should_ThrowException_WhenAlready_AtFinalStoryStatus() {
+        Story story = taskManagementRepository.createStory(VALID_TITLE, VALID_DESCRIPTION,
+                PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
+
+        List<String> params = List.of("1");
+        command.execute(params);
+        command.execute(params);
+
+        assertThrows(IllegalArgumentException.class, () -> command.execute(params));
+    }
+
+    @Test
+    public void should_ChangeFeedbackStatus_When_ArgumentsAreValid() {
+        Feedback feedback = taskManagementRepository.createFeedback(VALID_TITLE, VALID_DESCRIPTION, 22);
+
+        List<String> params = List.of("1");
+        command.execute(params);
+
+        assertEquals(FeedbackStatusType.UNSCHEDULED, FeedbackStatusType.UNSCHEDULED);
+    }
+
+    @Test
+    public void should_ThrowException_WhenAlready_AtFinalFeedbackStatus() {
+        Feedback feedback = taskManagementRepository.createFeedback(VALID_TITLE, VALID_DESCRIPTION, 22);
+
+        List<String> params = List.of("1");
+        command.execute(params);
+        command.execute(params);
+        command.execute(params);
+
+        assertThrows(IllegalArgumentException.class, () -> command.execute(params));
     }
 }

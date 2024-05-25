@@ -65,7 +65,7 @@ public class AssignTaskCommand implements Command {
 
     private List<Bug> filterBugsList(List<Bug> bugs, String filter) {
         if (bugs.isEmpty()) {
-            throw new ElementNotFoundException(String.format("No tasks of type Bug with specification %s were found!", filter));
+            throw new ElementNotFoundException("No tasks of type Bug are available at the moment");
         }
 
         List<Bug> filteredTasks = new ArrayList<>();
@@ -81,6 +81,9 @@ public class AssignTaskCommand implements Command {
                 .filter(task -> task.getStatus().toString().equals(filter))
                 .toList());
 
+        if (filteredTasks.isEmpty()) {
+            throw new ElementNotFoundException(String.format("No tasks of type Bug with specification %s were found!", filter));
+        }
         return filteredTasks;
     }
 
@@ -101,6 +104,10 @@ public class AssignTaskCommand implements Command {
         filteredTasks.addAll(stories.stream()
                 .filter(task -> task.getStatus().toString().equals(filter))
                 .toList());
+
+        if (filteredTasks.isEmpty()) {
+            throw new ElementNotFoundException(String.format("No tasks of type Story with specification %s were found!", filter));
+        }
 
         return filteredTasks;
     }
