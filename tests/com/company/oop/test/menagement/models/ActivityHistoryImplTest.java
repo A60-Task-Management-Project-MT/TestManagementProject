@@ -1,6 +1,5 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.ActivityHistoryImpl;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import org.junit.jupiter.api.Test;
 

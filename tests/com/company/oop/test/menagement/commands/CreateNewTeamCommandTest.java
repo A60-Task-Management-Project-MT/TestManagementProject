@@ -4,7 +4,6 @@ import com.company.oop.test.menagement.commands.contracts.Command;
 import com.company.oop.test.menagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
-import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Team;
 import com.company.oop.test.menagement.utils.TestUtilities;
 import org.junit.jupiter.api.Assertions;

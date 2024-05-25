@@ -1,6 +1,5 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.FeedbackImpl;
 import com.company.oop.test.menagement.models.contracts.Feedback;
 import com.company.oop.test.menagement.models.enums.feedback_enums.FeedbackStatusType;
 import org.junit.jupiter.api.Test;

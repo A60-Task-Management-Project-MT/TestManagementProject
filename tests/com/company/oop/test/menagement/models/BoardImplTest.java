@@ -1,9 +1,6 @@
 package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
-import com.company.oop.test.menagement.models.ActivityHistoryImpl;
-import com.company.oop.test.menagement.models.BoardImpl;
-import com.company.oop.test.menagement.models.FeedbackImpl;
 import com.company.oop.test.menagement.models.contracts.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

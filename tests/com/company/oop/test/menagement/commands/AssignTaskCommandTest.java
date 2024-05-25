@@ -5,11 +5,9 @@ import com.company.oop.test.menagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.test.menagement.core.contracts.TaskManagementRepository;
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
-import com.company.oop.test.menagement.models.StoryImpl;
 import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.contracts.Member;
 import com.company.oop.test.menagement.models.contracts.Story;
-import com.company.oop.test.menagement.models.contracts.Team;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.bug_enums.BugSeverityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
@@ -60,7 +58,6 @@ class AssignTaskCommandTest {
     public void should_AssignStoryTaskToPerson_When_ArgumentsAreValid() {
         Story story = taskManagementRepository.createStory(VALID_TITLE_LENGTH, VALID_DESCRIPTION_LENGTH,
                 PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
-
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
 
         List<String> params = List.of("Story", "Large", VALID_PERSON_NAME);
@@ -74,7 +71,6 @@ class AssignTaskCommandTest {
         Bug bug = taskManagementRepository.createBug(VALID_TITLE_LENGTH, VALID_DESCRIPTION_LENGTH,
                 PriorityType.MEDIUM, BugSeverityType.MINOR,
                 "Gosho", List.of("Step1", "Step2", "Step3"));
-
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
 
         List<String> params = List.of("Bug", "Minor", VALID_PERSON_NAME);
@@ -87,8 +83,8 @@ class AssignTaskCommandTest {
     public void should_ThrowException_When_StoriesList_With_ThisSpecification_IsEmpty() {
         Story story = taskManagementRepository.createStory(VALID_TITLE_LENGTH, VALID_DESCRIPTION_LENGTH,
                 PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
-
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
+
         List<String> params = List.of("Story", "Small", VALID_PERSON_NAME);
 
         assertThrows(ElementNotFoundException.class, () -> command.execute(params));
@@ -97,6 +93,7 @@ class AssignTaskCommandTest {
     @Test
     public void should_ThrowException_When_StoriesList_IsEmpty() {
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
+
         List<String> params = List.of("Story", "Small", VALID_PERSON_NAME);
 
         assertThrows(ElementNotFoundException.class, () -> command.execute(params));
@@ -105,6 +102,7 @@ class AssignTaskCommandTest {
     @Test
     public void should_ThrowException_When_BugsList_IsEmpty() {
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
+
         List<String> params = List.of("Bug", "Small", VALID_PERSON_NAME);
 
         assertThrows(ElementNotFoundException.class, () -> command.execute(params));
@@ -116,6 +114,7 @@ class AssignTaskCommandTest {
                 PriorityType.MEDIUM, BugSeverityType.MINOR,
                 "Gosho", List.of("Step1", "Step2", "Step3"));
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
+
         List<String> params = List.of("Bug", "Small", VALID_PERSON_NAME);
 
         assertThrows(ElementNotFoundException.class, () -> command.execute(params));
@@ -124,6 +123,7 @@ class AssignTaskCommandTest {
     @Test
     public void should_ThrowException_When_TryToAssignTask_ToFeedback() {
         Member member = taskManagementRepository.createMember(VALID_PERSON_NAME);
+
         List<String> params = List.of("Feedback", "Large", VALID_PERSON_NAME);
 
         assertThrows(IllegalArgumentException.class, () -> command.execute(params));

@@ -1,6 +1,5 @@
 package com.company.oop.test.menagement.units;
 
-import com.company.oop.test.menagement.exceptions.InvalidUserInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

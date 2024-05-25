@@ -1,8 +1,5 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.ActivityHistoryImpl;
-import com.company.oop.test.menagement.models.CommentImpl;
-import com.company.oop.test.menagement.models.StoryImpl;
 import com.company.oop.test.menagement.models.contracts.ActivityHistory;
 import com.company.oop.test.menagement.models.contracts.Comment;
 import com.company.oop.test.menagement.models.contracts.Story;
@@ -12,8 +9,6 @@ import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import com.company.oop.test.menagement.models.enums.story_enums.StoryStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;

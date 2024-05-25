@@ -1,6 +1,5 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.BugImpl;
 import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
