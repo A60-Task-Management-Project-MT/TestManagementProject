@@ -2,9 +2,13 @@ package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.*;
+import com.company.oop.test.menagement.models.enums.PriorityType;
+import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.company.oop.test.menagement.models.StoryImplTest.VALID_DESCRIPTION_NAME_LENGTH;
+import static com.company.oop.test.menagement.models.StoryImplTest.VALID_TITLE_NAME_LENGTH;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberImplTest {
@@ -105,5 +109,22 @@ class MemberImplTest {
         member.assignTask(feedback);
 
         assertThrows(DuplicateEntityException.class, () -> member.assignTask(feedback));
+    }
+
+    @Test
+    void viewInfo_Should_PrintFullHistoryInfo() {
+        Story story = new StoryImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH,
+                PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
+
+        Team team = new TeamImpl("TeamOne");
+        Board board = new BoardImpl("BoardOne");
+        Member member = new MemberImpl("Pesho");
+        team.addBoard(board);
+        team.addMember(member);
+        member.assignTask(story);
+
+        String result = story.viewInfo();
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(10, member.toString().split("\n").length);
     }
 }

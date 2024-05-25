@@ -1,8 +1,6 @@
 package com.company.oop.test.menagement.models;
 
-import com.company.oop.test.menagement.models.contracts.ActivityHistory;
-import com.company.oop.test.menagement.models.contracts.Comment;
-import com.company.oop.test.menagement.models.contracts.Story;
+import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
@@ -101,5 +99,36 @@ class StoryImplTest {
                 PriorityType.HIGH, StorySizeType.SMALL, "Gosho");
 
         assertNotEquals(story, story2);
+    }
+
+    @Test
+    void viewInfo_Should_PrintFullHistoryInfo() {
+        Story story = new StoryImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH,
+                PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
+        Team team = new TeamImpl("TeamOne");
+        Board board = new BoardImpl("BoardOne");
+        Member member = new MemberImpl("Pesho");
+        team.addBoard(board);
+        team.addMember(member);
+
+        String result = story.viewInfo();
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(9, story.viewInfo().split("\n").length);
+    }
+
+    @Test
+    void displayFullHistory_Should_PrintFullHistoryInfo() {
+        Story story = new StoryImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH,
+                PriorityType.MEDIUM, StorySizeType.LARGE, "Pesho");
+
+        Team team = new TeamImpl("TeamOne");
+        Board board = new BoardImpl("BoardOne");
+        Member member = new MemberImpl("Pesho");
+        team.addBoard(board);
+        team.addMember(member);
+
+        String result = story.viewInfo();
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1, story.displayFullHistory().split("\n").length);
     }
 }
