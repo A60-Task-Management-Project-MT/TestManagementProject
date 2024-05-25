@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListAllTaskCommand implements Command {
 
-    private final static int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    private final static int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String NO_TASKS_FOUND_ERROR = "There are no tasks found with %s word in title!";
 
     private List<Task> tasks;
