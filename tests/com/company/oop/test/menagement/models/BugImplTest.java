@@ -1,5 +1,6 @@
 package com.company.oop.test.menagement.models;
 
+import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
 import com.company.oop.test.menagement.models.contracts.Bug;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.TaskType;
@@ -15,7 +16,7 @@ class BugImplTest {
     public static final String VALID_DESCRIPTION_NAME_LENGTH = "C".repeat(500);
 
     @Test
-    void constructor_ShouldCreate_Story_WhenArguments_AreValid() {
+    void constructor_ShouldCreate_Bug_WhenArguments_AreValid() {
         Bug bug = new BugImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH, PriorityType.MEDIUM,
                 BugSeverityType.MINOR, "Gosho", List.of("Step1", "Step2", "Step3"));
 
@@ -30,6 +31,14 @@ class BugImplTest {
                 () -> assertEquals(TaskType.BUG, bug.getTaskType()),
                 () -> assertEquals(0, bug.getComments().size())
         );
+    }
+
+    @Test
+    void changeAssignee_Should_ThrowException_IfAssignee_IsSame() {
+        Bug bug = new BugImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH, PriorityType.MEDIUM,
+                BugSeverityType.MINOR, "Gosho", List.of("Step1", "Step2", "Step3"));
+
+        assertThrows(DuplicateEntityException.class, () -> bug.changeAssignee("Gosho"));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.company.oop.test.menagement.models;
 
 import com.company.oop.test.menagement.exceptions.DuplicateEntityException;
+import com.company.oop.test.menagement.exceptions.ElementNotFoundException;
 import com.company.oop.test.menagement.models.contracts.*;
 import com.company.oop.test.menagement.models.enums.PriorityType;
 import com.company.oop.test.menagement.models.enums.story_enums.StorySizeType;
@@ -126,5 +127,11 @@ class MemberImplTest {
         String result = story.viewInfo();
         Assertions.assertNotNull(result);
         Assertions.assertEquals(10, member.toString().split("\n").length);
+    }
+
+    @Test
+    void toString_Should_ThrowException_IfMember_DoesNotHaveTasks() {
+        Member member = new MemberImpl("Gosho");
+        assertThrows(ElementNotFoundException.class, member::toString);
     }
 }

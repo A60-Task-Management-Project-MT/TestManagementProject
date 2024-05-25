@@ -83,13 +83,11 @@ public class MemberImpl implements Member {
     public String displayFullHistory() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("~~~ MEMBER %s HISTORY ~~~", getMemberName().toUpperCase())).append(System.lineSeparator());
-        if (histories.isEmpty()) {
-            builder.append(" ~~~ NO AVAILABLE HISTORY ~~~").append(System.lineSeparator());
-        } else {
-            for (ActivityHistory activityHistory : histories) {
-                builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
-            }
+
+        for (ActivityHistory activityHistory : histories) {
+            builder.append(activityHistory.displayHistory()).append(System.lineSeparator());
         }
+
         return builder.toString().trim();
     }
 

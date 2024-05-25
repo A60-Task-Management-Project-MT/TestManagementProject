@@ -14,7 +14,7 @@ class FeedbackImplTest {
     public static final String VALID_DESCRIPTION_NAME_LENGTH = "C".repeat(500);
 
     @Test
-    void constructor_ShouldCreate_Story_WhenArguments_AreValid() {
+    void constructor_ShouldCreate_Feedback_WhenArguments_AreValid() {
         Feedback feedback = new FeedbackImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH, 25);
 
         assertAll(
@@ -25,7 +25,7 @@ class FeedbackImplTest {
         );
     }
     @Test
-    void constructor_ShouldCreate_Story_WithFirstStatus_New() {
+    void constructor_ShouldCreate_Feedback_WithFirstStatus_New() {
         Feedback feedback = new FeedbackImpl(1, VALID_TITLE_NAME_LENGTH, VALID_DESCRIPTION_NAME_LENGTH, 25);
 
         assertEquals(FeedbackStatusType.NEW, feedback.getStatus());
